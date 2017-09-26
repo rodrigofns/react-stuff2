@@ -21,7 +21,10 @@
 	margin-left: 180px;
 	transition: margin-left .3s;
 }
-
+.Layout-hamburger-gone {
+	transform: rotate(180deg);
+	transition: transform .3s;
+}
 
 #Layout-body {
 	flex-grow: 1;

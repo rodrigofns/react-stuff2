@@ -18,7 +18,7 @@ const Layout = () => {
 				<header id="Layout-header" ref={el => header = el}>
 					<AppBar title="Layouted"
 						onLeftIconButtonTouchTap={ev => {
-							console.log(ev.target)
+							ev.target.classList.toggle('Layout-hamburger-gone');
 							divWrap.classList.toggle('Layout-wrap-gone');
 							header.classList.toggle('Layout-header-gone');
 							footer.classList.toggle('Layout-footer-gone');

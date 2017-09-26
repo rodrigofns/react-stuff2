@@ -1,4 +1,5 @@
 import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
 const AddAlbum = () => (
@@ -22,6 +23,9 @@ const AddAlbum = () => (
 				fullWidth
 				defaultValue=""
 				floatingLabelText="Year"/>
+		</div>
+		<div style={{marginTop:'16px'}}>
+			<RaisedButton primary label="Insert"/>
 		</div>
 	</div>
 );

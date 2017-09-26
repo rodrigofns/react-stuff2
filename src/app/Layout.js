@@ -11,19 +11,20 @@ import AddAlbum from '../add-album/AddAlbum';
 const Layout = (props) => {
 	let divWrap = null;
 	let header = null;
-	let footer = null;
+	//let footer = null;
 
 	return (
 		<BrowserRouter>
 			<div id="Layout-wrap" ref={el => divWrap = el}>
 				<header id="Layout-header" ref={el => header = el}>
-					<AppBar title="Layouted" iconElementRight={<TopRite/>}
+					<AppBar title="Layouted"
+						iconElementRight={<TopRite/>}
 						onLeftIconButtonTouchTap={ev => {
 							let btnElem = header.childNodes[0].childNodes[0];
 							btnElem.classList.toggle('Layout-hamburger-gone');
 							divWrap.classList.toggle('Layout-wrap-gone');
 							header.classList.toggle('Layout-header-gone');
-							footer.classList.toggle('Layout-footer-gone');
+							//footer.classList.toggle('Layout-footer-gone');
 						}}/>
 				</header>
 				<div id="Layout-body">
@@ -38,9 +39,9 @@ const Layout = (props) => {
 						<Route exact path="/addAlbum" component={AddAlbum}/>
 					</main>
 				</div>
-				<footer id="Layout-footer" ref={el => footer = el}>
+				{/* <footer id="Layout-footer" ref={el => footer = el}>
 					Footer
-				</footer>
+				</footer> */}
 			</div>
 		</BrowserRouter>
 	);

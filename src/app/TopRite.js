@@ -1,13 +1,12 @@
 import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
-import { getStyles } from 'material-ui/AppBar/AppBar';
+import RaisedButton from 'material-ui/RaisedButton';
 import './TopRite.css';
 
 const TopRite = () => {
 	return (
-		<div>
+		<div id="TopRite-wrap">
 			<div id="TopRite-userInfo">Fulano de Tal</div>
-			<FlatButton id="TopRite-logoff" label="Logoff"/>
+			<RaisedButton primary id="TopRite-logoff" label="Logoff"/>
 		</div>
 	);
 };

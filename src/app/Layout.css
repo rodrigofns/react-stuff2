@@ -14,6 +14,7 @@
 }
 
 #Layout-header {
+	border-top: 20px solid #074e68; /* blue500 */
 	margin-left: 0;
 	transition: margin-left .3s;
 }
@@ -31,11 +32,13 @@
 	min-height: 0;
 	display: flex;
 }
+
 #Layout-body-left {
 	overflow-y: auto;
 	width: 180px;
 	border-right: 1px solid #d8d8d8;
 }
+
 #Layout-body-content {
 	flex-grow: 1;
 	overflow-y: auto;
@@ -43,7 +46,9 @@
 }
 
 #Layout-footer {
-	background: mistyrose;
+	color: white;
+	background-color: #074e68; /* blue500 */
+	padding: 20px;
 	/*height: 100px;*/
 	margin-left: 0;
 	transition: margin-left .3s;

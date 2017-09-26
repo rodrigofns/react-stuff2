@@ -1,5 +1,9 @@
+#TopRite-wrap > div {
+	background-color: transparent !important;
+}
+
 #TopRite-userInfo {
-	margin-right: 40px;
+	margin-right: 50px;
 	display: inline-block;
 	color: white;
 	font-size: 90%;

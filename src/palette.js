@@ -1,3 +1,5 @@
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
 export const blue50 = '#e1eaed';
 export const blue100 = '#b5cad2';
 export const blue200 = '#83a7b4';
@@ -27,3 +29,25 @@ export const redA100 = '#ff9ea8';
 export const redA200 = '#ff6b7a';
 export const redA400 = '#ff384c';
 export const redA700 = '#ff1f35';
+
+export const muiTheme = getMuiTheme({ // http://mcg.mbitson.com
+	palette: {
+		primary1Color: blue500,
+		// primary2Color: cyan700,
+		// primary3Color: grey400,
+		accent1Color: red500
+		// accent2Color: grey100,
+		// accent3Color: grey500,
+		// textColor: darkBlack,
+		// alternateTextColor: white,
+		// canvasColor: white,
+		// borderColor: grey300,
+		// disabledColor: fade(darkBlack, 0.3),
+		// pickerHeaderColor: cyan500,
+		// clockCircleColor: fade(darkBlack, 0.07),
+		// shadowColor: fullBlack
+	},
+	appBar: {
+		color: red500
+	}
+});

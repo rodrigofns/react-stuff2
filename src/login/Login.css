@@ -1,0 +1,9 @@
+#Login-wrap {
+	padding: 50px;
+	display: flex;
+	justify-content: center;
+}
+
+#Login-wrap form {
+	padding: 20px;
+}

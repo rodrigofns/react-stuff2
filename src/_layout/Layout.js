@@ -4,7 +4,7 @@ import AppBar from 'material-ui/AppBar';
 import { List } from 'material-ui/List';
 import './Layout.css';
 import ListNav from './ListNav';
-import TopRite from './TopRite';
+import DetalhesSessao from './DetalhesSessao';
 import Home from '../home/Home';
 import AddAlbum from '../add-album/AddAlbum';
 
@@ -18,7 +18,7 @@ const Layout = () => {
 			<div id="Layout-wrap" ref={el => divWrap = el}>
 				<header id="Layout-header" ref={el => header = el}>
 					<AppBar title="Layouted"
-						iconElementRight={<TopRite/>}
+						iconElementRight={<DetalhesSessao/>}
 						onLeftIconButtonTouchTap={ev => {
 							let btnElem = header.childNodes[0].childNodes[0];
 							btnElem.classList.toggle('Layout-hamburger-gone');

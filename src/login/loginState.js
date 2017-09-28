@@ -4,19 +4,25 @@ class LoginState {
 	constructor() {
 		this.ourState = new AppState();
 		this.ourState.set({
-			isLogged: !!localStorage.getItem('authUser'),
-			userName: localStorage.getItem('authUser')
+			estaLogado: !!localStorage.getItem('authUser'),
+			usuario: localStorage.getItem('authUser')
 		});
 	}
 
-	login(userName, pwd, callback) {
-		localStorage.setItem('authUser', userName);
-		this.ourState.set({ isLogged: true, userName: userName }, callback);
+	login(usuario, senha, callback) {
+		localStorage.setItem('authUser', usuario);
+		this.ourState.set({
+			estaLogado: true,
+			usuario: usuario
+		}, callback);
 	}
 
 	logoff(callback) {
 		localStorage.removeItem('authUser');
-		this.ourState.set({ isLogged: false, userName: '' }, callback);
+		this.ourState.set({
+			estaLogado: false,
+			usuario: ''
+		}, callback);
 	}
 
 	subscribe(TheComponent, ...vars) {

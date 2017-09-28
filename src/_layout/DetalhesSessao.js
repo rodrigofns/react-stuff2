@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
 import loginState from '../login/loginState';
-import './TopRite.css';
+import './DetalhesSessao.css';
 
-const TopRite = ({ userName }) => {
+const DetalhesSessao = ({ usuario }) => {
 	return (
 		<div id="TopRite-wrap">
-			<div id="TopRite-userInfo">{userName}</div>
+			<div id="TopRite-userInfo">{usuario}</div>
 			<RaisedButton
 				secondary
 				id="TopRite-logoff"
@@ -19,8 +19,8 @@ const TopRite = ({ userName }) => {
 	);
 };
 
-TopRite.propTypes = {
-	userName: PropTypes.string.isRequired
+DetalhesSessao.propTypes = {
+	usuario: PropTypes.string.isRequired
 };
 
-export default loginState.subscribe(TopRite, 'userName');
+export default loginState.subscribe(DetalhesSessao, 'usuario');

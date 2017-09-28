@@ -2,11 +2,10 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import { List } from 'material-ui/List';
-import './Layout.css';
 import ListNav from './ListNav';
 import DetalhesSessao from './DetalhesSessao';
-import Home from '../home/Home';
-import AddAlbum from '../add-album/AddAlbum';
+import rotas from './rotas';
+import './Layout.css';
 
 const Layout = () => {
 	let divWrap = null;
@@ -30,13 +29,15 @@ const Layout = () => {
 				<div id="Layout-body">
 					<aside id="Layout-body-left">
 						<List>
-							<ListNav to="/">Home</ListNav>
-							<ListNav to="/addAlbum">Add album</ListNav>
+							{rotas.map(rota =>
+								<ListNav to={rota.caminho}>{rota.nome}</ListNav>
+							)}
 						</List>
 					</aside>
 					<main id="Layout-body-content">
-						<Route exact path="/" component={Home}/>
-						<Route exact path="/addAlbum" component={AddAlbum}/>
+						{rotas.map(rota =>
+							<Route exact path={rota.caminho} component={rota.componente}/>
+						)}
 					</main>
 				</div>
 				{/* <footer id="Layout-footer" ref={el => footer = el}>

@@ -6,10 +6,10 @@ import Login from './login/Login';
 import Layout from './layout/Layout';
 import './App.css';
 
-const App = (props) => (
+const App = ({ isLogged }) => (
 	<MuiThemeProvider muiTheme={muiTheme}>
-		{props.isLogged ? <Layout/> : <Login/>}
+		{isLogged ? <Layout/> : <Login/>}
 	</MuiThemeProvider>
 );
 
-export default loginState.subscribe(App);
+export default loginState.subscribe(App, 'isLogged');

@@ -8,7 +8,7 @@ import TopRite from './TopRite';
 import Home from '../home/Home';
 import AddAlbum from '../add-album/AddAlbum';
 
-const Layout = (props) => {
+const Layout = () => {
 	let divWrap = null;
 	let header = null;
 	//let footer = null;

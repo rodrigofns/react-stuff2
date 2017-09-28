@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { ListItem } from 'material-ui/List';
 
-const ListNav = (props) => (
-	<ListItem onClick={() => props.history.push(props.to)}>
-		{props.children}
+const ListNav = ({ history, to, children }) => (
+	<ListItem onClick={() => history.push(to)}>
+		{children}
 	</ListItem>
 );
 
@@ -13,7 +13,8 @@ ListNav.propTypes = {
 	history: PropTypes.shape({
 		push: PropTypes.func.isRequired
 	}).isRequired,
-	to: PropTypes.string.isRequired
+	to: PropTypes.string.isRequired,
+	children: PropTypes.node
 };
 
 export default withRouter(ListNav);

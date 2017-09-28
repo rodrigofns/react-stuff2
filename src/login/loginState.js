@@ -1,4 +1,4 @@
-import AppState from '../AppState';
+import AppState from 'react-app-state';
 
 class LoginState {
 	constructor() {

@@ -15,23 +15,23 @@ const Login = () => (
 				ev.preventDefault();
 				loginState.login(frmState.get('usr'), frmState.get('pwd'));
 			}}>
-				<h1>Login</h1>
+				<h2>Login</h2>
 				<div>
 					<TextField
 						autoFocus
 						autoComplete="off"
 						onChange={e => frmState.set({ usr: e.target.value })}
 						name="login"
-						floatingLabelText="Login"/>
+						floatingLabelText="Nome de usuário"/>
 				</div>
 				<div>
 					<TextField
 						name="pwd"
 						onChange={e => frmState.set({ pwd: e.target.value })}
 						type="password"
-						floatingLabelText="Password"/>
+						floatingLabelText="Senha"/>
 				</div>
-				<RaisedButton primary type="submit" label="Sign in"/>
+				<RaisedButton primary type="submit" label="Entrar"/>
 			</form>
 		</Card>
 	</div>

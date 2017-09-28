@@ -4,7 +4,7 @@ import TextField from 'material-ui/TextField';
 
 const AddAlbum = () => (
 	<div>
-		<h1>Add album</h1>
+		<h2>Add album</h2>
 		<div style={{width:'240px'}}>
 			<TextField
 				fullWidth

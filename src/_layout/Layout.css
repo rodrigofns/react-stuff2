@@ -8,8 +8,8 @@
 	transition: left .3s, width .3s;
 }
 #Layout-wrap.Layout-wrap-gone {
-	left: -180px;
-	width: calc(100vw + 180px);
+	left: -200px;
+	width: calc(100vw + 200px);
 	transition: left .3s, width .3s;
 }
 
@@ -19,7 +19,7 @@
 	transition: margin-left .3s;
 }
 #Layout-header.Layout-header-gone {
-	margin-left: 180px;
+	margin-left: 200px;
 	transition: margin-left .3s;
 }
 .Layout-hamburger-gone {
@@ -35,7 +35,7 @@
 
 #Layout-body-left {
 	overflow-y: auto;
-	width: 180px;
+	width: 200px;
 	border-right: 1px solid #d8d8d8;
 }
 
@@ -54,6 +54,6 @@
 	transition: margin-left .3s;
 }
 #Layout-footer.Layout-footer-gone {
-	margin-left: 180px;
+	margin-left: 200px;
 	transition: margin-left .3s;
 }

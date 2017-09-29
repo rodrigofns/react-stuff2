@@ -8,11 +8,12 @@ import './Login.css';
 
 let frmState = new AppState({ usr: '', pwd: '' });
 
-const Login = () => (
+const Login = ({ usr, pwd }) => (
 	<div id="Login-wrap">
 		<form onSubmit={ev => {
 			ev.preventDefault();
 			loginState.login(frmState.get('usr'), frmState.get('pwd'));
+			frmState.set({ usr: '', pwd: '' });
 		}}>
 			<Card>
 				<div id="Login-card-inner">
@@ -32,7 +33,8 @@ const Login = () => (
 							type="password"
 							floatingLabelText="Senha"/>
 					</div>
-					<RaisedButton secondary type="submit" label="Entrar"/>
+					<RaisedButton secondary type="submit" label="Entrar"
+						disabled={(!usr || !usr.length) || (!pwd || !pwd.length)}/>
 				</div>
 			</Card>
 		</form>
@@ -44,4 +46,4 @@ const Login = () => (
 	</div>
 );
 
-export default Login;
+export default frmState.subscribe(Login, 'usr', 'pwd');

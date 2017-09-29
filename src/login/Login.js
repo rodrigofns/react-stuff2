@@ -10,30 +10,37 @@ let frmState = new AppState({ usr: '', pwd: '' });
 
 const Login = () => (
 	<div id="Login-wrap">
-		<Card>
-			<form onSubmit={ev => {
-				ev.preventDefault();
-				loginState.login(frmState.get('usr'), frmState.get('pwd'));
-			}}>
-				<h2>Login</h2>
-				<div>
-					<TextField
-						autoFocus
-						autoComplete="off"
-						onChange={e => frmState.set({ usr: e.target.value })}
-						name="login"
-						floatingLabelText="Nome de usuário"/>
+		<form onSubmit={ev => {
+			ev.preventDefault();
+			loginState.login(frmState.get('usr'), frmState.get('pwd'));
+		}}>
+			<Card>
+				<div id="Login-card-inner">
+					<h2>Login</h2>
+					<div>
+						<TextField
+							autoFocus
+							autoComplete="off"
+							onChange={e => frmState.set({ usr: e.target.value })}
+							name="login"
+							floatingLabelText="Nome de usuário"/>
+					</div>
+					<div>
+						<TextField
+							name="pwd"
+							onChange={e => frmState.set({ pwd: e.target.value })}
+							type="password"
+							floatingLabelText="Senha"/>
+					</div>
+					<RaisedButton secondary type="submit" label="Entrar"/>
 				</div>
-				<div>
-					<TextField
-						name="pwd"
-						onChange={e => frmState.set({ pwd: e.target.value })}
-						type="password"
-						floatingLabelText="Senha"/>
-				</div>
-				<RaisedButton primary type="submit" label="Entrar"/>
-			</form>
-		</Card>
+			</Card>
+		</form>
+		<footer>
+			Procuradoria Geral da Fazenda Nacional<br/>
+			Esplanada dos Ministérios, Bloco "P", 8º andar<br/>
+			CEP: 70048-900, Brasília/DF
+		</footer>
 	</div>
 );
 

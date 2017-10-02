@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
 import loginState from '../login/loginState';
-import './DetalhesSessao.css';
+import './LayoutLoginInfo.css';
 
-const DetalhesSessao = ({ usuario }) => {
+const LayoutLoginInfo = ({ usuario }) => {
 	return (
-		<div id="TopRite-wrap">
-			<div id="TopRite-userInfo">{usuario}</div>
+		<div id="LayoutLoginInfo-wrap">
+			<div id="LayoutLoginInfo-userInfo">{usuario}</div>
 			<RaisedButton
 				secondary
 				id="TopRite-logoff"
@@ -19,8 +19,8 @@ const DetalhesSessao = ({ usuario }) => {
 	);
 };
 
-DetalhesSessao.propTypes = {
+LayoutLoginInfo.propTypes = {
 	usuario: PropTypes.string.isRequired
 };
 
-export default loginState.subscribe(DetalhesSessao);
+export default loginState.subscribe(LayoutLoginInfo);

@@ -6,8 +6,8 @@ import './LayoutHeaderInfo.css';
 
 const LayoutHeaderInfo = ({ usuario }) => {
 	return (
-		<div id="LayoutHeaderInfo-wrap">
-			<div id="LayoutHeaderInfo-userInfo">{usuario}</div>
+		<div id="LayoutHeaderInfo">
+			<div className="userInfo">{usuario}</div>
 			<RaisedButton
 				secondary
 				id="TopRite-logoff"

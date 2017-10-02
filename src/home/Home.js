@@ -1,8 +1,9 @@
 import React from 'react';
+import './Home.css';
 
 const Home = () => (
-	<div>
-		<h2>Home</h2>
+	<div id="Home">
+		<div className="titulo">Sistema de Gestão de Unidades</div>
 	</div>
 );
 

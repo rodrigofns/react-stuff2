@@ -10,14 +10,14 @@ import './Login.css';
 let frmState = new AppState({ usr: '', pwd: '' });
 
 const Login = ({ usr, pwd }) => (
-	<div id="Login-wrap">
+	<div id="Login">
 		<form onSubmit={ev => {
 			ev.preventDefault();
 			loginState.login(frmState.get('usr'), frmState.get('pwd'));
 			frmState.set({ usr: '', pwd: '' });
 		}}>
 			<Card>
-				<div id="Login-card-inner">
+				<div className="caixaLogin">
 					<h2>Login</h2>
 					<div>
 						<TextField

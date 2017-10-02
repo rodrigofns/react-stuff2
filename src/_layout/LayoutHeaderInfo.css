@@ -1,15 +1,11 @@
-#LayoutHeaderInfo-wrap > div {
+#LayoutHeaderInfo > div {
 	background-color: transparent !important;
+	padding-top: 7px;
 }
 
-#LayoutHeaderInfo-userInfo {
+#LayoutHeaderInfo > .userInfo {
 	margin-right: 50px;
 	display: inline-block;
 	color: white;
 	font-size: 90%;
-}
-
-#LayoutHeaderInfo-logoff {
-	margin: 7px 0 0 !important;
-	color: white !important;
 }

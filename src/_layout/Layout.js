@@ -18,10 +18,10 @@ class Layout extends React.Component {
 
 	toggleMenu = () => {
 		let btnElem = this.header.childNodes[0].childNodes[0];
-		btnElem.classList.toggle('Layout-hamburger-gone');
-		this.divWrap.classList.toggle('Layout-wrap-gone');
-		this.header.classList.toggle('Layout-header-gone');
-		//this.footer.classList.toggle('Layout-footer-gone');
+		btnElem.classList.toggle('hamburger180');
+		this.divWrap.classList.toggle('hiddenMenu');
+		this.header.classList.toggle('hiddenMenu');
+		//this.footer.classList.toggle('hiddenMenu');
 	}
 
 	componentDidMount() {
@@ -31,12 +31,12 @@ class Layout extends React.Component {
 	render() {
 		return (
 			<BrowserRouter>
-				<div id="Layout-wrap" ref={el => this.divWrap = el}>
-					<header id="Layout-header" ref={el => this.header = el}>
+				<div id="Layout" ref={el => this.divWrap = el}>
+					<header ref={el => this.header = el}>
 						<LayoutHeader onMenuClick={this.toggleMenu}/>
 					</header>
-					<div id="Layout-body">
-						<aside id="Layout-body-left">
+					<div className="body">
+						<aside>
 							<List>
 								{rotas.map((rota, i) =>
 									<LayoutNav key={i} to={rota.caminho} onClick={this.toggleMenu}>
@@ -45,7 +45,7 @@ class Layout extends React.Component {
 								)}
 							</List>
 						</aside>
-						<main id="Layout-body-content">
+						<main>
 							<Switch>
 								<Redirect exact from="/" to={rotas[0].caminho}/>
 								{rotas.map((rota, i) =>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { ListItem } from 'material-ui/List';
 
-const ListNav = ({ history, to, children, onClick }) => (
+const LayoutNav = ({ history, to, children, onClick }) => (
 	<ListItem
 		onClick={() => {
 			history.push(to);
@@ -13,7 +13,7 @@ const ListNav = ({ history, to, children, onClick }) => (
 	</ListItem>
 );
 
-ListNav.propTypes = {
+LayoutNav.propTypes = {
 	history: PropTypes.shape({
 		push: PropTypes.func.isRequired
 	}).isRequired,
@@ -22,4 +22,4 @@ ListNav.propTypes = {
 	onClick: PropTypes.func
 };
 
-export default withRouter(ListNav);
+export default withRouter(LayoutNav);

@@ -2,8 +2,9 @@ import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { List } from 'material-ui/List';
 
-import ListNav from './ListNav';
-import LayoutAppBar from './LayoutAppBar';
+import LayoutNav from './LayoutNav';
+import LayoutHeader from './LayoutHeader';
+import Erro404 from './Erro404';
 import rotas from './rotas';
 import './Layout.css';
 
@@ -32,15 +33,15 @@ class Layout extends React.Component {
 			<BrowserRouter>
 				<div id="Layout-wrap" ref={el => this.divWrap = el}>
 					<header id="Layout-header" ref={el => this.header = el}>
-						<LayoutAppBar onMenuClick={this.toggleMenu}/>
+						<LayoutHeader onMenuClick={this.toggleMenu}/>
 					</header>
 					<div id="Layout-body">
 						<aside id="Layout-body-left">
 							<List>
 								{rotas.map((rota, i) =>
-									<ListNav key={i} to={rota.caminho} onClick={this.toggleMenu}>
+									<LayoutNav key={i} to={rota.caminho} onClick={this.toggleMenu}>
 										{rota.nome}
-									</ListNav>
+									</LayoutNav>
 								)}
 							</List>
 						</aside>
@@ -48,8 +49,9 @@ class Layout extends React.Component {
 							<Switch>
 								<Redirect exact from="/" to={rotas[0].caminho}/>
 								{rotas.map((rota, i) =>
-									<Route exact key={i} path={rota.caminho} component={rota.componente}/>
+									<Route key={i} path={rota.caminho} component={rota.componente}/>
 								)}
+								<Route component={Erro404}/>
 							</Switch>
 						</main>
 					</div>

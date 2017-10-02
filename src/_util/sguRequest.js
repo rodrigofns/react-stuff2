@@ -1,3 +1,5 @@
+const noop = () => { };
+
 class SguRequest {
 	doGet(url, callback) {
 		this._requisita(url, 'GET', callback);
@@ -9,9 +11,7 @@ class SguRequest {
 
 	doPost(url, dados, callback) {
 		console.log('doPost() recebeu...', dados);
-		setTimeout(() => {
-			callback({ status: true });
-		}, 3000);
+		setTimeout(() => callback ? callback({ status: true }) : noop, 3000);
 	}
 
 	_requisita(url, metodo, callback, dados = { }) {
@@ -23,7 +23,7 @@ class SguRequest {
 		}
 		fetch(url, opcoes)
 			.then(response => response.json())
-			.then(d => callback(d))
+			.then(d => callback ? callback(d) : noop)
 			.catch(err => console.log(err));
 	}
 }

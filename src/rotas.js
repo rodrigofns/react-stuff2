@@ -1,5 +1,5 @@
 import Home from './home/Home';
-import HierarquiaTipos    from './hierarquia-tipos/HierarquiaTipos';
+import HierarquiaTipos from './hierarquia-tipos/HierarquiaTipos';
 import HierarquiaUnidades from './hierarquia-unidades/HierarquiaUnidades';
 import Dashboard from './dashboard/Dashboard';
 

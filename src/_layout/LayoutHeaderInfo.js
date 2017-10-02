@@ -15,8 +15,8 @@ const LayoutHeaderInfo = ({ usuario, history }) => {
 				id="TopRite-logoff"
 				label="Logoff"
 				onClick={() => {
-					history.push('/');
 					loginState.logoff();
+					history.push('/');
 				}}/>
 		</div>
 	);

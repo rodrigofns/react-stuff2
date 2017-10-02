@@ -24,13 +24,12 @@ class LoginState extends AppState {
 	}
 
 	logoff(callback) {
-		// sguRequest.doPost('/logoff', { }, r => {
-			localStorage.removeItem('authUser');
-			super.set({
-				estaLogado: false,
-				usuario: ''
-			}, callback);
-		// });
+		localStorage.removeItem('authUser'); // limpa imediatamente
+		super.set({
+			estaLogado: false,
+			usuario: ''
+		}, callback);
+		sguRequest.doPost('/logoff');
 	}
 }
 

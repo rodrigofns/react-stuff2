@@ -9,7 +9,7 @@ import rotas from './rotas';
 const tituloApp = (pathname) => {
 	if (pathname !== '/') {
 		let rotaAtual = rotas.find(r => r.caminho === pathname);
-		return !rotaAtual ? 'SGU' : ('SGU - ' + rotaAtual.nome);
+		return !rotaAtual ? 'SGU' : `SGU - ${rotaAtual.nome}`;
 	}
 	return 'SGU';
 };

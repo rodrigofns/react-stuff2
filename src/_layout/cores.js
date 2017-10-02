@@ -30,7 +30,7 @@ export const redA200 = '#ff6b7a';
 export const redA400 = '#ff384c';
 export const redA700 = '#ff1f35';
 
-export const muiTheme = getMuiTheme({ // http://mcg.mbitson.com
+const cores = getMuiTheme({ // http://mcg.mbitson.com
 	palette: {
 		primary1Color: blue500,
 		// primary2Color: cyan700,
@@ -51,3 +51,5 @@ export const muiTheme = getMuiTheme({ // http://mcg.mbitson.com
 		color: red500
 	}
 });
+
+export default cores;

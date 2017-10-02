@@ -1,41 +1,46 @@
 import React from 'react';
 import AppState from 'react-app-state';
-import Card from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
+import {Card, RaisedButton, TextField} from '../_util/material';
 
+import BarraAguarde from '../_util/BarraAguarde';
 import loginState from './loginState';
 import './Login.css';
 
-let frmState = new AppState({ usr: '', pwd: '' });
+let frmLogin = new AppState({ usuario: '', senha: '', processando: false });
 
-const Login = ({ usr, pwd }) => (
+const Login = ({ usuario, senha, processando }) => (
 	<div id="Login">
 		<form onSubmit={ev => {
 			ev.preventDefault();
-			loginState.login(frmState.get('usr'), frmState.get('pwd'));
-			frmState.set({ usr: '', pwd: '' });
+			frmLogin.set({ processando: true }, () => {
+				loginState.login(usuario, senha, () => {
+					frmLogin.set({ usuario: '', senha: '', processando: false });
+				});
+			});
 		}}>
 			<Card>
+				<BarraAguarde visivel={processando}/>
 				<div className="caixaLogin">
 					<h2>Login</h2>
 					<div>
 						<TextField
 							autoFocus
 							autoComplete="off"
-							onChange={e => frmState.set({ usr: e.target.value })}
+							disabled={processando}
+							onChange={e => frmLogin.set({ usuario: e.target.value })}
 							name="login"
 							floatingLabelText="Nome de usuário"/>
 					</div>
 					<div>
 						<TextField
 							name="pwd"
-							onChange={e => frmState.set({ pwd: e.target.value })}
+							disabled={processando}
+							onChange={e => frmLogin.set({ senha: e.target.value })}
 							type="password"
 							floatingLabelText="Senha"/>
 					</div>
 					<RaisedButton secondary type="submit" label="Entrar"
-						disabled={(!usr || !usr.length) || (!pwd || !pwd.length)}/>
+						disabled={(!usuario || !usuario.length) || (!senha || !senha.length) || processando}/>
 				</div>
 			</Card>
 		</form>
@@ -47,4 +52,4 @@ const Login = ({ usr, pwd }) => (
 	</div>
 );
 
-export default frmState.subscribe(Login);
+export default frmLogin.subscribe(Login);

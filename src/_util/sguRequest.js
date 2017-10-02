@@ -3,8 +3,15 @@ class SguRequest {
 		this._requisita(url, 'GET', callback);
 	}
 
+	// doPost(url, dados, callback) {
+	// 	this._requisita(url, 'POST', callback);
+	// }
+
 	doPost(url, dados, callback) {
-		this._requisita(url, 'POST', callback);
+		console.log('doPost() recebeu...', dados);
+		setTimeout(() => {
+			callback({ status: true });
+		}, 3000);
 	}
 
 	_requisita(url, metodo, callback, dados = { }) {
@@ -14,11 +21,10 @@ class SguRequest {
 			formData.append('json', JSON.stringify(dados));
 			opcoes.body = formData;
 		}
-
 		fetch(url, opcoes)
-		.then(response => response.json())
-		.then(d => callback(d))
-		.catch(err => console.log(err));
+			.then(response => response.json())
+			.then(d => callback(d))
+			.catch(err => console.log(err));
 	}
 }
 

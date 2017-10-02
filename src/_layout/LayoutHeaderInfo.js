@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RaisedButton from 'material-ui/RaisedButton';
+import {RaisedButton} from '../_util/material';
 import loginState from '../login/loginState';
 import './LayoutHeaderInfo.css';
 

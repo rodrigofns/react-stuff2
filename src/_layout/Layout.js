@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { List } from 'material-ui/List';
+import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
+import {List} from '../_util/material';
 
 import LayoutNav from './LayoutNav';
 import LayoutHeader from './LayoutHeader';

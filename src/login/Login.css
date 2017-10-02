@@ -12,10 +12,10 @@
 #Login > form {
 	position: relative;
 	left: 15%;
+	padding-top: 20vh;
 }
 
 #Login .caixaLogin {
-	margin-top: 50%;
 	padding: 30px;
 }
 

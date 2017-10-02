@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import { ListItem } from 'material-ui/List';
+import {withRouter} from 'react-router-dom';
+import {ListItem} from '../_util/material';
 
 const LayoutNav = ({ history, to, children, onClick }) => (
 	<ListItem

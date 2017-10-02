@@ -5,7 +5,7 @@ import {List} from '../_util/material';
 import LayoutNav from './LayoutNav';
 import LayoutHeader from './LayoutHeader';
 import Erro404 from './Erro404';
-import rotas from './rotas';
+import rotas from '../rotas';
 import './Layout.css';
 
 class Layout extends React.Component {

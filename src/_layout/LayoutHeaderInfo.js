@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {withRouter} from 'react-router-dom';
+
 import {RaisedButton} from '../_util/material';
 import loginState from '../login/loginState';
 import './LayoutHeaderInfo.css';
 
-const LayoutHeaderInfo = ({ usuario }) => {
+const LayoutHeaderInfo = ({ usuario, history }) => {
 	return (
 		<div id="LayoutHeaderInfo">
 			<div className="userInfo">{usuario}</div>
@@ -13,6 +15,7 @@ const LayoutHeaderInfo = ({ usuario }) => {
 				id="TopRite-logoff"
 				label="Logoff"
 				onClick={() => {
+					history.push('/');
 					loginState.logoff();
 				}}/>
 		</div>
@@ -23,4 +26,4 @@ LayoutHeaderInfo.propTypes = {
 	usuario: PropTypes.string.isRequired
 };
 
-export default loginState.subscribe(LayoutHeaderInfo);
+export default withRouter(loginState.subscribe(LayoutHeaderInfo));

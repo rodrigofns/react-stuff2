@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 import {AppBar} from '../_util/material';
 
 import LayoutHeaderInfo from './LayoutHeaderInfo';
-import rotas from './rotas';
+import rotas from '../rotas';
 
 const tituloApp = (pathname) => {
 	if (pathname !== '/') {

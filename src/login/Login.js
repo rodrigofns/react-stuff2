@@ -3,6 +3,7 @@ import AppState from 'react-app-state';
 import Card from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+
 import loginState from './loginState';
 import './Login.css';
 
@@ -46,4 +47,4 @@ const Login = ({ usr, pwd }) => (
 	</div>
 );
 
-export default frmState.subscribe(Login, 'usr', 'pwd');
+export default frmState.subscribe(Login);

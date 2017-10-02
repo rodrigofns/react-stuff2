@@ -23,4 +23,4 @@ DetalhesSessao.propTypes = {
 	usuario: PropTypes.string.isRequired
 };
 
-export default loginState.subscribe(DetalhesSessao, 'usuario');
+export default loginState.subscribe(DetalhesSessao);

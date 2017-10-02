@@ -1,9 +1,8 @@
 import AppState from 'react-app-state';
 
-class LoginState {
+class LoginState extends AppState {
 	constructor() {
-		this.ourState = new AppState();
-		this.ourState.set({
+		super({
 			estaLogado: !!localStorage.getItem('authUser'),
 			usuario: localStorage.getItem('authUser')
 		});
@@ -11,7 +10,7 @@ class LoginState {
 
 	login(usuario, senha, callback) {
 		localStorage.setItem('authUser', usuario);
-		this.ourState.set({
+		super.set({
 			estaLogado: true,
 			usuario: usuario
 		}, callback);
@@ -19,14 +18,10 @@ class LoginState {
 
 	logoff(callback) {
 		localStorage.removeItem('authUser');
-		this.ourState.set({
+		super.set({
 			estaLogado: false,
 			usuario: ''
 		}, callback);
-	}
-
-	subscribe(TheComponent, ...vars) {
-		return this.ourState.subscribe(TheComponent, ...vars);
 	}
 }
 

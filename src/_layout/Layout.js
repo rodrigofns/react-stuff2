@@ -2,9 +2,11 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import { List } from 'material-ui/List';
+
 import ListNav from './ListNav';
 import DetalhesSessao from './DetalhesSessao';
 import rotas from './rotas';
+import tituloState from './tituloState';
 import './Layout.css';
 
 class Layout extends React.Component {
@@ -24,7 +26,7 @@ class Layout extends React.Component {
 	}
 
 	componentDidMount() {
-		this.toggleMenu();
+		this.toggleMenu(); // inicialmente ficará oculto
 	}
 
 	render() {
@@ -32,7 +34,7 @@ class Layout extends React.Component {
 			<BrowserRouter>
 				<div id="Layout-wrap" ref={el => this.divWrap = el}>
 					<header id="Layout-header" ref={el => this.header = el}>
-						<AppBar title="Sistema de Gestão de Unidades"
+						<AppBar title={tituloState.titulo}
 							iconElementRight={<DetalhesSessao/>}
 							onLeftIconButtonTouchTap={this.toggleMenu}/>
 					</header>
@@ -59,4 +61,4 @@ class Layout extends React.Component {
 	}
 }
 
-export default Layout;
+export default tituloState.subscribe(Layout);

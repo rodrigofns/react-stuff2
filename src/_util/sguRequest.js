@@ -11,7 +11,7 @@ class SguRequest {
 
 	doPost(url, dados, callback) {
 		console.log('doPost() recebeu...', dados);
-		setTimeout(() => callback ? callback({ status: true }) : noop, 3000);
+		setTimeout(() => callback ? callback({ status: true }) : noop, 1000);
 	}
 
 	_requisita(url, metodo, callback, dados = { }) {

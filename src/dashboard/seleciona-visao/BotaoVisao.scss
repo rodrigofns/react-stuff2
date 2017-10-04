@@ -1,0 +1,18 @@
+.VisaoBotao {
+	padding: 10px;
+	cursor: pointer;
+	font-size: 95%;
+	display: flex;
+	align-items: center;
+	user-select: none;
+
+	&:hover {
+		background-color: #f2f2f2;
+	}
+
+	&.selec {
+		background-color: #074e68; /* blue500 */
+		color: white;
+		cursor: default;
+	}
+}

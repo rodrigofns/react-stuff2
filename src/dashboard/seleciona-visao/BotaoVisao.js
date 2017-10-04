@@ -1,14 +1,14 @@
 import React from 'react';
-import './BotaoVisao.css';
+import './BotaoVisao.scss';
 
-const BotaoVisao = (props) => {
-	let { selecionado, ...otherProps } = props;
-	let cls = 'VisaoBotao' +
-		(selecionado ? ' selec' : '');
+export default class BotaoVisao extends React.Component {
+	render() {
+		let { selecionado, ...otherProps } = this.props;
+		let cls = 'VisaoBotao' +
+			(selecionado ? ' selec' : '');
 
-	return (
-		<div className={cls} {...otherProps}></div>
-	);
-};
-
-export default BotaoVisao;
+		return (
+			<div className={cls} {...otherProps}></div>
+		);
+	};
+}

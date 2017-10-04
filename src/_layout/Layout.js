@@ -6,7 +6,7 @@ import LayoutNav from './LayoutNav';
 import LayoutHeader from './LayoutHeader';
 import Erro404 from './Erro404';
 import rotas from '../rotas';
-import './Layout.css';
+import './Layout.scss';
 
 class Layout extends React.Component {
 	constructor(props) {

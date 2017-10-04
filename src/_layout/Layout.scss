@@ -1,3 +1,6 @@
+$cxMenu: 220px;
+$tempoMenu: .3s;
+
 #Layout {
 	display: flex;
 	flex-direction: column;
@@ -5,26 +8,26 @@
 	height: 100vh;
 	position: absolute;
 	left: 0;
-	transition: left .3s, width .3s;
+	transition: left $tempoMenu, width $tempoMenu;
 
 	&.hiddenMenu {
-		left: -220px;
-		width: calc(100vw + 220px);
-		transition: left .3s, width .3s;
+		left: -$cxMenu;
+		width: calc(100vw + #{$cxMenu});
+		transition: left $tempoMenu, width $tempoMenu;
 	}
 
 	& > header {
 		border-top: 20px solid #074e68; /* blue500 */
 		margin-left: 0;
-		transition: margin-left .3s;
+		transition: margin-left $tempoMenu;
 	}
 	& > header.hiddenMenu {
-		margin-left: 220px;
-		transition: margin-left .3s;
+		margin-left: $cxMenu;
+		transition: margin-left $tempoMenu;
 	}
 	& .hamburger180 {
 		transform: rotate(180deg);
-		transition: transform .3s;
+		transition: transform $tempoMenu;
 	}
 
 	& > .body {
@@ -35,7 +38,7 @@
 
 	& > .body > aside {
 		overflow-y: auto;
-		width: 220px;
+		width: $cxMenu;
 		border-right: 1px solid #d8d8d8;
 	}
 
@@ -51,10 +54,10 @@
 		padding: 20px;
 		/*height: 100px;*/
 		margin-left: 0;
-		transition: margin-left .3s;
+		transition: margin-left $tempoMenu;
 	}
 	& > footer.hiddenMenu {
-		margin-left: 220px;
-		transition: margin-left .3s;
+		margin-left: $cxMenu;
+		transition: margin-left $tempoMenu;
 	}
 }

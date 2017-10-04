@@ -1,16 +1,24 @@
 #Dashboard {
 	display: flex;
 	justify-content: center;
+	min-height: 70vh;
 
 	#Dashboard-card1 {
 		flex-grow: 1;
 		margin: 0 6px;
 		padding: 10px;
+		display: flex;
+
+		& > div {
+			flex-grow: 1;
+			display: flex;
+		}
 	}
 
 	#Dashboard-card2 {
 		width: 400px;
 		margin: 0 6px;
 		padding: 10px;
+		display: flex;
 	}
 }

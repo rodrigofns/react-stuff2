@@ -1,0 +1,14 @@
+#VisaoInternas {
+	flex-grow: 1;
+	display: flex;
+
+	.navegador {
+		flex-grow: 1;
+		padding-top: 120px;
+	}
+
+	.mapa {
+		width: 550px;
+		background-color: #f0f0f0;
+	}
+}

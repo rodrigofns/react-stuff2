@@ -6,7 +6,7 @@ import cores from './_layout/cores';
 import Layout from './_layout/Layout';
 import Login from './login/Login';
 import loginState from './login/loginState';
-import './App.css';
+import './App.scss';
 
 @subscribe(loginState)
 export default class App extends React.Component {

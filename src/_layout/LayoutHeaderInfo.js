@@ -5,7 +5,7 @@ import {subscribe} from 'react-app-state';
 
 import {RaisedButton} from '../_util/material';
 import loginState from '../login/loginState';
-import './LayoutHeaderInfo.css';
+import './LayoutHeaderInfo.scss';
 
 @subscribe(loginState)
 class LayoutHeaderInfo extends React.Component {
@@ -17,7 +17,7 @@ class LayoutHeaderInfo extends React.Component {
 		let { usuario, history } = this.props;
 		return (
 			<div id="LayoutHeaderInfo">
-				<div className="userInfo">{usuario}</div>
+				<div className="headerUserInfo">{usuario}</div>
 				<RaisedButton
 					secondary
 					id="TopRite-logoff"

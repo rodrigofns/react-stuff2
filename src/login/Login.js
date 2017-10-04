@@ -4,7 +4,7 @@ import {Card, RaisedButton, TextField} from '../_util/material';
 
 import BarraAguarde from '../_util/BarraAguarde';
 import loginState from './loginState';
-import './Login.css';
+import './Login.scss';
 
 let frmLogin = new AppState({ usuario: '', senha: '', processando: false });
 

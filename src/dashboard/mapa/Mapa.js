@@ -10,6 +10,7 @@ export default class Mapa extends React.Component {
 			cx: PropTypes.number.isRequired,
 			cy: PropTypes.number.isRequired
 		}).isRequired,
+		pontos: PropTypes.array.isRequired,
 		onHoverArea: PropTypes.func,
 		onHoverPonto: PropTypes.func,
 		onClickArea: PropTypes.func,
@@ -85,7 +86,25 @@ export default class Mapa extends React.Component {
 
 		// Renderização dos pontos.
 
+		let renderizaUmPonto = (lnglat, cor, alpha, raio) => {
+			this.ctx.fillStyle = cor;
+			this.ctx.globalAlpha = alpha;
+			this.ctx.beginPath();
+			this.ctx.arc(lnglat[0], lnglat[1], (this.raioPonto * raio) / escalaMapa, 0, 2 * Math.PI, false);
+			this.ctx.fill();
+		};
 
+		for (const po of this.props.pontos) {
+			let lnglat = this.converteCoords([po.lng, po.lat], origem);
+			if (po.id === this.idPontoSelecionado) {
+				renderizaUmPonto(lnglat, Mapa.GRAF.ponto.corSelec, .4, 1);
+			} else {
+				renderizaUmPonto(lnglat, Mapa.GRAF.ponto.cor, .25, 1);
+				if (this.pontosClicaveis && po.id === idDestaque) {
+					renderizaUmPonto(lnglat, Mapa.GRAF.ponto.cor, .25, 2);
+				}
+			}
+		}
 	}
 
 	areaOuPontoEmbaixoDoCursor(ev) {

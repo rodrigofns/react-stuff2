@@ -26,8 +26,9 @@ export default class Federal extends React.Component {
 				<div className="navegador">Navega</div>
 				<div className="mapa">
 					<Mapa
-						idConjunto="trfs"
 						tamanho={{ cx: 550, cy: 443 }}
+						idConjunto="trfs"
+						pontos={[]}
 						onHoverArea={this.hoverArea}
 						onHoverPonto={this.hoverPonto}
 						onClickArea={this.clickArea}

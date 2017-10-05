@@ -11,7 +11,7 @@ import './LayoutHeaderInfo.scss';
 class LayoutHeaderInfo extends React.Component {
 	static propTypes = {
 		usuario: PropTypes.string.isRequired
-	}
+	};
 
 	render() {
 		let { usuario, history } = this.props;

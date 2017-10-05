@@ -9,7 +9,11 @@ export default class Mapa extends React.Component {
 		tamanho: PropTypes.shape({ // idealmente as dimensões do elemento
 			cx: PropTypes.number.isRequired,
 			cy: PropTypes.number.isRequired
-		}).isRequired
+		}).isRequired,
+		onHoverArea: PropTypes.func,
+		onHoverPonto: PropTypes.func,
+		onClickArea: PropTypes.func,
+		onClickPonto: PropTypes.func
 	};
 
 	static GRAF = { // constantes gráficas usadas na plotagem 2D do canvas
@@ -129,18 +133,26 @@ export default class Mapa extends React.Component {
 		if (idHovered !== this.idPrevHover) {
 			this.idPrevHover = idHovered;
 			this.renderizaMapa(idHovered);
-			// this.pontosClicaveis ?
-			// 	this.hoverPonto.emit(idHovered) :
-			// 	this.hoverArea.emit(idHovered);
+
+			if (this.pontosClicaveis && this.props.onHoverPonto) {
+				this.props.onHoverPonto(idHovered);
+			} else if (!this.pontosClicaveis && this.props.onHoverArea) {
+				this.props.onHoverArea(idHovered);
+			}
 		}
 	}
 
 	canvasMouseOut = (ev) => {
-
+		this.renderizaMapa();
 	}
 
 	canvasClick = (ev) => {
-
+		if (this.pontosClicaveis && this.props.onClickPonto) {
+			this.props.onClickPonto(this.idPrevHover);
+		} else if (!this.pontosClicaveis && this.props.onClickArea) {
+			this.props.onClickArea(this.idPrevHover);
+		}
+		this.renderizaMapa(this.idPrevHover);
 	}
 
 	render() {

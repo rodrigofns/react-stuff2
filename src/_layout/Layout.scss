@@ -1,6 +1,3 @@
-$cxMenu: 220px;
-$tempoMenu: .3s;
-
 #Layout {
 	display: flex;
 	flex-direction: column;
@@ -8,41 +5,13 @@ $tempoMenu: .3s;
 	height: 100vh;
 	position: absolute;
 	left: 0;
-	transition: left $tempoMenu, width $tempoMenu;
-
-	&.hiddenMenu {
-		left: -$cxMenu;
-		width: calc(100vw + #{$cxMenu});
-		transition: left $tempoMenu, width $tempoMenu;
-	}
 
 	& > header {
-		border-top: 20px solid #074e68; /* blue500 */
+		border-top: 20px solid #074e68;
 		margin-left: 0;
-		transition: margin-left $tempoMenu;
-	}
-	& > header.hiddenMenu {
-		margin-left: $cxMenu;
-		transition: margin-left $tempoMenu;
-	}
-	& .hamburger180 {
-		transform: rotate(180deg);
-		transition: transform $tempoMenu;
 	}
 
-	& > .body {
-		flex-grow: 1;
-		min-height: 0;
-		display: flex;
-	}
-
-	& > .body > aside {
-		overflow-y: auto;
-		width: $cxMenu;
-		border-right: 1px solid #d8d8d8;
-	}
-
-	& > .body > main {
+	& > main {
 		flex-grow: 1;
 		overflow-y: auto;
 		padding: 12px;
@@ -50,14 +19,9 @@ $tempoMenu: .3s;
 
 	& > footer {
 		color: white;
-		background-color: #074e68; /* blue500 */
+		background-color: #074e68;
 		padding: 20px;
-		/*height: 100px;*/
+		//height: 100px;
 		margin-left: 0;
-		transition: margin-left $tempoMenu;
-	}
-	& > footer.hiddenMenu {
-		margin-left: $cxMenu;
-		transition: margin-left $tempoMenu;
 	}
 }

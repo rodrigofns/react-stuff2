@@ -21,13 +21,21 @@ export default class Mapa extends React.Component {
 	canvas = null;
 	ctx = null;
 	area2dPaths = null; // cache com os caminhos das áreas
+	idPrevHover = null; // área|ponto abaixo do cursor; cache para evitar envio de notificações repetidas
 
 	componentDidMount() {
+		this.inicializaCanvas();
+		this.geraArea2dPaths();
+		this.renderizaMapa();
+	}
+
+	inicializaCanvas() {
 		this.ctx = this.canvas.getContext('2d');
 		this.canvas.width = this.props.tamanho.cx;
 		this.canvas.height = this.props.tamanho.cy;
-		this.geraArea2dPaths();
-		this.renderizaMapa();
+		this.canvas.addEventListener('mousemove', this.canvasMouseMove);
+		this.canvas.addEventListener('mouseout', this.canvasMouseOut);
+		this.canvas.addEventListener('click', this.canvasClick);
 	}
 
 	geraArea2dPaths() {
@@ -39,7 +47,7 @@ export default class Mapa extends React.Component {
 		}
 	}
 
-	renderizaMapa() {
+	renderizaMapa(idDestaque = null) {
 
 		// Preparação para a plotagem.
 
@@ -63,7 +71,6 @@ export default class Mapa extends React.Component {
 		// Renderização das áreas.
 
 		for (const idArea of Object.keys(this.area2dPaths)) {
-let idDestaque = null; // virá do hover!
 			this.ctx.globalAlpha = .9;
 			this.ctx.fillStyle = (!this.pontosClicaveis && idArea === idDestaque) ?
 				Mapa.GRAF.area.corOn : Mapa.GRAF.area.corOff;
@@ -71,6 +78,68 @@ let idDestaque = null; // virá do hover!
 			this.ctx.globalAlpha = 1;
 			this.ctx.stroke(this.area2dPaths[idArea]);
 		}
+
+		// Renderização dos pontos.
+
+
+	}
+
+	areaOuPontoEmbaixoDoCursor(ev) {
+		let canvasRc = this.canvas.getBoundingClientRect();
+		let xPos = ev.clientX - canvasRc.left;
+		let yPos = ev.clientY - canvasRc.top;
+
+		if (this.pontosClicaveis) {
+			let origem = jsonMapas.origem;
+			let conjunto = jsonMapas.conjuntos[this.props.idConjunto];
+			let escalaMapa = origem.mapa.escala * conjunto.escala;
+
+			for (let i = 0; i < this.pontos.length; ++i) {
+				let po = this.pontos[i];
+				let lnglat = this.converteCoords([po.lng, po.lat], origem);
+				let reg = new Path2D();
+				reg.arc(lnglat[0], lnglat[1], this.raioPonto / escalaMapa, 0, 2 * Math.PI, false);
+				if (this.ctx.isPointInPath(reg, xPos, yPos)) {
+					return po.id; // ID do ponto abaixo do cursor
+				}
+			}
+		} else {
+			for (let idPath in this.area2dPaths) {
+				if (this.ctx.isPointInPath(this.area2dPaths[idPath], xPos, yPos)) {
+					return idPath; // ID da área abaixo do cursor
+				}
+			}
+		}
+
+		return null; // cursor não está sobre área nem ponto
+	}
+
+	converteCoords(lnglat, origem) {
+		let lng = lnglat[0] + 180 - origem.lnglat.offset[0];
+		let lat = 90 - lnglat[1] - origem.lnglat.offset[1];
+		lng *= origem.lnglat.escala / origem.mapa.escala;
+		lat *= origem.lnglat.escala / origem.mapa.escala;
+		return [lng, lat]; // longitude e latitude convertidas para a escala do mapa
+	}
+
+	canvasMouseMove = (ev) => {
+		let idHovered = this.areaOuPontoEmbaixoDoCursor(ev);
+		this.canvas.style.cursor = (idHovered !== null) ? 'pointer' : 'default';
+
+		if (idHovered !== this.idPrevHover) {
+			this.idPrevHover = idHovered;
+			this.renderizaMapa(idHovered);
+			// this.pontosClicaveis ?
+			// 	this.hoverPonto.emit(idHovered) :
+			// 	this.hoverArea.emit(idHovered);
+		}
+	}
+
+	canvasMouseOut = (ev) => {
+
+	}
+
+	canvasClick = (ev) => {
 
 	}
 

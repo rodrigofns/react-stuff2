@@ -5,6 +5,7 @@ import {Drawer, MenuItem} from '../_util/material';
 
 import menuState from './menuState';
 import rotas from '../rotas';
+import './LayoutDrawer.scss';
 
 @subscribe(menuState)
 class LayoutDrawer extends React.Component {
@@ -15,13 +16,16 @@ class LayoutDrawer extends React.Component {
 
 	render() {
 		return (
-			<Drawer
-				docked={false}
-				width={260}
+			<Drawer docked={false} width={260}
 				open={this.props.aberto}
 				onRequestChange={open => menuState.set({ aberto: open })}>
+				<div id="Drawer-top">
+					SGU
+				</div>
 				{rotas.map((rota, i) =>
-					<MenuItem key={i} onClick={() => this.clicouItem(rota)}>{rota.nome}</MenuItem>
+					<MenuItem key={i} onClick={() => this.clicouItem(rota)}>
+						<i className={`fa fa-${rota.icone} drawerMenuIcone`}></i> {rota.nome}
+					</MenuItem>
 				)}
 			</Drawer>
 		);

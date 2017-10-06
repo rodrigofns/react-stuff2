@@ -1,6 +1,6 @@
 const noop = () => { };
 
-class SguRequest {
+class SguHttpRequest {
 	doGet(url, callback) {
 		this._requisita(url, 'GET', callback);
 	}
@@ -28,4 +28,4 @@ class SguRequest {
 	}
 }
 
-export default new SguRequest();
+export default new SguHttpRequest();

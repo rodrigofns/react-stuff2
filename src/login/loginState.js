@@ -1,5 +1,5 @@
 import AppState from 'react-app-state';
-import sguRequest from '../_util/sguRequest';
+import sguHttpRequest from '../_util/sguHttpRequest';
 
 class LoginState extends AppState {
 	constructor() {
@@ -10,7 +10,7 @@ class LoginState extends AppState {
 	}
 
 	login(usuario, senha, callback) {
-		sguRequest.doPost('/login', { usuario, senha }, r => {
+		sguHttpRequest.doPost('/login', { usuario, senha }, r => {
 			if (r.status) {
 				localStorage.setItem('authUser', usuario);
 				super.set({
@@ -29,7 +29,7 @@ class LoginState extends AppState {
 			estaLogado: false,
 			usuario: ''
 		}, callback);
-		sguRequest.doPost('/logoff');
+		sguHttpRequest.doPost('/logoff');
 	}
 }
 

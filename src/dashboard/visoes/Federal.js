@@ -41,7 +41,7 @@ export default class Federal extends React.Component {
 		return (
 			<div id="VisaoFederal">
 				<div className="navegador">
-					{this.props.idAreas.map((idArea, i) =>
+					{idAreas.map((idArea, i) =>
 						(i >= 1) ? (
 							<div className="navegaAcima" key={i} onClick={() => this.sobeNivel(i)}>
 								{(i === 1) ? 'TRFs' : jsonMapas.areas[ idAreas[i - 1] ].nome}

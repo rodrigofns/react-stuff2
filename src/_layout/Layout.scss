@@ -1,3 +1,5 @@
+@import 'constantes';
+
 #Layout {
 	display: flex;
 	flex-direction: column;
@@ -7,7 +9,7 @@
 	left: 0;
 
 	& > header {
-		border-top: 20px solid #074e68;
+		border-top: 20px solid $azul-pgfn;
 		margin-left: 0;
 	}
 
@@ -19,7 +21,7 @@
 
 	& > footer {
 		color: white;
-		background-color: #074e68;
+		background-color: $azul-pgfn;
 		padding: 20px;
 		//height: 100px;
 		margin-left: 0;

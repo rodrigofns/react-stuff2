@@ -11,6 +11,7 @@ export default class Mapa extends React.Component {
 			cy: PropTypes.number.isRequired
 		}).isRequired,
 		pontos: PropTypes.array.isRequired,
+		pontosClicaveis: PropTypes.bool.isRequired,
 		onHoverArea: PropTypes.func,
 		onHoverPonto: PropTypes.func,
 		onClickArea: PropTypes.func,
@@ -30,8 +31,13 @@ export default class Mapa extends React.Component {
 
 	componentDidMount() {
 		this.inicializaCanvas();
-		this.geraArea2dPaths();
-		this.renderizaMapa();
+		this.geraArea2dPaths(this.props.idConjunto);
+		this.renderizaMapa(this.props.idConjunto);
+	}
+
+	componentWillUpdate(nextProps) {
+		this.geraArea2dPaths(nextProps.idConjunto);
+		this.renderizaMapa(nextProps.idConjunto);
 	}
 
 	inicializaCanvas() {
@@ -43,16 +49,16 @@ export default class Mapa extends React.Component {
 		this.canvas.addEventListener('click', this.canvasClick);
 	}
 
-	geraArea2dPaths() {
+	geraArea2dPaths(idConjunto) {
 		this.area2dPaths = { };
-		let conjunto = jsonMapas.conjuntos[this.props.idConjunto];
+		let conjunto = jsonMapas.conjuntos[idConjunto];
 		for (const idArea of conjunto.areas) {
 			let area = jsonMapas.areas[idArea];
 			this.area2dPaths[idArea] = new Path2D(area.path2d);
 		}
 	}
 
-	renderizaMapa(idDestaque = null) {
+	renderizaMapa(idConjunto, idDestaque = null) {
 
 		// Preparação para a plotagem.
 
@@ -61,7 +67,7 @@ export default class Mapa extends React.Component {
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
 		let origem = jsonMapas.origem;
-		let conjunto = jsonMapas.conjuntos[this.props.idConjunto];
+		let conjunto = jsonMapas.conjuntos[idConjunto];
 		let escalaMapa = origem.mapa.escala * conjunto.escala;
 		let offsetMapa = [ (origem.mapa.offset[0] + conjunto.offset[0]) / escalaMapa,
 			(origem.mapa.offset[1] + conjunto.offset[1]) / escalaMapa ];
@@ -77,7 +83,7 @@ export default class Mapa extends React.Component {
 
 		for (const idArea of Object.keys(this.area2dPaths)) {
 			this.ctx.globalAlpha = .9;
-			this.ctx.fillStyle = (!this.pontosClicaveis && idArea === idDestaque) ?
+			this.ctx.fillStyle = (!this.props.pontosClicaveis && idArea === idDestaque) ?
 				Mapa.GRAF.area.corOn : Mapa.GRAF.area.corOff;
 			this.ctx.fill(this.area2dPaths[idArea]);
 			this.ctx.globalAlpha = 1;
@@ -100,7 +106,7 @@ export default class Mapa extends React.Component {
 				renderizaUmPonto(lnglat, Mapa.GRAF.ponto.corSelec, .4, 1);
 			} else {
 				renderizaUmPonto(lnglat, Mapa.GRAF.ponto.cor, .25, 1);
-				if (this.pontosClicaveis && po.id === idDestaque) {
+				if (this.props.pontosClicaveis && po.id === idDestaque) {
 					renderizaUmPonto(lnglat, Mapa.GRAF.ponto.cor, .25, 2);
 				}
 			}
@@ -112,13 +118,12 @@ export default class Mapa extends React.Component {
 		let xPos = ev.clientX - canvasRc.left;
 		let yPos = ev.clientY - canvasRc.top;
 
-		if (this.pontosClicaveis) {
+		if (this.props.pontosClicaveis) {
 			let origem = jsonMapas.origem;
 			let conjunto = jsonMapas.conjuntos[this.props.idConjunto];
 			let escalaMapa = origem.mapa.escala * conjunto.escala;
 
-			for (let i = 0; i < this.pontos.length; ++i) {
-				let po = this.pontos[i];
+			for (const po of this.props.pontos) {
 				let lnglat = this.converteCoords([po.lng, po.lat], origem);
 				let reg = new Path2D();
 				reg.arc(lnglat[0], lnglat[1], this.raioPonto / escalaMapa, 0, 2 * Math.PI, false);
@@ -151,27 +156,27 @@ export default class Mapa extends React.Component {
 
 		if (idHovered !== this.idPrevHover) {
 			this.idPrevHover = idHovered;
-			this.renderizaMapa(idHovered);
+			this.renderizaMapa(this.props.idConjunto, idHovered);
 
-			if (this.pontosClicaveis && this.props.onHoverPonto) {
+			if (this.props.pontosClicaveis && this.props.onHoverPonto) {
 				this.props.onHoverPonto(idHovered);
-			} else if (!this.pontosClicaveis && this.props.onHoverArea) {
+			} else if (!this.props.pontosClicaveis && this.props.onHoverArea) {
 				this.props.onHoverArea(idHovered);
 			}
 		}
 	}
 
 	canvasMouseOut = (ev) => {
-		this.renderizaMapa();
+		this.renderizaMapa(this.props.idConjunto, );
 	}
 
 	canvasClick = (ev) => {
-		if (this.pontosClicaveis && this.props.onClickPonto) {
+		if (this.props.pontosClicaveis && this.props.onClickPonto) {
 			this.props.onClickPonto(this.idPrevHover);
-		} else if (!this.pontosClicaveis && this.props.onClickArea) {
+		} else if (!this.props.pontosClicaveis && this.props.onClickArea) {
 			this.props.onClickArea(this.idPrevHover);
 		}
-		this.renderizaMapa(this.idPrevHover);
+		this.renderizaMapa(this.props.idConjunto, this.idPrevHover);
 	}
 
 	render() {

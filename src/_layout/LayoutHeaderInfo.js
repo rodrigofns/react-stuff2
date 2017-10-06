@@ -1,29 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import {subscribe} from 'react-app-state';
 
 import {RaisedButton} from '../_util/material';
-import loginState from '../login/loginState';
+import authState from '../_auth/authState';
 import './LayoutHeaderInfo.scss';
 
-@subscribe(loginState)
+@subscribe(authState)
 class LayoutHeaderInfo extends React.Component {
-	static propTypes = {
-		usuario: PropTypes.string.isRequired
-	};
-
 	render() {
-		let { usuario, history } = this.props;
+		let { nomeUsuario, history } = this.props;
 		return (
 			<div id="LayoutHeaderInfo">
-				<div className="headerUserInfo">{usuario}</div>
+				<div className="headerUserInfo">{nomeUsuario}</div>
 				<RaisedButton
 					secondary
 					id="TopRite-logoff"
 					label="Logoff"
 					onClick={() => {
-						loginState.logoff();
+						authState.logoff();
 						history.push('/');
 					}}/>
 			</div>

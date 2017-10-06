@@ -1,28 +1,29 @@
 import React from 'react';
-import AppState, {subscribe} from 'react-app-state';
 import {Card, RaisedButton, TextField} from '../_util/material';
 
 import BarraAguarde from '../_util/BarraAguarde';
 import Rodape from './Rodape';
-import loginState from './loginState';
+import authState from '../_auth/authState';
 import './Login.scss';
 
-let frmLogin = new AppState({ usuario: '', senha: '', processando: false });
-
-@subscribe(frmLogin)
 export default class Login extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = { usuario: '', senha: '', processando: false };
+	}
+
 	submitForm = (ev) => {
 		ev.preventDefault();
-		let { usuario, senha } = this.props;
-		frmLogin.set({ processando: true }, () => {
-			loginState.login(usuario, senha, () => {
-				frmLogin.set({ usuario: '', senha: '', processando: false });
-			});
+		this.setState({ processando: true }, () => {
+			authState.login(this.state.usuario, this.state.senha)
+				.catch(() => {
+					this.setState({ senha: '', processando: false });
+				});
 		});
 	}
 
 	render() {
-		let { usuario, senha, processando } = this.props;
+		let { usuario, senha, processando } = this.state;
 		return (
 			<div id="Login">
 				<form onSubmit={this.submitForm}>
@@ -35,7 +36,7 @@ export default class Login extends React.Component {
 									autoFocus
 									autoComplete="off"
 									disabled={processando}
-									onChange={e => frmLogin.set({ usuario: e.target.value })}
+									onChange={e => this.setState({ usuario: e.target.value })}
 									name="login"
 									floatingLabelText="Nome de usuário"/>
 							</div>
@@ -43,7 +44,7 @@ export default class Login extends React.Component {
 								<TextField
 									name="pwd"
 									disabled={processando}
-									onChange={e => frmLogin.set({ senha: e.target.value })}
+									onChange={e => this.setState({ senha: e.target.value })}
 									type="password"
 									floatingLabelText="Senha"/>
 							</div>

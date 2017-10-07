@@ -1,3 +1,5 @@
+@import '../../_layout/constantes';
+
 .VisaoBotao {
 	padding: 10px;
 	cursor: pointer;
@@ -11,7 +13,7 @@
 	}
 
 	&.selec {
-		background-color: #074e68; /* blue500 */
+		background-color: $azul-pgfn;
 		color: white;
 		cursor: default;
 	}

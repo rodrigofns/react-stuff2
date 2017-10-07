@@ -1,3 +1,5 @@
+@import './_layout/constantes';
+
 * {
 	box-sizing: border-box;
 }
@@ -8,6 +10,6 @@ body {
 }
 
 h1,h2,h3,h4 {
-	color: #074e68; /* blue500 */
+	color: $azul-pgfn;
 	margin: 0;
 }

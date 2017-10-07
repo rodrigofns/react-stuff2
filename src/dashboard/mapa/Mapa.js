@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import cores from '../../_layout/cores';
 import jsonMapas from './mapas-2d.json';
 
 export default class Mapa extends React.Component {
@@ -19,18 +20,20 @@ export default class Mapa extends React.Component {
 	};
 
 	static GRAF = { // constantes gráficas usadas na plotagem 2D do canvas
-		area: { corOn: '#074e68', corOff: 'white', corBorda: 'black', espessura: .25 },
-		ponto: { cor: '#9b1a37', corSelec: '#074e68' },
+		area: { corOn: cores.palette.primary1Color, corOff: 'white', corBorda: 'black', espessura: .25 },
+		ponto: { cor: cores.palette.accent1Color, corSelec: cores.palette.primary1Color },
 		animacao: { duracao: 250 }
 	};
 
 	canvas = null;
 	ctx = null;
-	area2dPaths = null; // cache com os caminhos das áreas
+	area2dPaths = { }; // cache com os caminhos das áreas
 	idPrevHover = null; // área|ponto abaixo do cursor; cache para evitar envio de notificações repetidas
 
 	componentDidMount() {
-		this.inicializaCanvas();
+		this.ctx = this.canvas.getContext('2d');
+		this.canvas.width = this.props.tamanho.cx;
+		this.canvas.height = this.props.tamanho.cy;
 		this.geraArea2dPaths(this.props.idConjunto);
 		this.renderizaMapa(this.props.idConjunto);
 	}
@@ -38,15 +41,6 @@ export default class Mapa extends React.Component {
 	componentWillUpdate(nextProps) {
 		this.geraArea2dPaths(nextProps.idConjunto);
 		this.renderizaMapa(nextProps.idConjunto);
-	}
-
-	inicializaCanvas() {
-		this.ctx = this.canvas.getContext('2d');
-		this.canvas.width = this.props.tamanho.cx;
-		this.canvas.height = this.props.tamanho.cy;
-		this.canvas.addEventListener('mousemove', this.canvasMouseMove);
-		this.canvas.addEventListener('mouseout', this.canvasMouseOut);
-		this.canvas.addEventListener('click', this.canvasClick);
 	}
 
 	geraArea2dPaths(idConjunto) {
@@ -132,9 +126,9 @@ export default class Mapa extends React.Component {
 				}
 			}
 		} else {
-			for (let idPath in this.area2dPaths) {
-				if (this.ctx.isPointInPath(this.area2dPaths[idPath], xPos, yPos)) {
-					return idPath; // ID da área abaixo do cursor
+			for (const idArea of Object.keys(this.area2dPaths)) {
+				if (this.ctx.isPointInPath(this.area2dPaths[idArea], xPos, yPos)) {
+					return idArea; // ID da área abaixo do cursor
 				}
 			}
 		}
@@ -167,7 +161,7 @@ export default class Mapa extends React.Component {
 	}
 
 	canvasMouseOut = (ev) => {
-		this.renderizaMapa(this.props.idConjunto, );
+		this.renderizaMapa(this.props.idConjunto);
 	}
 
 	canvasClick = (ev) => {
@@ -180,6 +174,13 @@ export default class Mapa extends React.Component {
 	}
 
 	render() {
-		return <canvas ref={el => this.canvas = el}></canvas>;
+		return (
+			<canvas
+				ref={el => this.canvas = el}
+				onMouseMove={this.canvasMouseMove}
+				onMouseOut={this.canvasMouseOut}
+				onClick={this.canvasClick}>
+			</canvas>
+		);
 	}
 }

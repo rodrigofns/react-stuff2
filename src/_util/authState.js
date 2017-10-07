@@ -9,19 +9,11 @@ class AuthState extends AppState {
 	}
 
 	checkAuth() {
-		return new Promise((resolve, reject) => {
-			sguHttpRequest.doPost('/usuario')
-				.then(data => this._updateAuthStatus(data, () => resolve(data)))
-				.catch(err => this._updateAuthStatus(err, () => reject(err)));
-		});
+		return this._updateAuthStatus('/usuario', { });
 	}
 
 	login(usuario, senha) {
-		return new Promise((resolve, reject) => {
-			sguHttpRequest.doPost('/login', { usuario, senha })
-				.then(data => this._updateAuthStatus(data, () => resolve(data)))
-				.catch(err => this._updateAuthStatus(err, () => reject(err)));
-		});
+		return this._updateAuthStatus('/login', { usuario, senha });
 	}
 
 	logoff() {
@@ -30,14 +22,19 @@ class AuthState extends AppState {
 		return sguHttpRequest.doPost('/logoff');
 	}
 
-	_updateAuthStatus(data, callback) {
-		if (data.status) {
-			authToken.save(data.token);
-			super.set({ isAuth: true, nomeUsuario: data.nome }, callback);
-		} else {
-			authToken.remove();
-			super.set({ isAuth: false, nomeUsuario: '' }, callback);
-		}
+	_updateAuthStatus(path, body) {
+		return new Promise(resolve => {
+			sguHttpRequest.doPost(path, body)
+				.then(data => {
+					if (data.status) {
+						authToken.save(data.token);
+						super.set({ isAuth: true, nomeUsuario: data.nome }, () => resolve());
+					} else {
+						authToken.remove();
+						super.set({ isAuth: false, nomeUsuario: '' }, () => resolve());
+					}
+				});
+		});
 	}
 }
 

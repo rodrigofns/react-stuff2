@@ -1,24 +1,24 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
-import {subscribe} from 'react-app-state';
-import {Drawer, MenuItem} from '../_util/material';
 
-import menuState from './menuState';
+import {Drawer, MenuItem} from '../_util/material';
+import useProp from '../_util/useProp';
+import menuStore from './menuStore';
 import rotas from '../rotas';
 import './LayoutDrawer.scss';
 
-@subscribe(menuState)
+@useProp({ menuStore })
 class LayoutDrawer extends React.Component {
 	clicouItem(rota) {
 		this.props.history.push(rota.caminho);
-		menuState.set({ aberto: false });
+		this.props.menuStore.aberto = false;
 	}
 
 	render() {
 		return (
 			<Drawer docked={false} width={260}
-				open={this.props.aberto}
-				onRequestChange={open => menuState.set({ aberto: open })}>
+				open={this.props.menuStore.aberto}
+				onRequestChange={open => this.props.menuStore.aberto = open}>
 				<div id="Drawer-top">
 					SGU
 				</div>

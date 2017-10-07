@@ -2,10 +2,12 @@ import React from 'react';
 import {Card, RaisedButton, TextField} from '../_util/material';
 
 import BarraAguarde from '../_util/BarraAguarde';
-import authState from '../_util/authState';
+import useProp from '../_util/useProp';
+import authStore from '../_util/authStore';
 import Rodape from './Rodape';
 import './Login.scss';
 
+@useProp({ authStore })
 export default class Login extends React.Component {
 	constructor(props) {
 		super(props);
@@ -15,7 +17,7 @@ export default class Login extends React.Component {
 	submitForm = (ev) => {
 		ev.preventDefault();
 		this.setState({ processando: true }, () => {
-			authState.login(this.state.usuario, this.state.senha)
+			authStore.login(this.state.usuario, this.state.senha)
 				.catch(() => {
 					this.setState({ senha: '', processando: false });
 				});

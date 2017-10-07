@@ -1,19 +1,20 @@
 import React from 'react';
-import {subscribe} from 'react-app-state';
+
+import useProp from '../../_util/useProp';
 import VisaoLinha1 from './VisaoLinha1';
 import VisaoLinha2 from './VisaoLinha2';
-import visaoState from './visaoState';
+import visaoStore from './visaoStore';
 import './SelecionaVisao.scss';
 
-@subscribe(visaoState)
+@useProp({ visaoStore })
 export default class SelecionaVisao extends React.Component {
 	render() {
-		let { visaoAtual1 } = this.props;
+		let { visaoStore } = this.props;
 		return (
 			<div id="SelecionaVisao">
 				<div className="linhas">
 					<VisaoLinha1/>
-					{visaoAtual1 === 'EXTERNAS' ? (
+					{visaoStore.visaoAtual1 === 'EXTERNAS' ? (
 						<VisaoLinha2/>
 					) : null}
 				</div>

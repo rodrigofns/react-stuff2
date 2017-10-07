@@ -1,33 +1,34 @@
 import React from 'react';
-import {subscribe} from 'react-app-state';
+
+import useProp from '../../_util/useProp';
 import BotaoVisao from './BotaoVisao';
-import visaoState from './visaoState';
+import visaoStore from './visaoStore';
 import './VisaoLinha.scss';
 
-@subscribe(visaoState)
+@useProp({ visaoStore })
 export default class VisaoLinha2 extends React.Component {
 	render() {
-		let { visaoAtual2 } = this.props;
+		let { visaoStore } = this.props;
 		return (
 			<div className="VisaoLinha">
 				<BotaoVisao
-					selecionado={visaoAtual2 === 'FEDERAL'}
-					onClick={() => visaoState.set({ visaoAtual2: 'FEDERAL' })}>
+					selecionado={visaoStore.visaoAtual2 === 'FEDERAL'}
+					onClick={() => visaoStore.visaoAtual2 = 'FEDERAL'}>
 					Federal
 				</BotaoVisao>
 				<BotaoVisao
-					selecionado={visaoAtual2 === 'ESTADUAL'}
-					onClick={() => visaoState.set({ visaoAtual2: 'ESTADUAL' })}>
+					selecionado={visaoStore.visaoAtual2 === 'ESTADUAL'}
+					onClick={() => visaoStore.visaoAtual2 = 'ESTADUAL'}>
 					Estadual
 				</BotaoVisao>
 				<BotaoVisao
-					selecionado={visaoAtual2 === 'TRABALHISTA'}
-					onClick={() => visaoState.set({ visaoAtual2: 'TRABALHISTA' })}>
+					selecionado={visaoStore.visaoAtual2 === 'TRABALHISTA'}
+					onClick={() => visaoStore.visaoAtual2 = 'TRABALHISTA'}>
 					Trabalhista
 				</BotaoVisao>
 				<BotaoVisao
-					selecionado={visaoAtual2 === 'ELEITORAL'}
-					onClick={() => visaoState.set({ visaoAtual2: 'ELEITORAL' })}>
+					selecionado={visaoStore.visaoAtual2 === 'ELEITORAL'}
+					onClick={() => visaoStore.visaoAtual2 = 'ELEITORAL'}>
 					Eleitoral
 				</BotaoVisao>
 			</div>

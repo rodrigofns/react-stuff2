@@ -1,30 +1,31 @@
 import React from 'react';
-import {subscribe} from 'react-app-state';
+
+import useProp from '../../_util/useProp';
 import BotaoVisao from './BotaoVisao';
-import visaoState from './visaoState';
+import visaoStore from './visaoStore';
 import './VisaoLinha.scss';
 
-@subscribe(visaoState)
+@useProp({ visaoStore })
 export default class VisaoLinha1 extends React.Component {
 	render() {
-		let { visaoAtual1 } = this.props;
+		let { visaoStore } = this.props;
 		return (
 			<div className="VisaoLinha">
 				<BotaoVisao
-					selecionado={visaoAtual1 === 'INTERNAS'}
-					onClick={() => visaoState.set({ visaoAtual1: 'INTERNAS' })}>
+					selecionado={visaoStore.visaoAtual1 === 'INTERNAS'}
+					onClick={() => visaoStore.visaoAtual1 = 'INTERNAS'}>
 					Unidades<br/>
 					Internas
 				</BotaoVisao>
 				<BotaoVisao
-					selecionado={visaoAtual1 === 'EXTERNAS'}
-					onClick={() => visaoState.set({ visaoAtual1: 'EXTERNAS' })}>
+					selecionado={visaoStore.visaoAtual1 === 'EXTERNAS'}
+					onClick={() => visaoStore.visaoAtual1 = 'EXTERNAS'}>
 					Unidades<br/>
 					Externas
 				</BotaoVisao>
 				<BotaoVisao
-					selecionado={visaoAtual1 === 'GEOGRAFICO'}
-					onClick={() => visaoState.set({ visaoAtual1: 'GEOGRAFICO' })}>
+					selecionado={visaoStore.visaoAtual1 === 'GEOGRAFICO'}
+					onClick={() => visaoStore.visaoAtual1 = 'GEOGRAFICO'}>
 					Geográfico
 				</BotaoVisao>
 			</div>

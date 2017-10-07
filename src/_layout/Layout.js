@@ -1,32 +1,36 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 
+import useProp from '../_util/useProp';
 import LayoutDrawer from './LayoutDrawer';
 import LayoutHeader from './LayoutHeader';
 import Erro404 from './Erro404';
-import menuState from './menuState';
+import menuStore from './menuStore';
 import rotas from '../rotas';
 import './Layout.scss';
 
-const Layout = () => (
-	<BrowserRouter>
-		<div id="Layout">
-			<LayoutDrawer/>
-			<header>
-				<LayoutHeader onMenuClick={() => menuState.set({ aberto: true })}/>
-			</header>
-			<main>
-				<Switch>
-					<Redirect exact from="/" to={rotas[0].caminho}/>
-					{rotas.map((rota, i) =>
-						<Route key={i} path={rota.caminho} component={rota.componente}/>
-					)}
-					<Route component={Erro404}/>
-				</Switch>
-			</main>
-			{/* <footer>footer</footer> */}
-		</div>
-	</BrowserRouter>
-);
-
-export default Layout;
+@useProp({ menuStore })
+export default class Layout extends React.Component {
+	render() {
+		return (
+			<BrowserRouter>
+				<div id="Layout">
+					<LayoutDrawer/>
+					<header>
+						<LayoutHeader onMenuClick={() => this.props.menuStore.aberto = true}/>
+					</header>
+					<main>
+						<Switch>
+							<Redirect exact from="/" to={rotas[0].caminho}/>
+							{rotas.map((rota, i) =>
+								<Route key={i} path={rota.caminho} component={rota.componente}/>
+							)}
+							<Route component={Erro404}/>
+						</Switch>
+					</main>
+					{/* <footer>footer</footer> */}
+				</div>
+			</BrowserRouter>
+		);
+	}
+}

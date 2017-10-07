@@ -1,16 +1,13 @@
 import React from 'react';
-import AppState, {subscribe} from 'react-app-state';
 
 import jsonMapas from '../mapa/mapas-2d.json';
 import Mapa from '../mapa/Mapa.js';
 import './Federal.scss';
 
-let federalState = new AppState({ idAreas: ['trfs'], pontos: [] });
-
-@subscribe(federalState)
 export default class Federal extends React.Component {
-	componentDidMount() {
-		federalState.set({ idAreas: ['trfs'], pontos: [] }); // reset
+	constructor(props) {
+		super(props);
+		this.state = { idAreas: ['trfs'], pontos: [] };
 	}
 
 	hoverArea = (idArea) => {
@@ -22,8 +19,8 @@ export default class Federal extends React.Component {
 	}
 
 	clickArea = (idArea) => {
-		if (this.props.idAreas.length < 3) { // nível máximo de zoom
-			federalState.set({ idAreas: [ ...this.props.idAreas, idArea ] });
+		if (this.state.idAreas.length < 3) { // nível máximo de zoom
+			this.setState({ idAreas: [ ...this.state.idAreas, idArea ] });
 		}
 	}
 
@@ -32,11 +29,11 @@ export default class Federal extends React.Component {
 	}
 
 	sobeNivel = (nivel) => {
-		federalState.set({ idAreas: this.props.idAreas.slice(0, nivel) });
+		this.setState({ idAreas: this.state.idAreas.slice(0, nivel) });
 	}
 
 	render() {
-		let { idAreas, pontos } = this.props;
+		let { idAreas, pontos } = this.state;
 
 		return (
 			<div id="VisaoFederal">

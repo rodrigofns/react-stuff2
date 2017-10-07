@@ -1,14 +1,14 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {subscribe} from 'react-app-state';
 
 import cores from './_layout/cores';
 import Layout from './_layout/Layout';
 import Login from './login/Login';
-import authState from './_util/authState';
+import useProp from './_util/useProp';
+import authStore from './_util/authStore';
 import './App.scss';
 
-@subscribe(authState)
+@useProp({ authStore })
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -16,7 +16,7 @@ export default class App extends React.Component {
 	}
 
 	componentWillMount() {
-		authState.checkAuth()
+		authStore.checkAuth()
 			.then(() => {
 				this.setState({ verificando: false });
 			});
@@ -27,7 +27,7 @@ export default class App extends React.Component {
 			<MuiThemeProvider muiTheme={cores}>
 				{this.state.verificando ?
 					<div>Carregando...</div> :
-					(this.props.isAuth ? <Layout/> : <Login/>)
+					(this.props.authStore.isAuth ? <Layout/> : <Login/>)
 				}
 			</MuiThemeProvider>
 		);

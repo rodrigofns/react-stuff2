@@ -1,6 +1,6 @@
 import React from 'react';
-import {subscribe} from 'react-app-state';
 
+import useProp from '../_util/useProp';
 import SelecionaVisao from './seleciona-visao/SelecionaVisao';
 import Internas from './visoes/Internas';
 import Geografico from './visoes/Geografico';
@@ -8,13 +8,13 @@ import Federal from './visoes/Federal';
 import Estadual from './visoes/Estadual';
 import Trabalhista from './visoes/Trabalhista';
 import Eleitoral from './visoes/Eleitoral';
-import visaoState from './seleciona-visao/visaoState';
+import visaoStore from './seleciona-visao/visaoStore';
 import './Card1.scss';
 
-@subscribe(visaoState)
+@useProp({ visaoStore })
 export default class Card1 extends React.Component {
 	render() {
-		let { visaoAtual1, visaoAtual2 } = this.props;
+		let { visaoStore } = this.props;
 		let comps = {
 			'INTERNAS': <Internas/>,
 			'GEOGRAFICO': <Geografico/>,
@@ -27,7 +27,8 @@ export default class Card1 extends React.Component {
 		return (
 			<div id="Card1">
 				<SelecionaVisao/>
-				{comps[visaoAtual1 !== 'EXTERNAS' ? visaoAtual1 : visaoAtual2]}
+				{comps[visaoStore.visaoAtual1 !== 'EXTERNAS' ?
+					visaoStore.visaoAtual1 : visaoStore.visaoAtual2]}
 			</div>
 		);
 	}

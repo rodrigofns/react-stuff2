@@ -1,24 +1,24 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
-import {subscribe} from 'react-app-state';
 
 import {RaisedButton} from '../_util/material';
-import authState from '../_util/authState';
+import useProp from '../_util/useProp';
+import authStore from '../_util/authStore';
 import './LayoutHeaderInfo.scss';
 
-@subscribe(authState)
+@useProp({ authStore })
 class LayoutHeaderInfo extends React.Component {
 	render() {
-		let { nomeUsuario, history } = this.props;
+		let { authStore, history } = this.props;
 		return (
 			<div id="LayoutHeaderInfo">
-				<div className="headerUserInfo">{nomeUsuario}</div>
+				<div className="headerUserInfo">{authStore.nomeUsuario}</div>
 				<RaisedButton
 					secondary
 					id="TopRite-logoff"
 					label="Logoff"
 					onClick={() => {
-						authState.logoff();
+						authStore.logoff();
 						history.push('/');
 					}}/>
 			</div>

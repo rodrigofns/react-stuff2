@@ -2,8 +2,8 @@ import React from 'react';
 import {Card, RaisedButton, TextField} from '../_util/material';
 
 import BarraAguarde from '../_util/BarraAguarde';
+import authState from '../_util/authState';
 import Rodape from './Rodape';
-import authState from '../_auth/authState';
 import './Login.scss';
 
 export default class Login extends React.Component {

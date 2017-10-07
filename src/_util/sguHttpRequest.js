@@ -1,6 +1,6 @@
 import authToken from './authToken';
 
-const API_URL = '/webfs/mui/simula_servidor';
+const API_URL = ''; // '/sgu/api' trocar quando o servidor voltar !!!
 const TOKEN_HEADER_NAME = 'Set-Token';
 const AUTH_HEADER_NAME = 'Authorization';
 const AUTH_HEADER_VALUE_PREFIX = 'Token ';
@@ -11,7 +11,8 @@ class SguHttpRequest {
 	}
 
 	doPost(path, body) {
-		return this._doRequest(path, 'POST', body);
+		// return this._doRequest(path, 'POST', body);
+		return this.doGet(path); // desfazer quando servidor voltar !!!
 	}
 
 	_doRequest(path, method, body) {

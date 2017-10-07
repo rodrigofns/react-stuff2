@@ -3,7 +3,7 @@ import {withRouter} from 'react-router-dom';
 import {subscribe} from 'react-app-state';
 
 import {RaisedButton} from '../_util/material';
-import authState from '../_auth/authState';
+import authState from '../_util/authState';
 import './LayoutHeaderInfo.scss';
 
 @subscribe(authState)

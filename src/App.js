@@ -5,7 +5,7 @@ import {subscribe} from 'react-app-state';
 import cores from './_layout/cores';
 import Layout from './_layout/Layout';
 import Login from './login/Login';
-import authState from './_auth/authState';
+import authState from './_util/authState';
 import './App.scss';
 
 @subscribe(authState)

@@ -1,12 +1,12 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
+import {useProp} from '../_util/useProp';
 
-import useProp from '../_util/useProp';
+import rotas from '../rotas';
 import LayoutDrawer from './LayoutDrawer';
 import LayoutHeader from './LayoutHeader';
 import Erro404 from './Erro404';
 import menuStore from './menuStore';
-import rotas from '../rotas';
 import './Layout.scss';
 
 @useProp({ menuStore })

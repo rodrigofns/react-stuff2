@@ -1,9 +1,7 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
+import {useProp, authStore, RaisedButton} from '../_util';
 
-import {RaisedButton} from '../_util/material';
-import useProp from '../_util/useProp';
-import authStore from '../_util/authStore';
 import './LayoutHeaderInfo.scss';
 
 @useProp({ authStore })

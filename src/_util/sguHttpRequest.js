@@ -53,4 +53,4 @@ class SguHttpRequest {
 	}
 }
 
-export default new SguHttpRequest();
+export let sguHttpRequest = new SguHttpRequest();

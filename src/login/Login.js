@@ -1,9 +1,7 @@
 import React from 'react';
-import {Card, RaisedButton, TextField} from '../_util/material';
+import {useProp, authStore, BarraAguarde,
+	Card, RaisedButton, TextField} from '../_util';
 
-import BarraAguarde from '../_util/BarraAguarde';
-import useProp from '../_util/useProp';
-import authStore from '../_util/authStore';
 import Rodape from './Rodape';
 import './Login.scss';
 

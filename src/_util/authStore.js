@@ -1,7 +1,7 @@
 import {observable} from 'mobx';
 
 import authToken from './authToken';
-import sguHttpRequest from './sguHttpRequest';
+import {sguHttpRequest} from './sguHttpRequest';
 
 class AuthStore {
 	@observable isAuth = false;
@@ -38,4 +38,4 @@ class AuthStore {
 	}
 }
 
-export default new AuthStore();
+export let authStore = new AuthStore();

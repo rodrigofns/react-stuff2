@@ -1,6 +1,6 @@
 import React from 'react';
+import {useProp} from '../_util';
 
-import useProp from '../_util/useProp';
 import SelecionaVisao from './seleciona-visao/SelecionaVisao';
 import Internas from './visoes/Internas';
 import Geografico from './visoes/Geografico';

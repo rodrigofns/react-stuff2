@@ -1,6 +1,6 @@
 import React from 'react';
+import {useProp} from '../../_util';
 
-import useProp from '../../_util/useProp';
 import VisaoLinha1 from './VisaoLinha1';
 import VisaoLinha2 from './VisaoLinha2';
 import visaoStore from './visaoStore';

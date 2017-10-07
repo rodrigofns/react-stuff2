@@ -1,14 +1,14 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
+import {useProp, Drawer, MenuItem} from '../_util';
 
-import {Drawer, MenuItem} from '../_util/material';
-import useProp from '../_util/useProp';
 import menuStore from './menuStore';
 import rotas from '../rotas';
 import './LayoutDrawer.scss';
 
+@withRouter
 @useProp({ menuStore })
-class LayoutDrawer extends React.Component {
+export default class LayoutDrawer extends React.Component {
 	clicouItem(rota) {
 		this.props.history.push(rota.caminho);
 		this.props.menuStore.aberto = false;
@@ -31,5 +31,3 @@ class LayoutDrawer extends React.Component {
 		);
 	}
 }
-
-export default withRouter(LayoutDrawer);

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import cores from '../../_layout/cores';
+import cores from '_layout/cores';
 import jsonMapas from './mapas-2d.json';
 
 export default class Mapa extends React.Component {

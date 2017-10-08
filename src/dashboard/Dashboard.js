@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card} from '../_util';
+import {Card} from 'material-ui';
 
 import Card1 from './Card1';
 import Card2 from './Card2';

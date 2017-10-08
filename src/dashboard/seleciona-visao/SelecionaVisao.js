@@ -1,5 +1,5 @@
 import React from 'react';
-import {useProp} from '../../_util';
+import {useProp} from '_util';
 
 import VisaoLinha1 from './VisaoLinha1';
 import VisaoLinha2 from './VisaoLinha2';

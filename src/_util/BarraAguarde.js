@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LinearProgress from 'material-ui/LinearProgress';
 
-import cores from '../_layout/cores';
+import cores from '_layout/cores';
 
 export const BarraAguarde = ({ visivel }) => {
 	return visivel ? (

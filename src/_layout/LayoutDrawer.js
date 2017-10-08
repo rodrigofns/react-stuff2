@@ -1,9 +1,10 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
-import {useProp, Drawer, MenuItem} from '../_util';
+import {Drawer, MenuItem} from 'material-ui';
+import {useProp} from '_util';
 
+import rotas from 'rotas';
 import menuStore from './menuStore';
-import rotas from '../rotas';
 import './LayoutDrawer.scss';
 
 @withRouter

@@ -1,9 +1,9 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {useProp, authStore} from './_util';
+import {useProp, authStore} from '_util';
 
-import cores from './_layout/cores';
-import Layout from './_layout/Layout';
+import cores from '_layout/cores';
+import Layout from '_layout/Layout';
 import Login from './login/Login';
 import './App.scss';
 

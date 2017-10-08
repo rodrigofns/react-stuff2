@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
-import {AppBar} from '../_util';
+import {AppBar} from 'material-ui';
 
+import rotas from 'rotas';
 import LayoutHeaderInfo from './LayoutHeaderInfo';
-import rotas from '../rotas';
 
 class LayoutHeader extends React.Component {
 	static propTypes = {

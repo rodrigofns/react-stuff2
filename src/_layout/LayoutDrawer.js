@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom';
 import {Drawer, MenuItem} from 'material-ui';
 import {useProp} from '_util';
 
+import pgfnDrawer from './pgfn-drawer.png';
 import rotas from 'rotas';
 import menuStore from './menuStore';
 import './LayoutDrawer.scss';
@@ -21,11 +22,11 @@ export default class LayoutDrawer extends React.Component {
 				open={this.props.menuStore.aberto}
 				onRequestChange={open => this.props.menuStore.aberto = open}>
 				<div id="Drawer-top">
-					SGU
+					<img src={pgfnDrawer} alt="Logotipo PGFN"/> SGU
 				</div>
 				{rotas.map((rota, i) =>
-					<MenuItem key={i} onClick={() => this.clicouItem(rota)}>
-						<i className={`fa fa-${rota.icone} drawerMenuIcone`}></i> {rota.nome}
+					<MenuItem key={i} className="Drawer-item" onClick={() => this.clicouItem(rota)}>
+						<i className={`fa fa-${rota.icone} icone`}></i> {rota.nome}
 					</MenuItem>
 				)}
 			</Drawer>

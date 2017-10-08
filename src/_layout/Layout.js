@@ -1,6 +1,6 @@
 import React from 'react';
-import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
-import {useProp} from '_util/useProp';
+import {BrowserRouter, Switch, Redirect, Route} from 'react-router-dom';
+import {useProp} from '_util';
 
 import rotas from 'rotas';
 import LayoutDrawer from './LayoutDrawer';

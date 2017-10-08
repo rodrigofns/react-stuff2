@@ -6,14 +6,15 @@ import {AppBar} from 'material-ui';
 import rotas from 'rotas';
 import LayoutHeaderInfo from './LayoutHeaderInfo';
 
-class LayoutHeader extends React.Component {
+@withRouter
+export default class LayoutHeader extends React.Component {
 	static propTypes = {
 		onMenuClick: PropTypes.func
 	};
 
 	tituloApp(pathname) {
 		if (pathname !== '/') {
-			let rotaAtual = rotas.find(r => r.caminho === pathname);
+			let rotaAtual = rotas.find(r => pathname.startsWith(r.caminho));
 			return !rotaAtual ? 'SGU' : `SGU - ${rotaAtual.nome}`;
 		}
 		return 'SGU';
@@ -29,5 +30,3 @@ class LayoutHeader extends React.Component {
 		);
 	}
 }
-
-export default withRouter(LayoutHeader);

@@ -11,6 +11,7 @@ export default class Mapa extends React.Component {
 			cx: PropTypes.number.isRequired,
 			cy: PropTypes.number.isRequired
 		}).isRequired,
+		raioPonto: PropTypes.number.isRequired,
 		pontos: PropTypes.array.isRequired,
 		pontosClicaveis: PropTypes.bool.isRequired,
 		onHoverArea: PropTypes.func,
@@ -38,9 +39,9 @@ export default class Mapa extends React.Component {
 		this.renderizaMapa(this.props.idConjunto);
 	}
 
-	componentWillUpdate(nextProps) {
-		this.geraArea2dPaths(nextProps.idConjunto);
-		this.renderizaMapa(nextProps.idConjunto);
+	componentDidUpdate() {
+		this.geraArea2dPaths(this.props.idConjunto);
+		this.renderizaMapa(this.props.idConjunto);
 	}
 
 	geraArea2dPaths(idConjunto) {
@@ -90,7 +91,7 @@ export default class Mapa extends React.Component {
 			this.ctx.fillStyle = cor;
 			this.ctx.globalAlpha = alpha;
 			this.ctx.beginPath();
-			this.ctx.arc(lnglat[0], lnglat[1], (this.raioPonto * raio) / escalaMapa, 0, 2 * Math.PI, false);
+			this.ctx.arc(lnglat[0], lnglat[1], (this.props.raioPonto * raio) / escalaMapa, 0, 2 * Math.PI, false);
 			this.ctx.fill();
 		};
 
@@ -100,7 +101,7 @@ export default class Mapa extends React.Component {
 				renderizaUmPonto(lnglat, Mapa.GRAF.ponto.corSelec, .4, 1);
 			} else {
 				renderizaUmPonto(lnglat, Mapa.GRAF.ponto.cor, .25, 1);
-				if (this.props.pontosClicaveis && po.id === idDestaque) {
+				if (this.pontosClicaveis && po.id === idDestaque) {
 					renderizaUmPonto(lnglat, Mapa.GRAF.ponto.cor, .25, 2);
 				}
 			}

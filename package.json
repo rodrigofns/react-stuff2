@@ -5,6 +5,7 @@
 	"author": "Rodrigo Dias <rodrigo.dias@serpro.gov.br>",
 	"private": true,
 	"dependencies": {
+		"axios": "^0.16.2",
 		"babel-polyfill": "^6.26.0",
 		"custom-react-scripts": "0.2.0",
 		"font-awesome": "^4.7.0",
@@ -20,5 +21,6 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test --env=jsdom",
 		"eject": "react-scripts eject"
-	}
+	},
+	"proxy": "http://localhost:8081"
 }

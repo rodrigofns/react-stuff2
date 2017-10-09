@@ -1,4 +1,8 @@
-const TOKEN_PROPERTY = 'auth_token_sgu';
+/**
+ * Armazenamento do token JWT no cliente.
+ */
+
+const TOKEN_PROPERTY = process.env.REACT_APP_TOKEN_PROPERTY; // veja arquivo ".env" na raiz do projeto
 
 class AuthToken {
 	save(token) {

@@ -1,7 +1,11 @@
+/**
+ * Autenticação e dados do usuário autenticado.
+ */
+
 import {observable} from 'mobx';
 
 import authToken from './authToken';
-import {sguHttpRequest} from './sguHttpRequest';
+import {sguHttp} from './sguHttp';
 
 class AuthStore {
 	@observable isAuth = false;
@@ -19,22 +23,27 @@ class AuthStore {
 		authToken.remove();
 		this.isAuth = false;
 		this.nomeUsuario = '';
-		return sguHttpRequest.doPost('/logoff');
+		return sguHttp.doPost('/logoff');
 	}
 
 	_updateAuthStatus(path, body) {
-		return sguHttpRequest.doPost(path, body)
-			.then(data => {
-				if (data.status) {
-					authToken.save(data.token);
-					this.isAuth = true;
-					this.nomeUsuario = data.nome;
-				} else {
-					authToken.remove();
-					this.isAuth = false;
-					this.nomeUsuario = '';
-				}
-			});
+		// return sguHttp.doPost(path, body)
+		// 	.then(data => {
+		// 		if (data.status) {
+		// 			authToken.save(data.token);
+		// 			this.isAuth = true;
+		// 			this.nomeUsuario = data.nome;
+		// 		} else {
+		// 			authToken.remove();
+		// 			this.isAuth = false;
+		// 			this.nomeUsuario = '';
+		// 		}
+		// 	});
+		return new Promise(resolve => {
+			this.isAuth = true;
+			this.nomeUsuario = 'Usuário genérico';
+			resolve();
+		});
 	}
 }
 

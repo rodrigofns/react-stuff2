@@ -2,8 +2,8 @@ import React from 'react';
 import {BarraAguarde} from '_util';
 
 import httpDashboard from '../httpDashboard';
-import jsonMapas from '../mapa/mapas-2d.json';
 import Mapa from '../mapa/Mapa.js';
+import Navegador from '../mapa/Navegador';
 import './ExtFederal.scss';
 
 export default class Federal extends React.Component {
@@ -36,7 +36,7 @@ export default class Federal extends React.Component {
 				lat: orgao.municipio.latitude,
 				lng: orgao.municipio.longitude
 			});
-			let idAreaAtual = this.state.idAreas[ this.state.idAreas.length - 1 ];
+			let idAreaAtual = this.state.idAreas[this.state.idAreas.length - 1];
 
 			if (idAreaAtual === this.state.idAreas[0]) { // todo o Brasil
 				return this.orgaosFederais
@@ -81,18 +81,7 @@ export default class Federal extends React.Component {
 		return (
 			<div id="VisaoFederal">
 				{idAreas.length ? (
-					<div className="navegador">
-						{idAreas.map((idArea, i) =>
-							(i >= 1) ? (
-								<div className="navegaAcima" key={i} onClick={() => this.sobeNivel(i)}>
-									{(i === 1) ? 'TRFs' : jsonMapas.areas[ idAreas[i - 1] ].nome}
-								</div>
-							) : null
-						)}
-						<div className="nivelAtual">
-							{(idAreas.length === 1) ? 'TRFs' : jsonMapas.areas[ idAreas[idAreas.length - 1] ].nome}
-						</div>
-					</div>
+					<Navegador idAreas={idAreas} nomeInicial="TRFs" onClick={this.sobeNivel}/>
 				) : null}
 				<div className="mapa">
 					<BarraAguarde visivel={!idAreas.length}/>

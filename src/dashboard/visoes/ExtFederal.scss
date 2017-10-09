@@ -1,32 +1,6 @@
-@import '../../_layout/constantes';
-$largura-item-nav: 240px;
-
 #VisaoFederal {
 	flex-grow: 1;
 	display: flex;
-
-	.navegador {
-		flex-grow: 1;
-		padding-top: 160px;
-
-		.navegaAcima {
-			padding: 8px;
-			border-bottom: 1px solid #ddd;
-			cursor: pointer;
-			width: $largura-item-nav;
-			color: $azul-pgfn;
-
-			&:hover {
-				background-color: #f0f0f0;
-			}
-		}
-
-		.nivelAtual {
-			padding: 8px;
-			width: $largura-item-nav;
-			color: $vermelho-pgfn;
-		}
-	}
 
 	.mapa {
 		width: 550px;

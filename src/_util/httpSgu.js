@@ -10,7 +10,7 @@ const TOKEN_HEADER_NAME = 'Set-Token';
 const AUTH_HEADER_NAME = 'Authorization';
 const AUTH_HEADER_VALUE_PREFIX = 'Token ';
 
-class SguHttp {
+class HttpSgu {
 	doGet(path) {
 		return this._doRequest(path, 'GET');
 	}
@@ -55,4 +55,4 @@ class SguHttp {
 	}
 }
 
-export let sguHttp = new SguHttp();
+export let httpSgu = new HttpSgu();

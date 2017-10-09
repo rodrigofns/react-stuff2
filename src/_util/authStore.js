@@ -5,7 +5,7 @@
 import {observable} from 'mobx';
 
 import authToken from './authToken';
-import {sguHttp} from './sguHttp';
+import {httpSgu} from './httpSgu';
 
 class AuthStore {
 	@observable isAuth = false;
@@ -23,11 +23,11 @@ class AuthStore {
 		authToken.remove();
 		this.isAuth = false;
 		this.nomeUsuario = '';
-		return sguHttp.doPost('/logoff');
+		return httpSgu.doPost('/logoff');
 	}
 
 	_updateAuthStatus(path, body) {
-		// return sguHttp.doPost(path, body)
+		// return httpSgu.doPost(path, body)
 		// 	.then(data => {
 		// 		if (data.status) {
 		// 			authToken.save(data.token);

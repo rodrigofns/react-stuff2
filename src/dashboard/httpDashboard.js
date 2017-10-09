@@ -1,8 +1,8 @@
-import {sguHttp} from '_util';
+import {httpSgu} from '_util';
 
-class DashboardHttp {
+class HttpDashboard {
 	orgaosFederais() {
-		return sguHttp.doGet('/dashboard/justicaFederal')
+		return httpSgu.doGet('/dashboard/justicaFederal')
 			.then(dados =>
 				dados.filter(d => d.municipio) // remove órgãos com município null
 					.map(d => ({ regiao: 'trf'+d.regiaoFederal, ...d }))
@@ -10,4 +10,4 @@ class DashboardHttp {
 	}
 }
 
-export default new DashboardHttp();
+export default new HttpDashboard();

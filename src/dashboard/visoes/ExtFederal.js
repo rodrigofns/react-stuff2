@@ -12,7 +12,7 @@ export default class Federal extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { idAreas: [] }; // pilha com cada nível de zoom
+		this.state = { idAreas: [] }; // pilha com cada nível de zoom: ['trfs','trf1','am']
 	}
 
 	componentDidMount() {
@@ -80,12 +80,10 @@ export default class Federal extends React.Component {
 		let { idAreas } = this.state;
 		return (
 			<div id="VisaoFederal">
-				{idAreas.length &&
-					<Navegador idAreas={idAreas} nomeInicial="TRFs" onClick={this.sobeNivel}/>
-				}
+				<Navegador idAreas={idAreas} nomeInicial="TRFs" onClick={this.sobeNivel}/>
 				<div className="mapa">
 					<BarraAguarde visivel={!idAreas.length}/>
-					{idAreas.length &&
+					{idAreas.length > 0 &&
 						<Mapa
 							visivel={idAreas.length}
 							tamanho={{ cx: 550, cy: 443 }}

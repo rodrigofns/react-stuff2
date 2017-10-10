@@ -1,11 +1,12 @@
 #VisaoFederal {
 	flex-grow: 1;
 	display: flex;
+	justify-content: space-between;
 
 	.mapa {
 		width: 550px;
 		height: 443px;
-		border: 1px solid #ddd;
 		margin-left: 10px;
+		// border: 1px solid #ddd;
 	}
 }

@@ -63,7 +63,7 @@ export default class Federal extends React.Component {
 	}
 
 	clickArea = (idArea) => {
-		if (this.state.idAreas.length < 3) { // nível máximo de zoom
+		if (idArea && this.state.idAreas.length < 3) { // nível máximo de zoom
 			this.setState({ idAreas: [ ...this.state.idAreas, idArea ] });
 		}
 	}

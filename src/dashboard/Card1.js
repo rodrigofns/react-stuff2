@@ -25,6 +25,7 @@ export default class Card1 extends React.Component {
 					<Route path="/dashboard/externas/trabalhista" component={ExtTrabalhista}/>
 					<Route path="/dashboard/externas/eleitoral" component={ExtEleitoral}/>
 					<Route path="/dashboard/geografico" component={Geografico}/>
+					<Redirect to="/dashboard/internas"/>
 				</Switch>
 			</div>
 		);

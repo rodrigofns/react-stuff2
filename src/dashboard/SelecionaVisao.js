@@ -9,27 +9,30 @@ export default class SelecionaVisao extends React.Component {
 		return (
 			<div id="SelecionaVisao">
 				<div className="linha">
-					{['Internas', 'Externas', 'Geográfico'].map((visao, i) =>
-						<NavLink
-							key={i}
-							to={'/dashboard/' + visao.toLowerCase().replace(/á/g, 'a')}
-							className="botao"
-							activeClassName="botaoSelec">
-							{visao}
-						</NavLink>
-					)}
+					<NavLink to="/dashboard/internas" className="botao" activeClassName="botaoSelec">
+						Unidades<br/>Internas
+					</NavLink>
+					<NavLink to="/dashboard/externas" className="botao" activeClassName="botaoSelec">
+						Unidades<br/>Externas
+					</NavLink>
+					<NavLink to="/dashboard/geografico" className="botao" activeClassName="botaoSelec">
+						Geográfico
+					</NavLink>
 				</div>
 				{this.props.location.pathname.startsWith('/dashboard/externas') &&
 					<div className="linha">
-						{['Federal', 'Estadual', 'Trabalhista', 'Eleitoral'].map((visao, i) =>
-							<NavLink
-								key={i}
-								to={'/dashboard/externas/' + visao.toLowerCase()}
-								className="botao"
-								activeClassName="botaoSelec">
-								{visao}
-							</NavLink>
-						)}
+						<NavLink to="/dashboard/externas/federal" className="botao" activeClassName="botaoSelec">
+							Federal
+						</NavLink>
+						<NavLink to="/dashboard/externas/estadual" className="botao" activeClassName="botaoSelec">
+							Estadual
+						</NavLink>
+						<NavLink to="/dashboard/externas/trabalhista" className="botao" activeClassName="botaoSelec">
+							Trabalhista
+						</NavLink>
+						<NavLink to="/dashboard/externas/eleitoral" className="botao" activeClassName="botaoSelec">
+							Eleitoral
+						</NavLink>
 					</div>
 				}
 			</div>

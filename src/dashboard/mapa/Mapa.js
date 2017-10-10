@@ -14,6 +14,7 @@ export default class Mapa extends React.Component {
 		raioPonto: PropTypes.number.isRequired,
 		pontos: PropTypes.array.isRequired,
 		pontosClicaveis: PropTypes.bool.isRequired,
+		idPontoSelecionado: PropTypes.number, // será renderizado numa cor diferente
 		onHoverArea: PropTypes.func,
 		onHoverPonto: PropTypes.func,
 		onClickArea: PropTypes.func,
@@ -135,11 +136,11 @@ export default class Mapa extends React.Component {
 
 		for (const po of this.props.pontos) {
 			let lnglat = this.converteCoords([po.lng, po.lat], origem);
-			if (po.id === this.idPontoSelecionado) {
+			if (po.id === this.props.idPontoSelecionado) {
 				renderizaUmPonto(lnglat, Mapa.GRAF.ponto.corSelec, .4, 1);
 			} else {
 				renderizaUmPonto(lnglat, Mapa.GRAF.ponto.cor, .25, 1);
-				if (this.pontosClicaveis && po.id === idDestaque) {
+				if (this.props.pontosClicaveis && po.id === idDestaque) {
 					renderizaUmPonto(lnglat, Mapa.GRAF.ponto.cor, .25, 2);
 				}
 			}
@@ -159,7 +160,7 @@ export default class Mapa extends React.Component {
 			for (const po of this.props.pontos) {
 				let lnglat = this.converteCoords([po.lng, po.lat], origem);
 				let reg = new Path2D();
-				reg.arc(lnglat[0], lnglat[1], this.raioPonto / escalaMapa, 0, 2 * Math.PI, false);
+				reg.arc(lnglat[0], lnglat[1], this.props.raioPonto / escalaMapa, 0, 2 * Math.PI, false);
 				if (this.ctx.isPointInPath(reg, xPos, yPos)) {
 					return po.id; // ID do ponto abaixo do cursor
 				}

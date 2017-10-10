@@ -8,12 +8,13 @@ export default class Navegador extends React.Component {
 	static propTypes = {
 		idAreas: PropTypes.array.isRequired,
 		nomeInicial: PropTypes.string.isRequired,
+		nomeHover: PropTypes.string,
 		className: PropTypes.string,
 		onClick: PropTypes.func
 	};
 
 	render() {
-		let { idAreas, nomeInicial, className, onClick } = this.props;
+		let { idAreas, nomeInicial, nomeHover, className, onClick } = this.props;
 		return (
 			<div id="Navegador" className={className}>
 				{idAreas.map((idArea, i) =>
@@ -32,6 +33,9 @@ export default class Navegador extends React.Component {
 						jsonMapas.areas[ idAreas[idAreas.length - 1] ].nome
 					}
 				</div>
+				{nomeHover &&
+					<div className="nivelHover">{nomeHover}</div>
+				}
 			</div>
 		);
 	}

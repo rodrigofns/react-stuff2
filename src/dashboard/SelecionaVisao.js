@@ -1,10 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {withRouter, NavLink} from 'react-router-dom';
 
 import './SelecionaVisao.sass';
 
 @withRouter
 export default class SelecionaVisao extends React.Component {
+	static propTypes = {
+		className: PropTypes.string
+	}
+
 	render() {
 		return (
 			<div id="SelecionaVisao" className={this.props.className}>

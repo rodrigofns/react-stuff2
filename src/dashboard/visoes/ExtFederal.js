@@ -1,6 +1,6 @@
 import React from 'react';
-import {Card} from 'material-ui';
-import {BarraAguarde} from '_util';
+import {Card, TextField} from 'material-ui';
+import {BarraAguarde, removeAcentos} from '_util';
 
 import httpDashboard from '../httpDashboard';
 import Mapa from '../mapa/Mapa.js';
@@ -13,7 +13,10 @@ export default class Federal extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { idAreas: [] }; // pilha com cada nível de zoom: ['trfs','trf1','am']
+		this.state = {
+			idAreas: [], // pilha com cada nível de zoom: ['trfs','trf1','am']
+			filtro: '' // filtro dos nomes dos órgãos atualmente exibidos
+		};
 	}
 
 	componentDidMount() {
@@ -29,7 +32,8 @@ export default class Federal extends React.Component {
 			return [];
 		} else {
 			let nomeEstaNoFiltro = (orgao) => { // filtra os nomes dos órgãos quando o usuário usa o campo de filtro
-				return true;
+				return removeAcentos(orgao.nome.toLowerCase())
+					.indexOf(removeAcentos(this.state.filtro.toLowerCase())) !== -1;
 			};
 			let mapeiaGeoPontos = (orgao) => ({
 				id: orgao.id, // o ID do GeoPonto é o mesmo ID do OrgaoFederal
@@ -83,6 +87,10 @@ export default class Federal extends React.Component {
 			<div id="ExtFederal">
 				<Card>
 					<div className="card1">
+						<div className="txtFiltro">
+							<TextField fullWidth floatingLabelText="Filtro do nome do órgão"
+								onChange={ev => this.setState({ filtro: ev.target.value })}/>
+						</div>
 						<Navegador idAreas={idAreas} nomeInicial="TRFs" onClick={this.sobeNivel}/>
 						<div className="mapa">
 							<BarraAguarde visivel={!idAreas.length}/>

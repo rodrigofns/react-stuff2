@@ -19,7 +19,7 @@ export default class SelecionaVisao extends React.Component {
 						</NavLink>
 					)}
 				</div>
-				{this.props.location.pathname.startsWith('/dashboard/externas') ? (
+				{this.props.location.pathname.startsWith('/dashboard/externas') &&
 					<div className="linha">
 						{['Federal', 'Estadual', 'Trabalhista', 'Eleitoral'].map((visao, i) =>
 							<NavLink
@@ -31,7 +31,7 @@ export default class SelecionaVisao extends React.Component {
 							</NavLink>
 						)}
 					</div>
-				) : null}
+				}
 			</div>
 		);
 	}

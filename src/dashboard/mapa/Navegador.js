@@ -7,14 +7,14 @@ import './Navegador.scss';
 const Navegador = ({ idAreas, nomeInicial, onClick }) => (
 	<div id="Navegador">
 		{idAreas.map((idArea, i) =>
-			(i >= 1) ? (
+			{(i >= 1) &&
 				<div className="navegaAcima" key={i} onClick={() => onClick(i)}>
 					{i === 1 ?
 						nomeInicial :
 						jsonMapas.areas[ idAreas[i - 1] ].nome
 					}
 				</div>
-			) : null
+			}
 		)}
 		<div className="nivelAtual">
 			{idAreas.length === 1 ?

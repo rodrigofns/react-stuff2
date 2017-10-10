@@ -80,12 +80,12 @@ export default class Federal extends React.Component {
 		let { idAreas } = this.state;
 		return (
 			<div id="VisaoFederal">
-				{idAreas.length ? (
+				{idAreas.length &&
 					<Navegador idAreas={idAreas} nomeInicial="TRFs" onClick={this.sobeNivel}/>
-				) : null}
+				}
 				<div className="mapa">
 					<BarraAguarde visivel={!idAreas.length}/>
-					{idAreas.length ? (
+					{idAreas.length &&
 						<Mapa
 							visivel={idAreas.length}
 							tamanho={{ cx: 550, cy: 443 }}
@@ -97,7 +97,7 @@ export default class Federal extends React.Component {
 							onHoverPonto={this.hoverPonto}
 							onClickArea={this.clickArea}
 							onClickPonto={this.clickPonto}/>
-					) : null}
+					}
 				</div>
 			</div>
 		);

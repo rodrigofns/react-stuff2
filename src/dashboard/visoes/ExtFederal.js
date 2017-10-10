@@ -1,4 +1,5 @@
 import React from 'react';
+import {Card} from 'material-ui';
 import {BarraAguarde} from '_util';
 
 import httpDashboard from '../httpDashboard';
@@ -79,24 +80,34 @@ export default class Federal extends React.Component {
 	render() {
 		let { idAreas } = this.state;
 		return (
-			<div id="VisaoFederal">
-				<Navegador idAreas={idAreas} nomeInicial="TRFs" onClick={this.sobeNivel}/>
-				<div className="mapa">
-					<BarraAguarde visivel={!idAreas.length}/>
-					{idAreas.length > 0 &&
-						<Mapa
-							visivel={idAreas.length}
-							tamanho={{ cx: 550, cy: 443 }}
-							raioPonto={[0,4,6,10][idAreas.length]}
-							idConjunto={idAreas[idAreas.length - 1]}
-							pontos={this.filtraPontosDaAreaAtual(this.pontos)}
-							pontosClicaveis={idAreas.length === 3}
-							onHoverArea={this.hoverArea}
-							onHoverPonto={this.hoverPonto}
-							onClickArea={this.clickArea}
-							onClickPonto={this.clickPonto}/>
-					}
-				</div>
+			<div id="ExtFederal">
+				<Card>
+					<div className="card1">
+						<Navegador idAreas={idAreas} nomeInicial="TRFs" onClick={this.sobeNivel}/>
+						<div className="mapa">
+							<BarraAguarde visivel={!idAreas.length}/>
+							{idAreas.length > 0 &&
+								<Mapa
+									visivel={idAreas.length}
+									tamanho={{ cx: 550, cy: 443 }}
+									raioPonto={[0,4,6,10][idAreas.length]}
+									idConjunto={idAreas[idAreas.length - 1]}
+									pontos={this.filtraPontosDaAreaAtual(this.pontos)}
+									pontosClicaveis={idAreas.length === 3}
+									onHoverArea={this.hoverArea}
+									onHoverPonto={this.hoverPonto}
+									onClickArea={this.clickArea}
+									onClickPonto={this.clickPonto}/>
+							}
+						</div>
+					</div>
+				</Card>
+				<div className="entreCards"></div>
+				<Card>
+					<div className="card2">
+						Card 2
+					</div>
+				</Card>
 			</div>
 		);
 	}

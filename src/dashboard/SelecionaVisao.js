@@ -7,7 +7,7 @@ import './SelecionaVisao.sass';
 export default class SelecionaVisao extends React.Component {
 	render() {
 		return (
-			<div id="SelecionaVisao">
+			<div id="SelecionaVisao" className={this.props.className}>
 				<div className="linha">
 					<NavLink to="/dashboard/internas" className="botao" activeClassName="botaoSelec">
 						Unidades<br/>Internas

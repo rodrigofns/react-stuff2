@@ -1,20 +1,33 @@
 import React from 'react';
-import {Card} from 'material-ui';
+import {Switch, Redirect, Route} from 'react-router-dom';
 
-import Card1 from './Card1';
-import Card2 from './Card2';
+import SelecionaVisao from './SelecionaVisao';
+import Internas from './visoes/Internas';
+import ExtFederal from './visoes/ExtFederal';
+import ExtEstadual from './visoes/ExtEstadual';
+import ExtTrabalhista from './visoes/ExtTrabalhista';
+import ExtEleitoral from './visoes/ExtEleitoral';
+import Geografico from './visoes/Geografico';
 import './Dashboard.sass';
 
 export default class Dashboard extends React.Component {
 	render() {
 		return (
 			<div id="Dashboard">
-				<Card id="Dashboard-card1">
-					<Card1/>
-				</Card>
-				<Card id="Dashboard-card2">
-					<Card2/>
-				</Card>
+				<div className="centraliza">
+					<SelecionaVisao className="seletor"/>
+					<Switch>
+						<Redirect exact from="/dashboard" to="/dashboard/internas"/>
+						<Redirect exact from="/dashboard/externas" to="/dashboard/externas/federal"/>
+						<Route path="/dashboard/internas" component={Internas}/>
+						<Route path="/dashboard/externas/federal" component={ExtFederal}/>
+						<Route path="/dashboard/externas/estadual" component={ExtEstadual}/>
+						<Route path="/dashboard/externas/trabalhista" component={ExtTrabalhista}/>
+						<Route path="/dashboard/externas/eleitoral" component={ExtEleitoral}/>
+						<Route path="/dashboard/geografico" component={Geografico}/>
+						<Redirect to="/dashboard/internas"/>
+					</Switch>
+				</div>
 			</div>
 		);
 	}

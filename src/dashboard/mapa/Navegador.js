@@ -8,13 +8,14 @@ export default class Navegador extends React.Component {
 	static propTypes = {
 		idAreas: PropTypes.array.isRequired,
 		nomeInicial: PropTypes.string.isRequired,
+		className: PropTypes.string,
 		onClick: PropTypes.func
 	};
 
 	render() {
-		let { idAreas, nomeInicial, onClick } = this.props;
+		let { idAreas, nomeInicial, className, onClick } = this.props;
 		return (
-			<div id="Navegador">
+			<div id="Navegador" className={className}>
 				{idAreas.map((idArea, i) =>
 					(i >= 1 &&
 						<div className="navegaAcima" key={i} onClick={() => onClick(i)}>

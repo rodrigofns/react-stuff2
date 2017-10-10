@@ -91,7 +91,8 @@ export default class Federal extends React.Component {
 							<TextField fullWidth floatingLabelText="Filtro do nome do órgão"
 								onChange={ev => this.setState({ filtro: ev.target.value })}/>
 						</div>
-						<Navegador idAreas={idAreas} nomeInicial="TRFs" onClick={this.sobeNivel}/>
+						<Navegador className="navegador" idAreas={idAreas}
+							nomeInicial="TRFs" onClick={this.sobeNivel}/>
 						<div className="mapa">
 							<BarraAguarde visivel={!idAreas.length}/>
 							{idAreas.length > 0 &&

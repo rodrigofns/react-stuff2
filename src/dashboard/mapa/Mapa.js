@@ -30,6 +30,7 @@ export default class Mapa extends React.Component {
 	ctx = null;
 	area2dPaths = { }; // cache com os caminhos das áreas
 	idPrevHover = null; // área|ponto abaixo do cursor; cache para evitar envio de notificações repetidas
+	animando = false; // há uma animação acontecendo?
 
 	componentDidMount() {
 		this.ctx = this.canvas.getContext('2d');
@@ -39,9 +40,11 @@ export default class Mapa extends React.Component {
 		this.renderizaMapa(this.props.idConjunto);
 	}
 
-	componentDidUpdate() {
+	componentDidUpdate(prevProps) {
 		this.geraArea2dPaths(this.props.idConjunto);
-		this.renderizaMapa(this.props.idConjunto);
+		(prevProps.idConjunto !== this.props.idConjunto) ?
+			this.animaTransicao(prevProps.idConjunto, this.props.idConjunto) :
+			this.renderizaMapa(this.props.idConjunto);
 	}
 
 	geraArea2dPaths(idConjunto) {
@@ -53,7 +56,36 @@ export default class Mapa extends React.Component {
 		}
 	}
 
-	renderizaMapa(idConjunto, idDestaque = null) {
+	animaTransicao(idConjunto0, idConjunto1) {
+		let origem = jsonMapas.origem;
+		let conjunto0 = jsonMapas.conjuntos[idConjunto0];
+		let conjunto1 = jsonMapas.conjuntos[idConjunto1];
+		let escalaMapa0 = origem.mapa.escala * conjunto0.escala;
+		let escalaMapa1 = origem.mapa.escala * conjunto1.escala;
+
+		let time0 = 0;
+		let anim = (time) => {
+			this.animando = true;
+			if (!time0) time0 = time;
+			let delta = Math.min(1, (time - time0) / Mapa.GRAF.animacao.duracao);
+
+			let escala = escalaMapa0 + (escalaMapa1 - escalaMapa0) * delta;
+			let offsetX = conjunto0.offset[0] + (conjunto1.offset[0] - conjunto0.offset[0]) * delta;
+			let offsetY = conjunto0.offset[1] + (conjunto1.offset[1] - conjunto0.offset[1]) * delta;
+			let offset = [ (origem.mapa.offset[0] + offsetX) / escala,
+				(origem.mapa.offset[1] + offsetY) / escala];
+			this.renderizaMapa(idConjunto1, null, escala, offset);
+
+			if (delta < 1) {
+				requestAnimationFrame(anim);
+			} else {
+				this.animando = false;
+			}
+		};
+		requestAnimationFrame(anim);
+	}
+
+	renderizaMapa(idConjunto, idDestaque = null, escalaMapa = null, offsetMapa = null) {
 
 		// Preparação para a plotagem.
 
@@ -63,9 +95,15 @@ export default class Mapa extends React.Component {
 
 		let origem = jsonMapas.origem;
 		let conjunto = jsonMapas.conjuntos[idConjunto];
-		let escalaMapa = origem.mapa.escala * conjunto.escala;
-		let offsetMapa = [ (origem.mapa.offset[0] + conjunto.offset[0]) / escalaMapa,
-			(origem.mapa.offset[1] + conjunto.offset[1]) / escalaMapa ];
+
+		if (!escalaMapa) { // escala variável é usada na animação
+			escalaMapa = origem.mapa.escala * conjunto.escala;
+		}
+
+		if (!offsetMapa) { // offset variável é usado na animação
+			offsetMapa = [ (origem.mapa.offset[0] + conjunto.offset[0]) / escalaMapa,
+				(origem.mapa.offset[1] + conjunto.offset[1]) / escalaMapa ];
+		}
 
 		this.ctx.scale(escalaMapa, escalaMapa);
 		this.ctx.translate(offsetMapa[0], offsetMapa[1]);
@@ -146,6 +184,8 @@ export default class Mapa extends React.Component {
 	}
 
 	canvasMouseMove = (ev) => {
+		if (this.animando) return; // se há uma animação acontecendo, desabilita o evento
+
 		let idHovered = this.areaOuPontoEmbaixoDoCursor(ev);
 		this.canvas.style.cursor = (idHovered !== null) ? 'pointer' : 'default';
 
@@ -166,6 +206,8 @@ export default class Mapa extends React.Component {
 	}
 
 	canvasClick = (ev) => {
+		if (this.animando) return; // se há uma animação acontecendo, desabilita o evento
+
 		if (this.props.pontosClicaveis && this.props.onClickPonto) {
 			this.props.onClickPonto(this.idPrevHover);
 		} else if (!this.props.pontosClicaveis && this.props.onClickArea) {

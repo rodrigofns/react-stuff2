@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import jsonMapas from './mapas-2d.json';
-import './Navegador.scss';
+import './Navegador.sass';
 
 export default class Navegador extends React.Component {
 	static propTypes = {

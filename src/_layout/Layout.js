@@ -7,7 +7,7 @@ import LayoutDrawer from './LayoutDrawer';
 import LayoutHeader from './LayoutHeader';
 import Erro404 from './Erro404';
 import menuStore from './menuStore';
-import './Layout.scss';
+import './Layout.sass';
 
 @useProp({ menuStore })
 export default class Layout extends React.Component {

@@ -5,7 +5,7 @@ import {useProp, authStore} from '_util';
 import cores from '_layout/cores';
 import Layout from '_layout/Layout';
 import Login from './login/Login';
-import './App.scss';
+import './App.sass';
 
 @useProp({ authStore })
 export default class App extends React.Component {

@@ -6,7 +6,7 @@ import {useProp} from '_util';
 import pgfnDrawer from './pgfn-drawer.png';
 import rotas from 'rotas';
 import menuStore from './menuStore';
-import './LayoutDrawer.scss';
+import './LayoutDrawer.sass';
 
 @withRouter
 @useProp({ menuStore })

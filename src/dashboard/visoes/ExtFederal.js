@@ -4,7 +4,7 @@ import {BarraAguarde} from '_util';
 import httpDashboard from '../httpDashboard';
 import Mapa from '../mapa/Mapa.js';
 import Navegador from '../mapa/Navegador';
-import './ExtFederal.scss';
+import './ExtFederal.sass';
 
 export default class Federal extends React.Component {
 	orgaosFederais = [];

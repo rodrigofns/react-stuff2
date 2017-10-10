@@ -3,7 +3,7 @@ import {Card, RaisedButton, TextField} from 'material-ui';
 import {useProp, authStore, BarraAguarde} from '_util';
 
 import Rodape from './Rodape';
-import './Login.scss';
+import './Login.sass';
 
 @useProp({ authStore })
 export default class Login extends React.Component {

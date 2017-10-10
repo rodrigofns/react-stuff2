@@ -1,7 +1,7 @@
 import React from 'react';
 import {withRouter, NavLink} from 'react-router-dom';
 
-import './SelecionaVisao.scss';
+import './SelecionaVisao.sass';
 
 @withRouter
 export default class SelecionaVisao extends React.Component {

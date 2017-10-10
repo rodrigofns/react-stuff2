@@ -1,5 +1,5 @@
 import React from 'react';
-import './Home.scss';
+import './Home.sass';
 
 const Home = () => (
 	<div id="Home">

@@ -1,0 +1,23 @@
+@import '../../_layout/constantes'
+
+=item-nav
+	width: 240px
+	padding: 8px
+	border-left: 1px solid #ddd
+
+#Navegador
+	flex-grow: 1
+	padding-top: 160px
+
+	.navegaAcima
+		+item-nav
+		border-bottom: 1px solid #ddd
+		cursor: pointer
+		color: $azul-pgfn
+
+		&:hover
+			background-color: #f0f0f0
+
+	.nivelAtual
+		+item-nav
+		color: $vermelho-pgfn

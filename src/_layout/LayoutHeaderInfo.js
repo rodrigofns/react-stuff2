@@ -3,7 +3,7 @@ import {withRouter} from 'react-router-dom';
 import {RaisedButton} from 'material-ui';
 import {useProp, authStore} from '_util';
 
-import './LayoutHeaderInfo.scss';
+import './LayoutHeaderInfo.sass';
 
 @useProp({ authStore })
 class LayoutHeaderInfo extends React.Component {

@@ -8,7 +8,7 @@ import ExtEstadual from './visoes/ExtEstadual';
 import ExtTrabalhista from './visoes/ExtTrabalhista';
 import ExtEleitoral from './visoes/ExtEleitoral';
 import Geografico from './visoes/Geografico';
-import './Card1.scss';
+import './Card1.sass';
 
 
 export default class Card1 extends React.Component {

@@ -1,0 +1,21 @@
+=card-interno
+	margin: 0 6px
+	padding: 10px
+	display: flex
+
+#Dashboard
+	display: flex
+	justify-content: center
+	min-height: 350px // mas a altura do mapa é bem maior
+
+	#Dashboard-card1
+		+card-interno
+		min-width: 900px
+
+		& > div
+			flex-grow: 1
+			display: flex
+
+	#Dashboard-card2
+		+card-interno
+		width: 400px

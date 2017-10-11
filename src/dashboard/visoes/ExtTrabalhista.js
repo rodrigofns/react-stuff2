@@ -1,7 +1,24 @@
 import React from 'react';
 
-export default class Trabalhista extends React.Component {
+import httpDashboard from '../httpDashboard';
+import Visao from '../visao/Visao';
+
+export default class ExtTrabalhista extends React.Component {
+	getOrgaos() {
+		return httpDashboard.getOrgaosFederais(); // mudar !!!
+	}
+
+	getAbrangencia(idOrgaoFed) {
+		return httpDashboard.getAbrangenciaFederal(idOrgaoFed); // mudar !!!
+	}
+
 	render() {
-		return <div>Trabalhista</div>;
+		return (
+			<Visao
+				idConjuntoInicial="trfs"
+				nomeConjuntoInicial="Regiões"
+				onGetOrgaos={this.getOrgaos}
+				onGetAbrangencia={this.getAbrangencia}/>
+		);
 	}
 }

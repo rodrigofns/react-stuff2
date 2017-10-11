@@ -8,7 +8,7 @@ import './SelecionaVisao.sass';
 export default class SelecionaVisao extends React.Component {
 	static propTypes = {
 		className: PropTypes.string
-	}
+	};
 
 	render() {
 		return (

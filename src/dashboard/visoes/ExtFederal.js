@@ -7,7 +7,10 @@ import Mapa from '../mapa/Mapa.js';
 import Navegador from '../mapa/Navegador';
 import './ExtFederal.sass';
 
-export default class Federal extends React.Component {
+export default class ExtFederal extends React.Component {
+	static tamanhoMapa = { cx: 550, cy: 443 };
+	static raiosPonto = [0, 4, 6, 10];
+
 	orgaosFederais = [];
 	pilhaIdArea = []; // pilha com cada nível de zoom: ['trfs','trf1','am']
 	filtro = ''; // filtro dos nomes dos órgãos atualmente exibidos
@@ -66,8 +69,8 @@ export default class Federal extends React.Component {
 	}
 
 	hoverPonto = (idOrgaoFed) => {
-		// this.setState({ nomeHover: idOrgaoFed ?
-		// 	this.state.pontos.find(p => p.id === idOrgaoFed).nome : '' });
+		this.setState({ nomeHover: idOrgaoFed ?
+			this.state.pontos.find(p => p.id === idOrgaoFed).nome : '' });
 	}
 
 	clickArea = (idArea) => {
@@ -108,9 +111,9 @@ export default class Federal extends React.Component {
 							<BarraAguarde visivel={!this.pilhaIdArea.length}/>
 							{this.pilhaIdArea.length > 0 &&
 								<Mapa
+									tamanho={ExtFederal.tamanhoMapa}
+									raioPonto={ExtFederal.raiosPonto[this.pilhaIdArea.length]}
 									visivel={this.pilhaIdArea.length}
-									tamanho={{ cx: 550, cy: 443 }}
-									raioPonto={[0,4,6,10][this.pilhaIdArea.length]}
 									idConjunto={this.pilhaIdArea[this.pilhaIdArea.length - 1]}
 									pontos={pontos}
 									pontosClicaveis={this.pilhaIdArea.length === 3}

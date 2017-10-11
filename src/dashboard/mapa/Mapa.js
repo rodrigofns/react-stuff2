@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import cores from '_layout/cores';
 import jsonMapas from './mapas-2d.json';
 
-export default class Mapa extends React.Component {
+export default class Mapa extends React.PureComponent {
 	static propTypes = {
 		idConjunto: PropTypes.string.isRequired,
 		tamanho: PropTypes.shape({ // idealmente as dimensões do elemento

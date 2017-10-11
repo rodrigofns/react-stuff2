@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Card, TextField} from 'material-ui';
 import {BarraAguarde, removeAcentos} from '_util';
 
-import Mapa from '../mapa/Mapa.js';
+import Mapa from '../mapa/Mapa';
 import NavegadorZoom from '../mapa/NavegadorZoom';
 import jsonMapas from '../mapa/mapas-2d.json';
 import Detalhes from './Detalhes';

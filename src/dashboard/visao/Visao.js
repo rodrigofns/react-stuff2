@@ -171,7 +171,9 @@ export default class Visao extends React.Component {
 					<div className="card2">
 						<BarraAguarde visivel={this.state.aguardandoAbrangencia}/>
 						{!this.state.aguardandoAbrangencia &&
-							<Detalhes idArea={this.pilhaIdArea.last}/>
+							<Detalhes
+								pilhaIdArea={this.pilhaIdArea}
+								orgaos={this.orgaosFederais}/>
 						}
 					</div>
 				</Card>

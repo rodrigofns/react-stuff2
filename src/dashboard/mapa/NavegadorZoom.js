@@ -28,11 +28,11 @@ export default class NavegadorZoom extends React.Component {
 
 				{pontoSelecionado ? (
 					<div className="navegaAcima" onClick={() => onClick(idAreas.length)}>
-						{idAreas.length < 2 ? nomeInicial : jsonMapas.areas[ idAreas.last ].nome}
+						{idAreas.length < 2 ? nomeInicial : jsonMapas.areas[idAreas.last].nome}
 					</div>
 				) : (
 					<div className="nivelAtual">
-						{idAreas.length < 2 ? nomeInicial : jsonMapas.areas[ idAreas.last ].nome}
+						{idAreas.length < 2 ? nomeInicial : jsonMapas.areas[idAreas.last].nome}
 					</div>
 				)}
 

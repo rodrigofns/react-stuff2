@@ -42,7 +42,7 @@ export default class Login extends React.Component {
 									onChange={e => this.setState({ senha: e.target.value })}/>
 							</div>
 							<RaisedButton secondary type="submit" label="Entrar"
-								disabled={(!usuario || !usuario.length) || (!senha || !senha.length) || processando}/>
+								disabled={!usuario || !senha || processando}/>
 						</div>
 					</Card>
 				</form>

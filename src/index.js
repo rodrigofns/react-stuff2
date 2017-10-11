@@ -7,9 +7,14 @@ import 'font-awesome/css/font-awesome.min.css';
 
 // https://github.com/eslint/eslint/blob/master/docs/rules/no-extend-native.md
 /*eslint no-extend-native: ["error", { "exceptions": ["Array"] }]*/
-Object.defineProperty(Array.prototype, 'last', { // adiciona "last" ao objeto array
+Object.defineProperty(Array.prototype, 'last', {
 	get: function() {
 		return this[this.length - 1];
+	}
+});
+Object.defineProperty(Array.prototype, 'empty', {
+	get: function() {
+		return this.length === 0;
 	}
 });
 

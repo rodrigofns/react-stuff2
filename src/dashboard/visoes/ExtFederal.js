@@ -36,7 +36,7 @@ export default class ExtFederal extends React.Component {
 	}
 
 	filtraPontosDaAreaAtual() {
-		if (!this.orgaosFederais.length) {
+		if (this.orgaosFederais.empty) {
 			return [];
 		} else {
 			let nomeEstaNoFiltro = (orgao) => { // filtra os nomes dos órgãos quando o usuário usa o campo de filtro
@@ -49,7 +49,7 @@ export default class ExtFederal extends React.Component {
 				lat: orgao.municipio.latitude,
 				lng: orgao.municipio.longitude
 			});
-			let idAreaAtual = this.pilhaIdArea[this.pilhaIdArea.length - 1];
+			let idAreaAtual = this.pilhaIdArea.last;
 
 			if (idAreaAtual === this.pilhaIdArea[0]) { // todo o Brasil
 				return this.orgaosFederais
@@ -131,13 +131,13 @@ export default class ExtFederal extends React.Component {
 							nomeHover={this.state.nomeHover}
 							onClick={this.sobeNivel}/>
 						<div className="mapa">
-							<BarraAguarde visivel={!this.pilhaIdArea.length}/>
+							<BarraAguarde visivel={this.pilhaIdArea.empty}/>
 							{this.pilhaIdArea.length > 0 &&
 								<Mapa
 									tamanho={ExtFederal.tamanhoMapa}
 									raioPonto={ExtFederal.raiosPonto[this.pilhaIdArea.length]}
-									visivel={this.pilhaIdArea.length}
-									idConjunto={this.pilhaIdArea[this.pilhaIdArea.length - 1]}
+									visivel={!this.pilhaIdArea.empty}
+									idConjunto={this.pilhaIdArea.last}
 									pontos={this.state.pontos}
 									pontosClicaveis={this.pilhaIdArea.length === 3}
 									idPontoSelecionado={this.state.idOrgaoSelecionado}

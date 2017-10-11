@@ -7,10 +7,11 @@ import './Login.sass';
 
 @useProp({ authStore })
 export default class Login extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = { usuario: '', senha: '', processando: false };
-	}
+	state = {
+		usuario: '',
+		senha: '',
+		processando: false
+	};
 
 	submitForm = (ev) => {
 		ev.preventDefault();
@@ -23,7 +24,7 @@ export default class Login extends React.Component {
 	}
 
 	render() {
-		let { usuario, senha, processando } = this.state;
+		const { usuario, senha, processando } = this.state;
 		return (
 			<div id="Login">
 				<form onSubmit={this.submitForm}>

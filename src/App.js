@@ -9,10 +9,9 @@ import './App.sass';
 
 @useProp({ authStore })
 export default class App extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = { verificando: true };
-	}
+	state = {
+		verificando: true
+	};
 
 	componentWillMount() {
 		authStore.checkAuth()

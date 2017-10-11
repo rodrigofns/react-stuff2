@@ -22,17 +22,13 @@ export default class Visao extends React.Component {
 	orgaosFederais = [];
 	pilhaIdArea = []; // pilha com cada nível de zoom: ['trfs','trf1','am']
 	filtro = ''; // filtro dos nomes dos órgãos atualmente exibidos
-
-	constructor(props) {
-		super(props);
-		this.state = {
-			pontos: [],
-			idOrgaoSelecionado: null, // um ponto
-			nomeOrgaoSelecionado: '',
-			nomeHover: '', // atualmente abaixo do cursor
-			aguardandoAbrangencia: false
-		};
-	}
+	state = {
+		pontos: [],
+		idOrgaoSelecionado: null, // um ponto
+		nomeOrgaoSelecionado: '',
+		nomeHover: '', // atualmente abaixo do cursor
+		aguardandoAbrangencia: false
+	};
 
 	componentDidMount() {
 		this.props.onGetOrgaos()

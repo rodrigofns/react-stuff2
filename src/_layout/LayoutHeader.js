@@ -21,7 +21,7 @@ export default class LayoutHeader extends React.Component {
 	}
 
 	render() {
-		let { onMenuClick, location } = this.props;
+		const { onMenuClick, location } = this.props;
 		return (
 			<AppBar
 				title={this.tituloApp(location.pathname)}

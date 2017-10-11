@@ -11,7 +11,7 @@ export default class Detalhes extends React.Component {
 	};
 
 	quantidadeOrgaos() {
-		let { pilhaIdArea, orgaos } = this.props;
+		const { pilhaIdArea, orgaos } = this.props;
 		if (pilhaIdArea.length === 1) { // nacional
 			return orgaos.length;
 		} else { // de uma área
@@ -23,8 +23,8 @@ export default class Detalhes extends React.Component {
 	}
 
 	render() {
-		let { pilhaIdArea } = this.props;
-		return !pilhaIdArea.empty ? (
+		const { pilhaIdArea } = this.props;
+		return (!pilhaIdArea.empty &&
 			<div id="Detalhes">
 				<div className="cabecalho">Dados da área</div>
 				<div className="corpo">
@@ -32,6 +32,6 @@ export default class Detalhes extends React.Component {
 					<div>Quantidade de órgãos: {this.quantidadeOrgaos()}</div>
 				</div>
 			</div>
-		) : null;
+		);
 	}
 }

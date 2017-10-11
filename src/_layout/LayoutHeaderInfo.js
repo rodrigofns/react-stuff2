@@ -8,7 +8,7 @@ import './LayoutHeaderInfo.sass';
 @useProp({ authStore })
 class LayoutHeaderInfo extends React.Component {
 	render() {
-		let { authStore, history } = this.props;
+		const { authStore, history } = this.props;
 		return (
 			<div id="LayoutHeaderInfo">
 				<div className="headerUserInfo">{authStore.nomeUsuario}</div>

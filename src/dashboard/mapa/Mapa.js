@@ -138,9 +138,12 @@ export default class Mapa extends React.PureComponent {
 			let lnglat = this.converteCoords([po.lng, po.lat], origem);
 			if (po.id === this.props.idPontoSelecionado) {
 				renderizaUmPonto(lnglat, Mapa.GRAF.ponto.corSelec, .4, 1);
+				if (this.props.pontosClicaveis && po.id === idDestaque) { // highlight: círculo maior ao redor
+					renderizaUmPonto(lnglat, Mapa.GRAF.ponto.corSelec, .25, 2);
+				}
 			} else {
 				renderizaUmPonto(lnglat, Mapa.GRAF.ponto.cor, .25, 1);
-				if (this.props.pontosClicaveis && po.id === idDestaque) {
+				if (this.props.pontosClicaveis && po.id === idDestaque) { // highlight: círculo maior ao redor
 					renderizaUmPonto(lnglat, Mapa.GRAF.ponto.cor, .25, 2);
 				}
 			}
@@ -188,7 +191,8 @@ export default class Mapa extends React.PureComponent {
 		if (this.animando) return; // se há uma animação acontecendo, desabilita o evento
 
 		let idHovered = this.areaOuPontoEmbaixoDoCursor(ev);
-		this.canvas.style.cursor = (idHovered !== null) ? 'pointer' : 'default';
+		this.canvas.style.cursor =
+			(idHovered !== null && idHovered !== this.props.idPontoSelecionado) ? 'pointer' : 'default';
 
 		if (idHovered !== this.idPrevHover) {
 			this.idPrevHover = idHovered;

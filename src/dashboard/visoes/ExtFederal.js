@@ -4,7 +4,8 @@ import {BarraAguarde, removeAcentos} from '_util';
 
 import httpDashboard from '../httpDashboard';
 import Mapa from '../mapa/Mapa.js';
-import Navegador from '../mapa/Navegador';
+import NavegadorZoom from '../mapa/NavegadorZoom';
+import jsonMapas from '../mapa/mapas-2d.json';
 import './ExtFederal.sass';
 
 export default class ExtFederal extends React.Component {
@@ -19,6 +20,8 @@ export default class ExtFederal extends React.Component {
 		super(props);
 		this.state = {
 			pontos: [],
+			idOrgaoSelecionado: null, // um ponto
+			nomeOrgaoSelecionado: '',
 			nomeHover: '' // atualmente abaixo do cursor
 		};
 	}
@@ -65,28 +68,44 @@ export default class ExtFederal extends React.Component {
 	}
 
 	hoverArea = (idArea) => {
-
+		this.setState({
+			nomeHover: idArea ? jsonMapas.areas[idArea].nome : ''
+		});
 	}
 
 	hoverPonto = (idOrgaoFed) => {
-		this.setState({ nomeHover: idOrgaoFed ?
-			this.state.pontos.find(p => p.id === idOrgaoFed).nome : '' });
+		this.setState({
+			nomeHover: idOrgaoFed ?
+				this.state.pontos.find(p => p.id === idOrgaoFed).nome : ''
+		});
 	}
 
 	clickArea = (idArea) => {
 		if (idArea && this.pilhaIdArea.length < 3) { // nível máximo de zoom
 			this.pilhaIdArea.push(idArea);
-			this.setState({ pontos: this.filtraPontosDaAreaAtual() });
+			this.setState({
+				pontos: this.filtraPontosDaAreaAtual(),
+				nomeHover: ''
+			});
 		}
 	}
 
-	clickPonto = (idPonto) => {
-
+	clickPonto = (idOrgaoFed) => {
+		if (idOrgaoFed) {
+			this.setState({
+				idOrgaoSelecionado: idOrgaoFed,
+				nomeOrgaoSelecionado: 'FOO'
+			});
+		}
 	}
 
 	sobeNivel = (nivel) => {
 		this.pilhaIdArea = this.pilhaIdArea.slice(0, nivel);
-		this.setState({ pontos: this.filtraPontosDaAreaAtual() });
+		this.setState({
+			pontos: this.filtraPontosDaAreaAtual(),
+			idOrgaoSelecionado: null,
+			nomeOrgaoSelecionado: ''
+		});
 	}
 
 	filtroMudou = (ev) => {
@@ -95,17 +114,21 @@ export default class ExtFederal extends React.Component {
 	}
 
 	render() {
-		let { pontos, nomeHover } = this.state;
 		return (
 			<div id="ExtFederal">
 				<Card>
 					<div className="card1">
 						<div className="txtFiltro">
-							<TextField fullWidth floatingLabelText="Filtro do nome do órgão"
+							<TextField fullWidth
+								floatingLabelText="Filtro do nome do órgão"
 								onChange={this.filtroMudou}/>
 						</div>
-						<Navegador className="navegador" idAreas={this.pilhaIdArea}
-							nomeInicial="TRFs" nomeHover={nomeHover}
+						<NavegadorZoom
+							className="navegador"
+							idAreas={this.pilhaIdArea}
+							nomeInicial="TRFs"
+							pontoSelecionado={this.state.nomeOrgaoSelecionado}
+							nomeHover={this.state.nomeHover}
 							onClick={this.sobeNivel}/>
 						<div className="mapa">
 							<BarraAguarde visivel={!this.pilhaIdArea.length}/>
@@ -115,9 +138,9 @@ export default class ExtFederal extends React.Component {
 									raioPonto={ExtFederal.raiosPonto[this.pilhaIdArea.length]}
 									visivel={this.pilhaIdArea.length}
 									idConjunto={this.pilhaIdArea[this.pilhaIdArea.length - 1]}
-									pontos={pontos}
+									pontos={this.state.pontos}
 									pontosClicaveis={this.pilhaIdArea.length === 3}
-									idPontoSelecionado={null}
+									idPontoSelecionado={this.state.idOrgaoSelecionado}
 									onHoverArea={this.hoverArea}
 									onHoverPonto={this.hoverPonto}
 									onClickArea={this.clickArea}

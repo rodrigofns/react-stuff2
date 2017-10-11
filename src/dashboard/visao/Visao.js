@@ -6,12 +6,12 @@ import {BarraAguarde, removeAcentos} from '_util';
 import Mapa from '../mapa/Mapa.js';
 import NavegadorZoom from '../mapa/NavegadorZoom';
 import jsonMapas from '../mapa/mapas-2d.json';
+import Detalhes from './Detalhes';
 import './Visao.sass';
 
 export default class Visao extends React.Component {
 	static propTypes = {
 		idConjuntoInicial: PropTypes.string.isRequired,
-		nomeConjuntoInicial: PropTypes.string.isRequired,
 		onGetOrgaos: PropTypes.func.isRequired,
 		onGetAbrangencia: PropTypes.func.isRequired
 	};
@@ -144,7 +144,6 @@ export default class Visao extends React.Component {
 						<NavegadorZoom
 							className="navegador"
 							idAreas={this.pilhaIdArea}
-							nomeInicial={this.props.nomeConjuntoInicial}
 							pontoSelecionado={this.state.nomeOrgaoSelecionado}
 							nomeHover={this.state.nomeHover}
 							onClick={this.sobeNivel}/>
@@ -172,7 +171,7 @@ export default class Visao extends React.Component {
 					<div className="card2">
 						<BarraAguarde visivel={this.state.aguardandoAbrangencia}/>
 						{!this.state.aguardandoAbrangencia &&
-							<div>Card 2</div>
+							<Detalhes idArea={this.pilhaIdArea.last}/>
 						}
 					</div>
 				</Card>

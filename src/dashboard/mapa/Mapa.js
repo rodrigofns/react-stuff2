@@ -207,6 +207,7 @@ export default class Mapa extends React.PureComponent {
 	}
 
 	canvasMouseOut = (ev) => {
+		if (this.animando) return; // se há uma animação acontecendo, desabilita o evento
 		this.renderizaMapa(this.props.idConjunto);
 	}
 

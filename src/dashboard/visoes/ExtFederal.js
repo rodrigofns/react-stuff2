@@ -22,12 +22,13 @@ export default class ExtFederal extends React.Component {
 			pontos: [],
 			idOrgaoSelecionado: null, // um ponto
 			nomeOrgaoSelecionado: '',
-			nomeHover: '' // atualmente abaixo do cursor
+			nomeHover: '', // atualmente abaixo do cursor
+			aguardandoAbrangencia: false
 		};
 	}
 
 	componentDidMount() {
-		httpDashboard.orgaosFederais()
+		httpDashboard.getOrgaosFederais()
 			.then(orgaos => {
 				this.orgaosFederais = orgaos;
 				this.pilhaIdArea = ['trfs']; // inicia mostrando regiões federais
@@ -92,9 +93,19 @@ export default class ExtFederal extends React.Component {
 
 	clickPonto = (idOrgaoFed) => {
 		if (idOrgaoFed) {
+			let orgaoSelec = this.orgaosFederais.find(orgao => orgao.id === idOrgaoFed);
 			this.setState({
 				idOrgaoSelecionado: idOrgaoFed,
-				nomeOrgaoSelecionado: 'FOO'
+				nomeOrgaoSelecionado: orgaoSelec.nome
+			}, () => {
+				if (!orgaoSelec.abrangencia) { // dados da abrangência ainda não estão em cache?
+					this.setState({ aguardandoAbrangencia: true });
+					httpDashboard.getAbrangenciaFederal(idOrgaoFed)
+						.then(dadosAbrang => {
+							orgaoSelec.abrangencia = dadosAbrang;
+							this.setState({ aguardandoAbrangencia: false });
+						});
+				}
 			});
 		}
 	}
@@ -132,7 +143,7 @@ export default class ExtFederal extends React.Component {
 							onClick={this.sobeNivel}/>
 						<div className="mapa">
 							<BarraAguarde visivel={this.pilhaIdArea.empty}/>
-							{this.pilhaIdArea.length > 0 &&
+							{!this.pilhaIdArea.empty &&
 								<Mapa
 									tamanho={ExtFederal.tamanhoMapa}
 									raioPonto={ExtFederal.raiosPonto[this.pilhaIdArea.length]}
@@ -152,7 +163,8 @@ export default class ExtFederal extends React.Component {
 				<div className="entreCards"></div>
 				<Card>
 					<div className="card2">
-						Card 2
+						<BarraAguarde visivel={this.state.aguardandoAbrangencia}/>
+						<div>Card 2</div>
 					</div>
 				</Card>
 			</div>

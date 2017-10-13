@@ -1,10 +1,11 @@
 import React from 'react';
 import {Card, RaisedButton, TextField} from 'material-ui';
-import {httpSgu, BarraAguarde} from '_util';
+import {globalMsgStore, httpSgu, withStore, BarraAguarde} from '_util';
 
 import Rodape from './Rodape';
 import './Login.sass';
 
+@withStore({ globalMsgStore })
 export default class Login extends React.Component {
 	state = {
 		usuario: '',
@@ -29,6 +30,8 @@ export default class Login extends React.Component {
 
 	render() {
 		const { usuario, senha, processando } = this.state;
+		const { globalMsgStore } = this.props;
+
 		return (
 			<div id="Login">
 				<form onSubmit={this.submitForm}>
@@ -36,6 +39,11 @@ export default class Login extends React.Component {
 						<BarraAguarde visivel={processando}/>
 						<div className="caixaLogin">
 							<h2>Login</h2>
+							<ul className="erros">
+								{globalMsgStore.msgs.map((msg, i) =>
+									<li key={i} className="erro">{msg}</li>
+								)}
+							</ul>
 							<div>
 								<TextField autoComplete="off" disabled={processando}
 									name="login" floatingLabelText="Nome de usuário" autoFocus

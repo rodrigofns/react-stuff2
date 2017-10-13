@@ -5,27 +5,20 @@ import {authStore, withStore} from '_util';
 
 import './LayoutHeaderInfo.sass';
 
-@withRouter
-@withStore({ authStore })
-class LayoutHeaderInfo extends React.Component {
-	render() {
-		const { authStore, history } = this.props;
-		const usr = authStore.getUserInfo();
+const LayoutHeaderInfo = ({ authStore, history }) => (
+	<div id="LayoutHeaderInfo">
+		<div className="headerUserInfo">{authStore.getUserInfo().nome}</div>
+		<RaisedButton
+			secondary
+			id="TopRite-logoff"
+			label="Logoff"
+			onClick={() => {
+				authStore.removeToken();
+				history.push('/');
+			}}/>
+	</div>
+);
 
-		return (
-			<div id="LayoutHeaderInfo">
-				<div className="headerUserInfo">{usr.nome}</div>
-				<RaisedButton
-					secondary
-					id="TopRite-logoff"
-					label="Logoff"
-					onClick={() => {
-						authStore.removeToken();
-						history.push('/');
-					}}/>
-			</div>
-		);
-	}
-}
-
-export default LayoutHeaderInfo;
+export default withRouter(
+	withStore({ authStore })(LayoutHeaderInfo)
+);

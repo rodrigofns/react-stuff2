@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {authStore} from './authStore';
+import {globalMsgStore} from './globalMsgStore';
 
 const API_URL = process.env.REACT_APP_API_URL; // veja arquivo ".env" na raiz do projeto
 const TOKEN_HEADER_NAME = 'Set-Token';
@@ -55,6 +56,7 @@ class HttpSgu {
 	_handleError(err) {
 		authStore.removeToken();
 		if (err.response) { // servidor respondeu com um status de erro
+			globalMsgStore.msgs.push(`${err.response.status}: ${err.response.statusText}`);
 			console.error('SGU', err.response);
 		} else if (err.request) { // nenhuma resposta recebida do servidor
 			console.error('SGU', err.response);

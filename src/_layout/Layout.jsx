@@ -5,32 +5,31 @@ import {withStore} from '_util';
 import rotas from 'rotas';
 import LayoutDrawer from './LayoutDrawer';
 import LayoutHeader from './LayoutHeader';
+import GlobalMsg from './GlobalMsg';
 import Erro404 from './Erro404';
 import menuStore from './menuStore';
 import './Layout.sass';
 
-@withStore({ menuStore })
-export default class Layout extends React.Component {
-	render() {
-		return (
-			<BrowserRouter>
-				<div id="Layout">
-					<LayoutDrawer/>
-					<header>
-						<LayoutHeader onMenuClick={() => this.props.menuStore.aberto = true}/>
-					</header>
-					<main>
-						<Switch>
-							<Redirect exact from="/" to={rotas[0].caminho}/>
-							{rotas.map((rota, i) =>
-								<Route key={i} path={rota.caminho} component={rota.componente}/>
-							)}
-							<Route component={Erro404}/>
-						</Switch>
-					</main>
-					{/* <footer>footer</footer> */}
-				</div>
-			</BrowserRouter>
-		);
-	}
-}
+const Layout = ({ menuStore }) => (
+	<BrowserRouter>
+		<div id="Layout">
+			<LayoutDrawer/>
+			<header>
+				<LayoutHeader onMenuClick={() => menuStore.aberto = true}/>
+			</header>
+			<main>
+				<GlobalMsg/>
+				<Switch>
+					<Redirect exact from="/" to={rotas[0].caminho}/>
+					{rotas.map((rota, i) =>
+						<Route key={i} path={rota.caminho} component={rota.componente}/>
+					)}
+					<Route component={Erro404}/>
+				</Switch>
+			</main>
+			{/* <footer>footer</footer> */}
+		</div>
+	</BrowserRouter>
+);
+
+export default withStore({ menuStore })(Layout);

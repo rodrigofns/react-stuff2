@@ -5,10 +5,10 @@
 import React from 'react';
 import {observer} from 'mobx-react';
 
-export function useProp(stores) {
+export function withStore(stores) {
 	return function(Component) {
 		let Wrapped = observer(Component);
-		return function MobXUseProp(props) {
+		return function MobXWithStore(props) {
 			return <Wrapped {...stores} {...props}/>;
 		};
 	};

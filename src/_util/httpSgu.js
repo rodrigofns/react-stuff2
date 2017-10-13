@@ -1,9 +1,5 @@
-/**
- * Base para todas as requisições HTTP.
- */
-
 import axios from 'axios';
-import authToken from './authToken';
+import {authStore} from './authStore';
 
 const API_URL = process.env.REACT_APP_API_URL; // veja arquivo ".env" na raiz do projeto
 const TOKEN_HEADER_NAME = 'Set-Token';
@@ -24,33 +20,46 @@ class HttpSgu {
 	}
 
 	doDelete(path) {
-		return this._doRequest(path, 'PUT');
+		return this._doRequest(path, 'DELETE');
 	}
 
 	_doRequest(path, method, body) {
 		let headers = { 'Content-Type': 'application/json' };
-		this._addAuthHeader(headers);
+		this._addToken(headers);
 
 		return axios({
 			method: method,
 			url: API_URL + path,
 			headers: headers,
 			data: body
-		}).then(resp => resp.data)
-			.catch(err => console.error(err)); // TODO: tratamento de erro
+		}).then(resp => {
+			this._saveToken(resp); // sempre salva o token JWT a cada requisição
+			return resp.data;
+		}).catch(err => {
+			this._handleError(err);
+		});
 	}
 
-	_addAuthHeader(headers) {
-		let token = authToken.read();
+	_addToken(headers) {
+		let token = authStore.getToken();
 		if (token) {
 			headers[AUTH_HEADER_NAME] = AUTH_HEADER_VALUE_PREFIX + token;
 		}
 	}
 
 	_saveToken(response) {
-		let token = response.headers.get(TOKEN_HEADER_NAME);
-		if (token) {
-			authToken.save(token);
+		let token = response.headers[TOKEN_HEADER_NAME];
+		authStore.saveToken(token);
+	}
+
+	_handleError(err) {
+		authStore.removeToken();
+		if (err.response) { // servidor respondeu com um status de erro
+			console.error('SGU', err.response);
+		} else if (err.request) { // nenhuma resposta recebida do servidor
+			console.error('SGU', err.response);
+		} else { // outro erro
+			console.error('SGU', err);
 		}
 	}
 }

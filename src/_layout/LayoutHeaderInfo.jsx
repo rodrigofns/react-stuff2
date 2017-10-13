@@ -1,23 +1,26 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import {RaisedButton} from 'material-ui';
-import {useProp, authStore} from '_util';
+import {authStore, withStore} from '_util';
 
 import './LayoutHeaderInfo.sass';
 
-@useProp({ authStore })
+@withRouter
+@withStore({ authStore })
 class LayoutHeaderInfo extends React.Component {
 	render() {
 		const { authStore, history } = this.props;
+		const usr = authStore.getUserInfo();
+
 		return (
 			<div id="LayoutHeaderInfo">
-				<div className="headerUserInfo">{authStore.nomeUsuario}</div>
+				<div className="headerUserInfo">{usr.nome}</div>
 				<RaisedButton
 					secondary
 					id="TopRite-logoff"
 					label="Logoff"
 					onClick={() => {
-						authStore.logoff();
+						authStore.removeToken();
 						history.push('/');
 					}}/>
 			</div>
@@ -25,4 +28,4 @@ class LayoutHeaderInfo extends React.Component {
 	}
 }
 
-export default withRouter(LayoutHeaderInfo);
+export default LayoutHeaderInfo;

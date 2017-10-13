@@ -1,11 +1,10 @@
 import React from 'react';
 import {Card, RaisedButton, TextField} from 'material-ui';
-import {useProp, authStore, BarraAguarde} from '_util';
+import {httpSgu, BarraAguarde} from '_util';
 
 import Rodape from './Rodape';
 import './Login.sass';
 
-@useProp({ authStore })
 export default class Login extends React.Component {
 	state = {
 		usuario: '',
@@ -16,10 +15,15 @@ export default class Login extends React.Component {
 	submitForm = (ev) => {
 		ev.preventDefault();
 		this.setState({ processando: true }, () => {
-			authStore.login(this.state.usuario, this.state.senha)
-				.catch(() => {
-					this.setState({ senha: '', processando: false });
+			httpSgu.doPost('/login', {
+				usuario: this.state.usuario,
+				senha: this.state.senha
+			}).catch(() => {
+				this.setState({
+					senha: '',
+					processando: false
 				});
+			});
 		});
 	}
 

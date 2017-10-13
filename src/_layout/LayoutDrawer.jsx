@@ -1,7 +1,7 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import {Drawer, MenuItem} from 'material-ui';
-import {useProp} from '_util';
+import {withStore} from '_util';
 
 import pgfnDrawer from './pgfn-drawer.png';
 import rotas from 'rotas';
@@ -9,7 +9,7 @@ import menuStore from './menuStore';
 import './LayoutDrawer.sass';
 
 @withRouter
-@useProp({ menuStore })
+@withStore({ menuStore })
 export default class LayoutDrawer extends React.Component {
 	clicouItem(rota) {
 		this.props.history.push(rota.caminho);

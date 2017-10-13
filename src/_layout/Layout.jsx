@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Switch, Redirect, Route} from 'react-router-dom';
-import {useProp} from '_util';
+import {withStore} from '_util';
 
 import rotas from 'rotas';
 import LayoutDrawer from './LayoutDrawer';
@@ -9,7 +9,7 @@ import Erro404 from './Erro404';
 import menuStore from './menuStore';
 import './Layout.sass';
 
-@useProp({ menuStore })
+@withStore({ menuStore })
 export default class Layout extends React.Component {
 	render() {
 		return (

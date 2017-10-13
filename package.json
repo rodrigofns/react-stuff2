@@ -9,6 +9,7 @@
 		"babel-polyfill": "^6.26.0",
 		"custom-react-scripts": "0.2.0",
 		"font-awesome": "^4.7.0",
+		"jwt-simple": "^0.5.1",
 		"material-ui": "^0.19.3",
 		"mobx": "^3.3.1",
 		"mobx-react": "^4.3.3",

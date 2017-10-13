@@ -1,49 +1,39 @@
-/**
- * Autenticação e dados do usuário autenticado.
- */
-
 import {observable} from 'mobx';
+import * as jwt from 'jwt-simple';
 
-import authToken from './authToken';
-import {httpSgu} from './httpSgu';
+const TOKEN_PROPERTY = process.env.REACT_APP_TOKEN_PROPERTY; // veja arquivo ".env" na raiz do projeto
 
 class AuthStore {
 	@observable isAuth = false;
-	@observable nomeUsuario = '';
 
 	checkAuth() {
-		return this._updateAuthStatus('/usuario', { });
+		// this.isAuth = !!this.getToken();
+		this.isAuth = true;
 	}
 
-	login(usuario, senha) {
-		return this._updateAuthStatus('/login', { usuario, senha });
+	getToken() {
+		return localStorage.getItem(TOKEN_PROPERTY);
 	}
 
-	logoff() {
-		authToken.remove();
+	saveToken(token) {
+		// if (token) {
+		// 	localStorage.setItem(TOKEN_PROPERTY, token);
+		// 	this.isAuth = true;
+		// } else {
+		// 	this.removeToken();
+		// }
+	}
+
+	removeToken() {
+		localStorage.removeItem(TOKEN_PROPERTY);
 		this.isAuth = false;
-		this.nomeUsuario = '';
-		return httpSgu.doPost('/logoff');
 	}
 
-	_updateAuthStatus(path, body) {
-		// return httpSgu.doPost(path, body)
-		// 	.then(data => {
-		// 		if (data.status) {
-		// 			authToken.save(data.token);
-		// 			this.isAuth = true;
-		// 			this.nomeUsuario = data.nome;
-		// 		} else {
-		// 			authToken.remove();
-		// 			this.isAuth = false;
-		// 			this.nomeUsuario = '';
-		// 		}
-		// 	});
-		return new Promise(resolve => {
-			this.isAuth = true;
-			this.nomeUsuario = 'Usuário genérico';
-			resolve();
-		});
+	getUserInfo() {
+		// return this.isAuth
+		// 	? jwt.decode(this.getToken(), '', true).princ
+		// 	: null;
+		return { nome: 'Genérico' };
 	}
 }
 

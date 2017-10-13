@@ -27,7 +27,6 @@ export default class Visao extends React.Component {
 		idOrgaoSelecionado: null, // um ponto
 		nomeOrgaoSelecionado: '',
 		nomeHover: '', // atualmente abaixo do cursor
-		aguardandoAbrangencia: false
 	};
 
 	componentDidMount() {
@@ -100,15 +99,6 @@ export default class Visao extends React.Component {
 			this.setState({
 				idOrgaoSelecionado: idOrgaoFed,
 				nomeOrgaoSelecionado: orgaoSelec.nome
-			}, () => {
-				if (!orgaoSelec.abrangencia) { // dados da abrangência ainda não estão em cache?
-					this.setState({ aguardandoAbrangencia: true });
-					this.props.onGetAbrangencia(idOrgaoFed)
-						.then(dadosAbrang => {
-							orgaoSelec.abrangencia = dadosAbrang;
-							this.setState({ aguardandoAbrangencia: false });
-						});
-				}
 			});
 		}
 	}
@@ -165,12 +155,11 @@ export default class Visao extends React.Component {
 				<div className="entreCards"></div>
 				<Card>
 					<div className="card2">
-						<BarraAguarde visivel={this.state.aguardandoAbrangencia}/>
-						{!this.state.aguardandoAbrangencia &&
-							<Detalhes
-								pilhaIdArea={this.pilhaIdArea}
-								orgaos={this.orgaosFederais}/>
-						}
+						<Detalhes
+							pilhaIdArea={this.pilhaIdArea}
+							orgaos={this.orgaosFederais}
+							idOrgaoSelecionado={this.state.idOrgaoSelecionado}
+							onGetAbrangencia={this.props.onGetAbrangencia}/>
 					</div>
 				</Card>
 			</div>

@@ -3,7 +3,7 @@ import React from 'react';
 import httpDashboard from '../httpDashboard';
 import Visao from '../visao/Visao';
 
-export default class ExtEstadual extends React.Component {
+export default class ExtEstadual extends React.PureComponent {
 	getOrgaos() {
 		return httpDashboard.getOrgaosFederais(); // mudar !!!
 	}

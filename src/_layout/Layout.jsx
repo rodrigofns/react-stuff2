@@ -15,7 +15,7 @@ const Layout = ({ menuStore }) => (
 		<div id="Layout">
 			<LayoutDrawer/>
 			<header>
-				<LayoutHeader onMenuClick={() => menuStore.aberto = true}/>
+				<LayoutHeader onMenuClick={() => menuStore.abreMenu(true)}/>
 			</header>
 			<main>
 				<GlobalMsg className="msgs"/>

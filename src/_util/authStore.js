@@ -1,4 +1,4 @@
-import {observable} from 'mobx';
+import {action, observable} from 'mobx';
 import * as jwt from 'jwt-simple';
 
 const TOKEN_PROPERTY = process.env.REACT_APP_TOKEN_PROPERTY; // veja arquivo ".env" na raiz do projeto
@@ -6,6 +6,7 @@ const TOKEN_PROPERTY = process.env.REACT_APP_TOKEN_PROPERTY; // veja arquivo ".e
 class AuthStore {
 	@observable isAuth = false;
 
+	@action
 	checkAuth() {
 		this.isAuth = !!this.getToken();
 	}
@@ -14,6 +15,7 @@ class AuthStore {
 		return localStorage.getItem(TOKEN_PROPERTY);
 	}
 
+	@action
 	saveToken(token) {
 		if (token) {
 			localStorage.setItem(TOKEN_PROPERTY, token);
@@ -23,6 +25,7 @@ class AuthStore {
 		}
 	}
 
+	@action
 	removeToken() {
 		localStorage.removeItem(TOKEN_PROPERTY);
 		this.isAuth = false;

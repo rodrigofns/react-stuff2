@@ -13,14 +13,14 @@ import './LayoutDrawer.sass';
 export default class LayoutDrawer extends React.Component {
 	clicouItem(rota) {
 		this.props.history.push(rota.caminho);
-		this.props.menuStore.aberto = false;
+		this.props.menuStore.abreMenu(false);
 	}
 
 	render() {
 		return (
 			<Drawer docked={false} width={260}
 				open={this.props.menuStore.aberto}
-				onRequestChange={open => this.props.menuStore.aberto = open}>
+				onRequestChange={open => this.props.menuStore.abreMenu(open)}>
 				<div id="Drawer-top">
 					<img src={pgfnDrawer} alt="Logotipo PGFN"/> SGU
 				</div>

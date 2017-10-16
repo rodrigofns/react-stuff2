@@ -18,7 +18,7 @@ const Layout = ({ menuStore }) => (
 				<LayoutHeader onMenuClick={() => menuStore.aberto = true}/>
 			</header>
 			<main>
-				<GlobalMsg/>
+				<GlobalMsg className="msgs"/>
 				<Switch>
 					<Redirect exact from="/" to={rotas[0].caminho}/>
 					{rotas.map((rota, i) =>

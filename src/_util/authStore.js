@@ -7,8 +7,7 @@ class AuthStore {
 	@observable isAuth = false;
 
 	checkAuth() {
-		// this.isAuth = !!this.getToken();
-		this.isAuth = true;
+		this.isAuth = !!this.getToken();
 	}
 
 	getToken() {
@@ -16,12 +15,12 @@ class AuthStore {
 	}
 
 	saveToken(token) {
-		// if (token) {
-		// 	localStorage.setItem(TOKEN_PROPERTY, token);
-		// 	this.isAuth = true;
-		// } else {
-		// 	this.removeToken();
-		// }
+		if (token) {
+			localStorage.setItem(TOKEN_PROPERTY, token);
+			this.isAuth = true;
+		} else {
+			this.removeToken();
+		}
 	}
 
 	removeToken() {
@@ -30,10 +29,9 @@ class AuthStore {
 	}
 
 	getUserInfo() {
-		// return this.isAuth
-		// 	? jwt.decode(this.getToken(), '', true).princ
-		// 	: null;
-		return { nome: 'Genérico' };
+		return this.isAuth
+			? jwt.decode(this.getToken(), '', true).princ
+				: null;
 	}
 }
 

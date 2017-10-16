@@ -3,7 +3,7 @@ import {authStore} from './authStore';
 import {globalMsgStore} from './globalMsgStore';
 
 const API_URL = process.env.REACT_APP_API_URL; // veja arquivo ".env" na raiz do projeto
-const TOKEN_HEADER_NAME = 'Set-Token';
+const TOKEN_HEADER_NAME = 'set-token';
 const AUTH_HEADER_NAME = 'Authorization';
 const AUTH_HEADER_VALUE_PREFIX = 'Token ';
 
@@ -54,10 +54,11 @@ class HttpSgu {
 	}
 
 	_handleError(err) {
-		authStore.removeToken();
+		// authStore.removeToken();
 		if (err.response) { // servidor respondeu com um status de erro
-			globalMsgStore.msgs.push(`${err.response.status}: ${err.response.statusText}`);
+			globalMsgStore.msgs.push(`${err.response.status}: ${err.response.statusText} - ${err.response.data}`);
 			console.error('SGU', err.response);
+			throw err;
 		} else if (err.request) { // nenhuma resposta recebida do servidor
 			console.error('SGU', err.response);
 		} else { // outro erro

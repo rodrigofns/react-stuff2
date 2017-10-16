@@ -1,7 +1,7 @@
 import {observable} from 'mobx';
 
 class GlobalMsgStore {
-	@observable msgs = ['this','shit'];
+	@observable msgs = [];
 
 	add(msg) {
 		this.msgs.push(msg);

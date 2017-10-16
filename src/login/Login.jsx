@@ -1,11 +1,12 @@
 import React from 'react';
 import {Card, RaisedButton, TextField} from 'material-ui';
-import {globalMsgStore, httpSgu, withStore, BarraAguarde} from '_util';
+import {BarraAguarde} from '_util';
 
+import GlobalMsg from '../_layout/GlobalMsg';
 import Rodape from './Rodape';
+import httpLogin from './httpLogin';
 import './Login.sass';
 
-@withStore({ globalMsgStore })
 export default class Login extends React.Component {
 	state = {
 		usuario: '',
@@ -13,24 +14,26 @@ export default class Login extends React.Component {
 		processando: false
 	};
 
+	txtUsuario = null;
+
 	submitForm = (ev) => {
 		ev.preventDefault();
 		this.setState({ processando: true }, () => {
-			httpSgu.doPost('/login', {
-				usuario: this.state.usuario,
-				senha: this.state.senha
-			}).catch(() => {
-				this.setState({
-					senha: '',
-					processando: false
+			httpLogin.login(this.state.usuario, this.state.senha)
+				.catch(err => {
+					this.setState({
+						senha: '',
+						processando: false
+					}, () => {
+						this.txtUsuario.focus();
+						this.txtUsuario.select();
+					});
 				});
-			});
 		});
 	}
 
 	render() {
 		const { usuario, senha, processando } = this.state;
-		const { globalMsgStore } = this.props;
 
 		return (
 			<div id="Login">
@@ -39,20 +42,17 @@ export default class Login extends React.Component {
 						<BarraAguarde visivel={processando}/>
 						<div className="caixaLogin">
 							<h2>Login</h2>
-							<ul className="erros">
-								{globalMsgStore.msgs.map((msg, i) =>
-									<li key={i} className="erro">{msg}</li>
-								)}
-							</ul>
+							<GlobalMsg className="msgs"/>
 							<div>
 								<TextField autoComplete="off" disabled={processando}
+									ref={elem => this.txtUsuario = elem}
 									name="login" floatingLabelText="Nome de usuário" autoFocus
-									onChange={e => this.setState({ usuario: e.target.value })}/>
+									value={usuario} onChange={e => this.setState({ usuario: e.target.value })}/>
 							</div>
 							<div>
 								<TextField name="pwd" disabled={processando}
 									type="password" floatingLabelText="Senha"
-									onChange={e => this.setState({ senha: e.target.value })}/>
+									value={senha} onChange={e => this.setState({ senha: e.target.value })}/>
 							</div>
 							<RaisedButton secondary type="submit" label="Entrar"
 								disabled={!usuario || !senha || processando}/>

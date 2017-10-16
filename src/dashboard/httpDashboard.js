@@ -1,4 +1,4 @@
-import {httpSgu, removeAcentos} from '_util';
+import {httpSgu, globalMsgStore, removeAcentos} from '_util';
 
 class HttpDashboard {
 	getOrgaosFederais() {
@@ -6,7 +6,8 @@ class HttpDashboard {
 			.then(dados =>
 				dados.filter(d => d.municipio) // remove órgãos com município null
 					.map(d => ({ regiao: 'trf'+d.regiaoFederal, ...d }))
-			);
+			).catch(err =>
+				globalMsgStore.add('Não foi possível trazer os órgãos federais.'));
 	}
 
 	getAbrangenciaFederal(idOrgao) {
@@ -20,7 +21,8 @@ class HttpDashboard {
 					arr.sort((a, b) => removeAcentos(a.nome) < removeAcentos(b.nome) ? -1 : 1);
 				});
 				return dados;
-			});
+			})
+			.catch(err => globalMsgStore.add('Não foi possível trazer a abrangência federal.'));
 	}
 }
 

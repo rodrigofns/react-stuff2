@@ -7,6 +7,10 @@ class GlobalMsgStore {
 		this.msgs.push(msg);
 	}
 
+	remove(i) {
+		this.msgs.splice(i, 1);
+	}
+
 	clear() {
 		this.msgs = [];
 	}

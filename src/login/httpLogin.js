@@ -1,4 +1,4 @@
-import {httpSgu, globalMsgStore} from '_util';
+import {httpSgu} from '_util';
 
 class HttpLogin {
 	login(usuario, senha) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Switch, Redirect, Route} from 'react-router-dom';
-import {withStore} from '_util';
+import {subscribeTo} from '_util';
 
 import rotas from 'rotas';
 import LayoutDrawer from './LayoutDrawer';
@@ -32,4 +32,4 @@ const Layout = ({ menuStore }) => (
 	</BrowserRouter>
 );
 
-export default withStore({ menuStore })(Layout);
+export default subscribeTo({ menuStore })(Layout);

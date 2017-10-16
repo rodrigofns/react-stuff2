@@ -1,13 +1,13 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import {RaisedButton} from 'material-ui';
-import {authStore, withStore} from '_util';
+import {authStore, subscribeTo} from '_util';
 
 import './LayoutHeaderInfo.sass';
 
 const LayoutHeaderInfo = ({ authStore, history }) => (
 	<div id="LayoutHeaderInfo">
-		<div className="headerUserInfo">{authStore.getUserInfo().nome}</div>
+		<div className="headerUserInfo">{authStore.userInfo.nome}</div>
 		<RaisedButton
 			secondary
 			id="TopRite-logoff"
@@ -20,5 +20,5 @@ const LayoutHeaderInfo = ({ authStore, history }) => (
 );
 
 export default withRouter(
-	withStore({ authStore })(LayoutHeaderInfo)
+	subscribeTo({ authStore })(LayoutHeaderInfo)
 );

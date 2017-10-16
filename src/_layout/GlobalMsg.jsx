@@ -1,5 +1,5 @@
 import React from 'react';
-import {globalMsgStore, withStore} from '_util';
+import {globalMsgStore, subscribeTo} from '_util';
 
 import './GlobalMsg.sass';
 
@@ -22,4 +22,4 @@ const GlobalMsg = ({ className, globalMsgStore }) =>
 		</ul>
 	);
 
-export default withStore({ globalMsgStore })(GlobalMsg);
+export default subscribeTo({ globalMsgStore })(GlobalMsg);

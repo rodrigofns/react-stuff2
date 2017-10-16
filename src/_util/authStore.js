@@ -1,4 +1,4 @@
-import {action, observable} from 'mobx';
+import {action, computed, observable} from 'mobx';
 import * as jwt from 'jwt-simple';
 
 const TOKEN_PROPERTY = process.env.REACT_APP_TOKEN_PROPERTY; // veja arquivo ".env" na raiz do projeto
@@ -31,7 +31,8 @@ class AuthStore {
 		this.isAuth = false;
 	}
 
-	getUserInfo() {
+	@computed
+	get userInfo() {
 		return this.isAuth
 			? jwt.decode(this.getToken(), '', true).princ
 				: null;

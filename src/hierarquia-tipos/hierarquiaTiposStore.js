@@ -52,6 +52,21 @@ class HierarquiaTiposStore {
 		}
 	}
 
+	@action
+	moveFilhoAcima(idx) {
+		this.tipoAtual.filhos.splice(idx - 1, 0, this.tipoAtual.filhos.splice(idx, 1)[0]);
+	}
+
+	@action
+	moveFilhoAbaixo(idx) {
+		this.tipoAtual.filhos.splice(idx + 1, 0, this.tipoAtual.filhos.splice(idx, 1)[0]);
+	}
+
+	@action
+	removeFilho(idx) {
+		this.tipoAtual.filhos.splice(idx, 1);
+	}
+
 	@computed
 	get tipoAtualComFilhos() {
 		// Os filhos do tipo são um simples array com os IDs,

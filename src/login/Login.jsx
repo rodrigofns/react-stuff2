@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card, RaisedButton, TextField} from 'material-ui';
-import {BarraAguarde} from '_util';
+import {WaitBar} from '_util';
 
 import GlobalMsg from '../_layout/GlobalMsg';
 import Rodape from './Rodape';
@@ -39,7 +39,7 @@ export default class Login extends React.Component {
 			<div id="Login">
 				<form onSubmit={this.submitForm}>
 					<Card>
-						<BarraAguarde visivel={processando}/>
+						<WaitBar show={processando}/>
 						<div className="caixaLogin">
 							<h2>Login</h2>
 							<GlobalMsg className="msgs"/>

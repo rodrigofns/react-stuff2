@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {BarraAguarde} from '_util';
+import {WaitBar} from '_util';
 
 import jsonMapas from '../mapa/mapas-2d.json';
 import ListaAbrangencia from './ListaAbrangencia';
@@ -68,7 +68,7 @@ export default class Detalhes extends React.PureComponent {
 					<div>Área: {jsonMapas.areas[pilhaIdArea.last].nome}</div>
 					<div>Quantidade de órgãos: {this.calculaQuantidadeOrgaos()}</div>
 				</div>
-				<BarraAguarde visivel={consultando}/>
+				<WaitBar show={consultando}/>
 				{!consultando && !abrangencia.empty &&
 					<div>
 						<div className="cabecalho">Abrangência</div>

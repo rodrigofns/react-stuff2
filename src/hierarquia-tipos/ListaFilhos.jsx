@@ -1,6 +1,5 @@
 import React from 'react';
-import {FontIcon, IconButton} from 'material-ui';
-import {subscribeTo} from '_util';
+import {IconBtn, subscribeTo} from '_util';
 
 import htStore from './hierarquiaTiposStore';
 import './ListaFilhos.sass';
@@ -10,22 +9,16 @@ const ListaFilhos = ({ className }) => (
 		{htStore.tipoAtual.filhos.map((idFilho, i) =>
 			<div key={i} className="itemFilho">
 				<div>{htStore.tipoPorId(idFilho).nome}</div>
-				<div className="btns">
-					<IconButton
+				<div>
+					<IconBtn icon="arrow-up"
 						tooltip="Mover para cima"
-						tooltipPosition="top-center">
-						<FontIcon className="fa fa-arrow-up"/>
-					</IconButton>
-					<IconButton
+						tooltipPosition="top-center"/>
+					<IconBtn icon="arrow-down"
 						tooltip="Mover para baixo"
-						tooltipPosition="top-center">
-						<FontIcon className="fa fa-arrow-down"/>
-					</IconButton>
-					<IconButton
+						tooltipPosition="top-center"/>
+					<IconBtn icon="times"
 						tooltip="Remover este filho"
-						tooltipPosition="top-center">
-						<FontIcon className="fa fa-times"/>
-					</IconButton>
+						tooltipPosition="top-center"/>
 				</div>
 			</div>
 		)}

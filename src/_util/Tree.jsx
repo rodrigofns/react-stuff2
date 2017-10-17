@@ -54,7 +54,7 @@ class TreeNode extends React.PureComponent {
 	}
 }
 
-const Tree = ({ rootNode, className, pxIdent, nameField, childrenField }) => (
+export const Tree = ({ rootNode, className, pxIdent, nameField, childrenField }) => (
 	<div className={className}>
 		<TreeNode node={rootNode} level={0} pxIdent={pxIdent}
 			nameField={nameField} childrenField={childrenField}/>
@@ -68,5 +68,3 @@ Tree.propTypes = {
 	nameField: PropTypes.string,
 	childrenField: PropTypes.string
 };
-
-export {Tree};

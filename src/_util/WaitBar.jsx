@@ -4,11 +4,11 @@ import LinearProgress from 'material-ui/LinearProgress';
 
 import cores from '_layout/cores';
 
-export const BarraAguarde = ({ visivel }) => (
-	visivel &&
+export const WaitBar = ({ show }) => (
+	show &&
 		<LinearProgress mode="indeterminate" color={cores.palette.accent1Color}/>
 );
 
-BarraAguarde.propTypes = {
-	visivel: PropTypes.bool.isRequired
+WaitBar.propTypes = {
+	show: PropTypes.bool.isRequired
 };

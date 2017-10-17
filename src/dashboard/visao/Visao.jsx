@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Card, TextField} from 'material-ui';
-import {BarraAguarde, removeAcentos} from '_util';
+import {removeAcentos, WaitBar} from '_util';
 
 import Mapa from '../mapa/Mapa';
 import NavegadorZoom from '../mapa/NavegadorZoom';
@@ -134,7 +134,7 @@ export default class Visao extends React.Component {
 							nomeHover={this.state.nomeHover}
 							onClick={this.sobeNivel}/>
 						<div className="mapa">
-							<BarraAguarde visivel={this.pilhaIdArea.empty}/>
+							<WaitBar show={this.pilhaIdArea.empty}/>
 							{!this.pilhaIdArea.empty &&
 								<Mapa
 									tamanho={Visao.tamanhoMapa}

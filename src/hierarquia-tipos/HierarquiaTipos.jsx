@@ -30,6 +30,7 @@ export default class HierarquiaTipos extends React.Component {
 						<div>Tipos ({htStore.tipos.length})</div>
 						<div>
 							<TextField fullWidth
+								disabled={htStore.processando}
 								value={htStore.filtro}
 								onChange={ev => htStore.filtra(ev.target.value)}
 								floatingLabelText="Filtro"/>

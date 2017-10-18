@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Checkbox, RaisedButton, TextField} from 'material-ui';
 import {CircleButton, DialogYesNo, subscribeTo, Tree, WaitBar} from '_util';
 
@@ -9,6 +10,10 @@ import './FormTipo.sass';
 
 @subscribeTo({ htStore })
 export default class FormTipo extends React.Component {
+	static propTypes = {
+		onDeletaTipo: PropTypes.func.isRequired
+	};
+
 	dlg = null;
 
 	salvaTipo = (ev) => {
@@ -22,11 +27,13 @@ export default class FormTipo extends React.Component {
 	}
 
 	deletaTipo = (ev) => {
-		this.dlg.show(`Deseja deletar permanentemente o tipo "${htStore.tipoAtual.nome}"?`, resp => {
-			if (resp) {
-
-			}
-		});
+		this.dlg.show(`Deseja deletar permanentemente o tipo "${htStore.tipoAtual.nome}"?`,
+			resp => {
+				if (resp) {
+					httpHierarquiaTipos.deletaTipo(htStore.tipoAtual.id)
+						.then(this.props.onDeletaTipo);
+				}
+			});
 	}
 
 	adicionaFilho = (ev) => {

@@ -18,6 +18,11 @@ export default class HierarquiaTipos extends React.Component {
 	}
 
 	componentDidMount() {
+		this.recarregaTipos();
+	}
+
+	recarregaTipos = () => {
+		htStore.carregaTipos([]); // limpa para recarregar tudo
 		httpHierarquiaTipos.listaTipos()
 			.then(tipos => htStore.carregaTipos(tipos));
 	}
@@ -26,11 +31,7 @@ export default class HierarquiaTipos extends React.Component {
 		this.dlg.show('Nome do tipo', nome => {
 			if (nome) {
 				httpHierarquiaTipos.criaTipo(nome)
-					.then(() => {
-						htStore.carregaTipos([]); // limpa para recarregar tudo
-						httpHierarquiaTipos.listaTipos()
-							.then(tipos => htStore.carregaTipos(tipos));
-					});
+					.then(this.recarregaTipos);
 			}
 		});
 	}
@@ -58,7 +59,7 @@ export default class HierarquiaTipos extends React.Component {
 				<div className="entreCards"></div>
 				{htStore.tipoAtual ? (
 					<Card>
-						<FormTipo className="card2"/>
+						<FormTipo className="card2" onDeletaTipo={this.recarregaTipos}/>
 					</Card>
 				) : (
 					<div id="card2-oculto"></div>

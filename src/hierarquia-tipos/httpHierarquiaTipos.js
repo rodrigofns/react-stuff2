@@ -18,6 +18,10 @@ class HttpHierarquiaTipos {
 		};
 		return httpSgu.doPost('/tipo-unidade', tipoSemId);
 	}
+
+	deletaTipo(idTipo) {
+		return httpSgu.doDelete(`/tipo-unidade/${idTipo}`);
+	}
 }
 
 export default new HttpHierarquiaTipos();

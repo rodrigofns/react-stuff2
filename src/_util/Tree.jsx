@@ -23,7 +23,7 @@ class TreeNode extends React.PureComponent {
 	};
 
 	ident(node) {
-		let { childrenField } = this.props;
+		const { childrenField } = this.props;
 		if (node[childrenField] && !node[childrenField].empty) {
 			return this.state.expanded
 				? <i className="fa fa-minus-square-o plusMinus"></i>
@@ -33,9 +33,8 @@ class TreeNode extends React.PureComponent {
 	}
 
 	render() {
-		let { node, level, pxIdent, nameField, childrenField } = this.props;
-		let { expanded } = this.state;
-
+		const { node, level, pxIdent, nameField, childrenField } = this.props;
+		const { expanded } = this.state;
 		return (
 			<div className="TreeNode-wrap">
 				<div

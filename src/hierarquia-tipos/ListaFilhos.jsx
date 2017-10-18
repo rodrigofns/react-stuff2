@@ -14,8 +14,7 @@ export default class ListaFilhos extends React.Component {
 	dlg = null;
 
 	render() {
-		let { className, htStore } = this.props;
-
+		const { className, htStore } = this.props;
 		return (
 			<div className={className}>
 				<table id="ListaFilhos">

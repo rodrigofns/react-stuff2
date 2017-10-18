@@ -30,16 +30,14 @@ export default class FormTipo extends React.Component {
 	}
 
 	render() {
-		let { htStore, className } = this.props;
-
+		const { htStore, className } = this.props;
 		return (
 			<form id="FormTipo" className={className}>
 				<div id="formCol1">
 					<div id="formCol1-row1">
 						<div>
 							<Checkbox label="Ativo"
-								disabled={htStore.processando}
-								checked={htStore.tipoAtual.ativo}
+								disabled={htStore.processando} checked={htStore.tipoAtual.ativo}
 								onCheck={() => htStore.alteraTipoAtual({ ativo: !htStore.tipoAtual.ativo })}/>
 						</div>
 						<div>
@@ -48,14 +46,12 @@ export default class FormTipo extends React.Component {
 					</div>
 					<div>
 						<TextField floatingLabelText="Nome do tipo"
-							disabled={htStore.processando}
-							value={htStore.tipoAtual.nome}
+							disabled={htStore.processando} value={htStore.tipoAtual.nome}
 							onChange={ev => htStore.alteraTipoAtual({ nome: ev.target.value })}/>
 					</div>
 					<div>
 						<TextField floatingLabelText="Descrição do tipo"
-							disabled={htStore.processando}
-							value={htStore.tipoAtual.descricao}
+							disabled={htStore.processando} value={htStore.tipoAtual.descricao}
 							onChange={ev => htStore.alteraTipoAtual({ descricao: ev.target.value })}/>
 					</div>
 					<div>

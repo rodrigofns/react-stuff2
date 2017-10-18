@@ -10,25 +10,23 @@ import ExtEleitoral from './visoes/ExtEleitoral';
 import Geografico from './visoes/Geografico';
 import './Dashboard.sass';
 
-export default class Dashboard extends React.Component {
-	render() {
-		return (
-			<div id="Dashboard">
-				<div className="centraliza">
-					<SelecionaVisao className="seletor"/>
-					<Switch>
-						<Redirect exact from="/dashboard" to="/dashboard/internas"/>
-						<Redirect exact from="/dashboard/externas" to="/dashboard/externas/federal"/>
-						<Route path="/dashboard/internas" component={Internas}/>
-						<Route path="/dashboard/externas/federal" component={ExtFederal}/>
-						<Route path="/dashboard/externas/estadual" component={ExtEstadual}/>
-						<Route path="/dashboard/externas/trabalhista" component={ExtTrabalhista}/>
-						<Route path="/dashboard/externas/eleitoral" component={ExtEleitoral}/>
-						<Route path="/dashboard/geografico" component={Geografico}/>
-						<Redirect to="/dashboard/internas"/>
-					</Switch>
-				</div>
-			</div>
-		);
-	}
-}
+const Dashboard = () => (
+	<div id="Dashboard">
+		<div className="centraliza">
+			<SelecionaVisao className="seletor"/>
+			<Switch>
+				<Redirect exact from="/dashboard" to="/dashboard/internas"/>
+				<Redirect exact from="/dashboard/externas" to="/dashboard/externas/federal"/>
+				<Route path="/dashboard/internas" component={Internas}/>
+				<Route path="/dashboard/externas/federal" component={ExtFederal}/>
+				<Route path="/dashboard/externas/estadual" component={ExtEstadual}/>
+				<Route path="/dashboard/externas/trabalhista" component={ExtTrabalhista}/>
+				<Route path="/dashboard/externas/eleitoral" component={ExtEleitoral}/>
+				<Route path="/dashboard/geografico" component={Geografico}/>
+				<Redirect to="/dashboard/internas"/>
+			</Switch>
+		</div>
+	</div>
+);
+
+export default Dashboard;

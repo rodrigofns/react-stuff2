@@ -21,8 +21,7 @@ export default class HierarquiaTipos extends React.Component {
 	}
 
 	render() {
-		let { htStore } = this.props;
-
+		const { htStore } = this.props;
 		return (
 			<div id="HierarquiaTipos">
 				<Card>
@@ -36,7 +35,7 @@ export default class HierarquiaTipos extends React.Component {
 								floatingLabelText="Filtro"/>
 						</div>
 						<div>
-						<ListaTipos/>
+						<ListaTipos className="listaTipos"/>
 						</div>
 					</div>
 				</Card>

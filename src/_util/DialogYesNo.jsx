@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-export class DialogYesNo extends React.Component {
+export class DialogYesNo extends React.PureComponent {
 	static propTypes = {
 		width: PropTypes.string
 	};
@@ -38,9 +38,8 @@ export class DialogYesNo extends React.Component {
 
 	render() {
 		return (
-			<Dialog
-				open={this.state.open} contentStyle={{ width: this.props.width }}
-				modal={false} onRequestClose={this.clickNo}
+			<Dialog modal={false} contentStyle={{ width: this.props.width }}
+				open={this.state.open} onRequestClose={this.clickNo}
 				actions={[
 					<FlatButton label="Sim" onClick={this.clickYes} primary keyboardFocused/>,
 					<FlatButton label="Não" onClick={this.clickNo} secondary/>

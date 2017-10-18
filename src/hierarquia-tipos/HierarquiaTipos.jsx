@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card, TextField} from 'material-ui';
-import {subscribeTo} from '_util';
+import {CircleButton, DialogInput, subscribeTo} from '_util';
 
 import ListaTipos from './ListaTipos';
 import FormTipo from './FormTipo';
@@ -10,6 +10,8 @@ import './HierarquiaTipos.sass';
 
 @subscribeTo({ htStore })
 export default class HierarquiaTipos extends React.Component {
+	dlg = null;
+
 	componentWillMount() {
 		htStore.carregaTipos([]);
 		htStore.selecionaTipo(null);
@@ -20,22 +22,31 @@ export default class HierarquiaTipos extends React.Component {
 			.then(tipos => htStore.carregaTipos(tipos));
 	}
 
+	adicionaTipo = (ev) => {
+		this.dlg.show('Nome do tipo', nome => {
+			if (nome) {
+
+			}
+		});
+	}
+
 	render() {
 		const { htStore } = this.props;
 		return (
 			<div id="HierarquiaTipos">
 				<Card>
 					<div id="card1">
-						<div>Tipos ({htStore.tipos.length})</div>
-						<div>
-							<TextField fullWidth
-								disabled={htStore.processando}
-								value={htStore.filtro}
-								onChange={ev => htStore.filtra(ev.target.value)}
-								floatingLabelText="Filtro"/>
+						<div id="card1Top">
+							<div>
+								<div id="card1Top-titulo">Tipos ({htStore.tipos.length})</div>
+								<TextField fullWidth
+									disabled={htStore.processando} value={htStore.filtro}
+									floatingLabelText="Filtro" onChange={ev => htStore.filtra(ev.target.value)}/>
+							</div>
+							<CircleButton icon="plus" tooltip="Novo tipo..." onClick={this.adicionaTipo}/>
 						</div>
 						<div>
-						<ListaTipos className="listaTipos"/>
+							<ListaTipos className="listaTipos"/>
 						</div>
 					</div>
 				</Card>
@@ -47,6 +58,7 @@ export default class HierarquiaTipos extends React.Component {
 				) : (
 					<div id="card2-oculto"></div>
 				)}
+				<DialogInput ref={elem => this.dlg = elem}/>
 			</div>
 		);
 	}

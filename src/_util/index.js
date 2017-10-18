@@ -1,5 +1,6 @@
 export * from './authStore';
 export * from './CircleButton';
+export * from './DialogInput';
 export * from './DialogYesNo';
 export * from './globalMsgStore';
 export * from './httpSgu';

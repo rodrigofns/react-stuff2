@@ -59,7 +59,8 @@ export default class FormTipo extends React.Component {
 							onChange={ev => htStore.alteraTipoAtual({ descricao: ev.target.value })}/>
 					</div>
 					<div>
-						<CircleButton className="btnAdiciona" icon="plus" tooltip="Adicionar filho..." onClick={this.adicionaFilho}/>
+						<CircleButton className="btnAdicionaFilho" icon="plus"
+							tooltip="Adicionar filho..." onClick={this.adicionaFilho}/>
 						<div className="tituloCampo">Filhos do tipo ({htStore.tipoAtual.filhos.length})</div>
 						<ListaFilhos className="listaFilhos"/>
 					</div>

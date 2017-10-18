@@ -14,7 +14,7 @@ export default class FormTipo extends React.Component {
 	salvaTipo = (ev) => {
 		ev.preventDefault();
 		htStore.processandoDados(true);
-		httpHierarquiaTipos.putTipo(htStore.tipoAtual)
+		httpHierarquiaTipos.salvaTipo(htStore.tipoAtual)
 			.then(() => {
 				htStore.atualizaArrayOriginal();
 				htStore.processandoDados(false);

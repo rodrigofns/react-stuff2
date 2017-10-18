@@ -18,14 +18,19 @@ export default class HierarquiaTipos extends React.Component {
 	}
 
 	componentDidMount() {
-		httpHierarquiaTipos.getTipos()
+		httpHierarquiaTipos.listaTipos()
 			.then(tipos => htStore.carregaTipos(tipos));
 	}
 
 	adicionaTipo = (ev) => {
 		this.dlg.show('Nome do tipo', nome => {
 			if (nome) {
-
+				httpHierarquiaTipos.criaTipo(nome)
+					.then(() => {
+						htStore.carregaTipos([]); // limpa para recarregar tudo
+						httpHierarquiaTipos.listaTipos()
+							.then(tipos => htStore.carregaTipos(tipos));
+					});
 			}
 		});
 	}

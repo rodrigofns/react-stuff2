@@ -1,12 +1,22 @@
 import {httpSgu} from '_util';
 
 class HttpHierarquiaTipos {
-	getTipos() {
+	listaTipos() {
 		return httpSgu.doGet('/tipo-unidade');
 	}
 
-	putTipo(tipo) {
+	salvaTipo(tipo) {
 		return httpSgu.doPut('/tipo-unidade', tipo);
+	}
+
+	criaTipo(nome) {
+		let tipoSemId = {
+			nome: nome,
+			descricao: '',
+			ativo: true,
+			filhos: []
+		};
+		return httpSgu.doPost('/tipo-unidade', tipoSemId);
 	}
 }
 

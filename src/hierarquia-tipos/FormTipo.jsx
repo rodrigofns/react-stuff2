@@ -1,6 +1,6 @@
 import React from 'react';
 import {Checkbox, RaisedButton, TextField} from 'material-ui';
-import {DialogYesNo, subscribeTo, Tree, WaitBar} from '_util';
+import {CircleButton, DialogYesNo, subscribeTo, Tree, WaitBar} from '_util';
 
 import ListaFilhos from './ListaFilhos';
 import htStore from './hierarquiaTiposStore';
@@ -29,6 +29,10 @@ export default class FormTipo extends React.Component {
 		});
 	}
 
+	adicionaFilho = (ev) => {
+
+	}
+
 	render() {
 		const { htStore, className } = this.props;
 		return (
@@ -41,7 +45,7 @@ export default class FormTipo extends React.Component {
 								onCheck={() => htStore.alteraTipoAtual({ ativo: !htStore.tipoAtual.ativo })}/>
 						</div>
 						<div>
-							<RaisedButton label="Deletar" type="button" onClick={this.deletaTipo}/>
+							<CircleButton icon="trash-o" tooltip="Deletar este tipo" onClick={this.deletaTipo}/>
 						</div>
 					</div>
 					<div>
@@ -55,6 +59,7 @@ export default class FormTipo extends React.Component {
 							onChange={ev => htStore.alteraTipoAtual({ descricao: ev.target.value })}/>
 					</div>
 					<div>
+						<CircleButton className="btnAdiciona" icon="plus" tooltip="Adicionar filho..." onClick={this.adicionaFilho}/>
 						<div className="tituloCampo">Filhos do tipo ({htStore.tipoAtual.filhos.length})</div>
 						<ListaFilhos className="listaFilhos"/>
 					</div>

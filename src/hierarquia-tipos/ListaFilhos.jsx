@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {DialogYesNo, IconBtn, subscribeTo} from '_util';
+import {DialogYesNo, MiniIconButton, subscribeTo} from '_util';
 
 import htStore from './hierarquiaTiposStore';
 import './ListaFilhos.sass';
@@ -24,21 +24,21 @@ export default class ListaFilhos extends React.Component {
 								<td>{filho.nome}</td>
 								<td>
 									{!htStore.processando && i > 0 &&
-										<IconBtn icon="arrow-up"
+										<MiniIconButton icon="arrow-up"
 											tooltip="Mover para cima" tooltipPosition="top-center"
 											onClick={() => htStore.moveFilhoAcima(i)}/>
 									}
 								</td>
 								<td>
 									{!htStore.processando && i < (htStore.tipoAtualComFilhos.filhos.length - 1) &&
-										<IconBtn icon="arrow-down"
+										<MiniIconButton icon="arrow-down"
 											tooltip="Mover para baixo" tooltipPosition="top-center"
 											onClick={() => htStore.moveFilhoAbaixo(i)}/>
 									}
 								</td>
 								<td>
 									{!htStore.processando &&
-										<IconBtn icon="times"
+										<MiniIconButton icon="times"
 											tooltip="Remover este filho" tooltipPosition="top-center"
 											onClick={() => {
 												this.dlg.show(`Deseja remover o tipo filho "${filho.nome}"?`, resp => {

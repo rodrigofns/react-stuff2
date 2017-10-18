@@ -22,6 +22,12 @@ class TreeNode extends React.PureComponent {
 		expanded: false
 	};
 
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps.node !== this.props.node) {
+			this.setState({ expanded: false });
+		}
+	}
+
 	ident(node) {
 		const { childrenField } = this.props;
 		if (node[childrenField] && !node[childrenField].empty) {

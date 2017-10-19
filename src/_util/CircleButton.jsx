@@ -11,6 +11,7 @@ import Tooltip from 'material-ui/internal/Tooltip';
 export class CircleButton extends React.PureComponent {
 	static propTypes = {
 		className: PropTypes.string,
+		disabled: PropTypes.bool,
 		icon: PropTypes.string.isRequired, // fontawesome
 		mini: PropTypes.bool,
 		tooltip: PropTypes.string,
@@ -28,13 +29,14 @@ export class CircleButton extends React.PureComponent {
 	};
 
 	render() {
-		const { className, icon, mini, tooltip, tooltipPosition, onClick } = this.props;
+		const { className, disabled, icon, mini, tooltip, tooltipPosition, onClick } = this.props;
 		const tooltipPos = tooltipPosition.split('-');
 
 		return (
 			<div style={{ position: 'relative' }} className={className}>
 				<FloatingActionButton
 					mini={mini}
+					disabled={disabled}
 					onClick={onClick}
 					onMouseEnter={() => this.setState({ hovered: true })}
 					onMouseLeave={() => this.setState({ hovered: false })}>

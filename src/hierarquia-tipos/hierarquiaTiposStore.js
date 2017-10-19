@@ -1,4 +1,4 @@
-import {action, computed, observable} from 'mobx';
+import {action, computed, observable, isObservableArray} from 'mobx';
 
 import {removeAcentos} from '_util';
 
@@ -55,6 +55,11 @@ class HierarquiaTiposStore {
 				this.tipoAtual[p] = propriedades[p];
 			}
 		}
+	}
+
+	@action
+	descartaAlteracoesDoTipoAtual() {
+		this.selecionaTipo(this.tipoAtual.id);
 	}
 
 	@action
@@ -137,6 +142,28 @@ class HierarquiaTiposStore {
 		} else {
 			return this.tipos;
 		}
+	}
+
+	@computed
+	get tipoAtualMudou() {
+		// Compara o tipo atualmente selecionado com o original.
+		if (this.tipoAtual) {
+			let tipoOrig = this.tipos.find(t => t.id === this.tipoAtual.id);
+			for (let k of Object.keys(this.tipoAtual)) {
+				if (!isObservableArray(tipoOrig[k]) && tipoOrig[k] !== this.tipoAtual[k]) {
+					return true;
+				}
+			}
+			if (tipoOrig.filhos.length !== this.tipoAtual.filhos.length) {
+				return true;
+			}
+			for (let i = 0; i < tipoOrig.filhos.length; ++i) {
+				if (tipoOrig.filhos[i] !== this.tipoAtual.filhos[i]) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
 

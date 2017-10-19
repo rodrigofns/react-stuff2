@@ -48,6 +48,15 @@ export default class FormTipo extends React.Component {
 			});
 	}
 
+	descartaAlteracoes = (ev) => {
+		this.dlgOk.show(`Deseja descartar as alterações feitas no tipo "${htStore.tipoAtual.nome}"?`,
+			resp => {
+				if (resp) {
+					htStore.descartaAlteracoesDoTipoAtual();
+				}
+			});
+	}
+
 	render() {
 		const { htStore, className } = this.props;
 		return (
@@ -87,7 +96,11 @@ export default class FormTipo extends React.Component {
 					<div id="finalButtons">
 						<WaitBar show={htStore.processando}/>
 						<RaisedButton primary type="submit" label="Salvar"
-							disabled={htStore.processando} onClick={this.salvaTipo}/>
+							disabled={htStore.processando || !htStore.tipoAtualMudou}
+							onClick={this.salvaTipo}/>{' '}
+						<RaisedButton type="button" label="Descartar alterações"
+							disabled={htStore.processando || !htStore.tipoAtualMudou}
+							onClick={this.descartaAlteracoes}/>
 					</div>
 				</div>
 				<DialogOkCancel ref={elem => this.dlgOk = elem}/>

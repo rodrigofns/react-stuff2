@@ -49,10 +49,12 @@ export default class HierarquiaTipos extends React.Component {
 									disabled={htStore.processando} value={htStore.filtro}
 									floatingLabelText="Filtro" onChange={ev => htStore.defineFiltro(ev.target.value)}/>
 							</div>
-							<CircleButton icon="plus" tooltip="Novo tipo..." onClick={this.adicionaTipo}/>
+							<CircleButton icon="plus" tooltip="Novo tipo..."
+								disabled={htStore.tipoAtualMudou} onClick={this.adicionaTipo}/>
 						</div>
 						<div>
-							<ListaTipos className="listaTipos" disabled={htStore.processando}
+							<ListaTipos className="listaTipos"
+								disabled={htStore.processando || htStore.tipoAtualMudou}
 								tipos={htStore.tiposFiltrados.slice()}
 								onSelecionaTipo={idTipo => htStore.selecionaTipo(idTipo)}/>
 						</div>

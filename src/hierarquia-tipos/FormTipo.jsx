@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Checkbox, RaisedButton, TextField} from 'material-ui';
-import {CircleButton, DialogInfo, DialogOkCancel, subscribeTo, Tree, WaitBar} from '_util';
+import {CircleButton, DialogInfo, DialogOkCancel, subscribeTo, Toast, Tree, WaitBar} from '_util';
 
 import ListaFilhos from './ListaFilhos';
 import AdicionaFilho from './AdicionaFilho';
@@ -15,6 +15,7 @@ export default class FormTipo extends React.Component {
 		onDeletaTipo: PropTypes.func.isRequired
 	};
 
+	toast = null;
 	dlgOkCanc = null;
 	dlgInfo = null;
 	dlgAdicionaFilho = null;
@@ -34,6 +35,8 @@ export default class FormTipo extends React.Component {
 			let res = htStore.adicionaFilho(idTipo);
 			if (!res.status) {
 				this.dlgInfo.show(res.msg);
+			} else {
+				this.toast.show('Filho adicionado.');
 			}
 		});
 	}
@@ -45,6 +48,7 @@ export default class FormTipo extends React.Component {
 			.then(() => {
 				htStore.replicaTipoAtualNoArrayOriginal();
 				htStore.processandoDados(false);
+				this.toast.show('Alterações salvas.');
 			});
 	}
 
@@ -53,6 +57,7 @@ export default class FormTipo extends React.Component {
 			resp => {
 				if (resp) {
 					htStore.descartaAlteracoesDoTipoAtual();
+					this.toast.show('Alterações descartadas.');
 				}
 			});
 	}
@@ -103,6 +108,7 @@ export default class FormTipo extends React.Component {
 							onClick={this.descartaAlteracoes}/>
 					</div>
 				</div>
+				<Toast ref={elem => this.toast = elem}/>
 				<DialogOkCancel ref={elem => this.dlgOkCanc = elem}/>
 				<DialogInfo ref={elem => this.dlgInfo = elem}/>
 				<AdicionaFilho tipos={htStore.tipos.slice()} ref={elem => this.dlgAdicionaFilho = elem}/>

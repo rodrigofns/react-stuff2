@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card, TextField} from 'material-ui';
-import {CircleButton, DialogInput, subscribeTo} from '_util';
+import {CircleButton, DialogInput, subscribeTo, Toast} from '_util';
 
 import ListaTipos from './ListaTipos';
 import FormTipo from './FormTipo';
@@ -10,6 +10,7 @@ import './HierarquiaTipos.sass';
 
 @subscribeTo({ htStore })
 export default class HierarquiaTipos extends React.Component {
+	toast = null;
 	dlgInput = null;
 
 	componentWillMount() {
@@ -31,9 +32,17 @@ export default class HierarquiaTipos extends React.Component {
 		this.dlgInput.show(nome => {
 			if (nome) {
 				httpHierarquiaTipos.criaTipo(nome)
-					.then(this.recarregaTipos);
+					.then(() => {
+						this.recarregaTipos();
+						this.toast.show('Tipo adicionado.');
+					});
 			}
 		});
+	}
+
+	tipoFoiDeletado = (ev) => {
+		this.recarregaTipos();
+		this.toast.show('Tipo deletado.');
 	}
 
 	render() {
@@ -63,11 +72,12 @@ export default class HierarquiaTipos extends React.Component {
 				<div className="entreCards"></div>
 				{htStore.tipoAtual ? (
 					<Card>
-						<FormTipo className="card2" onDeletaTipo={this.recarregaTipos}/>
+						<FormTipo className="card2" onDeletaTipo={this.tipoFoiDeletado}/>
 					</Card>
 				) : (
 					<div id="card2-oculto"></div>
 				)}
+				<Toast ref={elem => this.toast = elem}/>
 				<DialogInput label="Nome do tipo" ref={elem => this.dlgInput = elem}/>
 			</div>
 		);

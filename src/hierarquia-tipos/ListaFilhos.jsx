@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {DialogOkCancel, MiniIconButton, subscribeTo} from '_util';
+import {DialogOkCancel, MiniIconButton, subscribeTo, Toast} from '_util';
 
 import htStore from './hierarquiaTiposStore';
 import './ListaFilhos.sass';
@@ -18,6 +18,7 @@ export default class ListaFilhos extends React.Component {
 			resp => {
 				if (resp) {
 					htStore.removeFilho(i);
+					this.toast.show('Filho removido.');
 				}
 			});
 	}
@@ -56,6 +57,7 @@ export default class ListaFilhos extends React.Component {
 						)}
 					</tbody>
 				</table>
+				<Toast ref={elem => this.toast = elem}/>
 				<DialogOkCancel ref={elem => this.dlgOk = elem}/>
 			</div>
 		);

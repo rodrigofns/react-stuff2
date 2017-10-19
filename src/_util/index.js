@@ -9,5 +9,6 @@ export * from './httpSgu';
 export * from './MiniIconButton';
 export * from './removeAcentos';
 export * from './subscribeTo';
+export * from './Toast';
 export * from './Tree';
 export * from './WaitBar';

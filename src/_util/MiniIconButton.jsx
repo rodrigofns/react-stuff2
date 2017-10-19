@@ -5,8 +5,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import FontIcon from 'material-ui/FontIcon';
-import IconButton from 'material-ui/IconButton';
+import {FontIcon, IconButton} from 'material-ui';
 
 import './IconBtn.sass';
 

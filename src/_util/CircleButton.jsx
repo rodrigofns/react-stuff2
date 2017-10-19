@@ -4,8 +4,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import FontIcon from 'material-ui/FontIcon';
+import {FloatingActionButton, FontIcon} from 'material-ui';
 import Tooltip from 'material-ui/internal/Tooltip';
 
 export class CircleButton extends React.PureComponent {

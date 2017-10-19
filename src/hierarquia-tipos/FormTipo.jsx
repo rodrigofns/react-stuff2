@@ -15,12 +15,12 @@ export default class FormTipo extends React.Component {
 		onDeletaTipo: PropTypes.func.isRequired
 	};
 
-	dlgOk = null;
+	dlgOkCanc = null;
 	dlgInfo = null;
 	dlgAdicionaFilho = null;
 
 	deletaTipo = (ev) => {
-		this.dlgOk.show(`Deseja deletar permanentemente o tipo "${htStore.tipoAtual.nome}"?`,
+		this.dlgOkCanc.show(`Deseja deletar permanentemente o tipo "${htStore.tipoAtual.nome}"?`,
 			resp => {
 				if (resp) {
 					httpHierarquiaTipos.deletaTipo(htStore.tipoAtual.id)
@@ -49,7 +49,7 @@ export default class FormTipo extends React.Component {
 	}
 
 	descartaAlteracoes = (ev) => {
-		this.dlgOk.show(`Deseja descartar as alterações feitas no tipo "${htStore.tipoAtual.nome}"?`,
+		this.dlgOkCanc.show(`Deseja descartar as alterações feitas no tipo "${htStore.tipoAtual.nome}"?`,
 			resp => {
 				if (resp) {
 					htStore.descartaAlteracoesDoTipoAtual();
@@ -103,7 +103,7 @@ export default class FormTipo extends React.Component {
 							onClick={this.descartaAlteracoes}/>
 					</div>
 				</div>
-				<DialogOkCancel ref={elem => this.dlgOk = elem}/>
+				<DialogOkCancel ref={elem => this.dlgOkCanc = elem}/>
 				<DialogInfo ref={elem => this.dlgInfo = elem}/>
 				<AdicionaFilho tipos={htStore.tipos.slice()} ref={elem => this.dlgAdicionaFilho = elem}/>
 			</form>

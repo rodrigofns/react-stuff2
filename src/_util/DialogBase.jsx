@@ -4,8 +4,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import {Dialog, FlatButton} from 'material-ui';
 
 export class DialogBase extends React.PureComponent {
 	static propTypes = {

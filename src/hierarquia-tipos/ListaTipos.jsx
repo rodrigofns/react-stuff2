@@ -1,31 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {subscribeTo, removeAcentos} from '_util';
 
-import htStore from './hierarquiaTiposStore';
 import './ListaTipos.sass';
 
-@subscribeTo({ htStore })
 export default class ListaTipos extends React.PureComponent {
 	static propTypes = {
-		className: PropTypes.string
+		tipos: PropTypes.array,
+		className: PropTypes.string,
+		onSelecionaTipo: PropTypes.func
 	};
 
-	estaFiltrado(tipo, filtro) {
-		return removeAcentos(tipo.nome).toLowerCase()
-			.indexOf(removeAcentos(filtro).toLowerCase()) !== -1;
+	state = {
+		idTipoAtual: null
+	};
+
+	selecionaTipo(tipo) {
+		this.setState({ idTipoAtual: tipo.id }, () => {
+			if (this.props.onSelecionaTipo) {
+				this.props.onSelecionaTipo(tipo.id);
+			}
+		});
 	}
 
 	render() {
-		const { htStore, className } = this.props;
+		const { tipos, className } = this.props;
+		const { idTipoAtual } = this.state;
+
 		return (
 			<div id="ListaTipos" className={className}>
-				{htStore.tipos.map((t, i) =>
-					this.estaFiltrado(t, htStore.filtro) &&
+				{tipos.map((t, i) =>
 					<div key={i}
-						className={classNames('itemTipo', {selec: htStore.tipoAtual && htStore.tipoAtual.id === t.id})}
-						onClick={() => htStore.selecionaTipo(t.id)}>
+						className={classNames('itemTipo', {selec: idTipoAtual === t.id})}
+						onClick={() => this.selecionaTipo(t)}>
 						{t.nome}
 						{!t.ativo &&
 							<div className="inativo">(inativo)</div>

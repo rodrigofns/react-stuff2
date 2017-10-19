@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {DialogYesNo, MiniIconButton, subscribeTo} from '_util';
+import {DialogOkCancel, MiniIconButton, subscribeTo} from '_util';
 
 import htStore from './hierarquiaTiposStore';
 import './ListaFilhos.sass';
@@ -11,7 +11,16 @@ export default class ListaFilhos extends React.Component {
 		className: PropTypes.string
 	};
 
-	dlg = null;
+	dlgOk = null;
+
+	removeFilho = (filho, i) => {
+		this.dlgOk.show(`Deseja remover o tipo filho "${filho.nome}"?`,
+			resp => {
+				if (resp) {
+					htStore.removeFilho(i);
+				}
+			});
+	}
 
 	render() {
 		const { className, htStore } = this.props;
@@ -40,20 +49,14 @@ export default class ListaFilhos extends React.Component {
 									{!htStore.processando &&
 										<MiniIconButton icon="times"
 											tooltip="Remover este filho" tooltipPosition="top-center"
-											onClick={() => {
-												this.dlg.show(`Deseja remover o tipo filho "${filho.nome}"?`, resp => {
-													if (resp) {
-														htStore.removeFilho(i);
-													}
-												});
-											}}/>
+											onClick={() => this.removeFilho(filho, i)}/>
 									}
 								</td>
 							</tr>
 						)}
 					</tbody>
 				</table>
-				<DialogYesNo ref={elem => this.dlg = elem}/>
+				<DialogOkCancel ref={elem => this.dlgOk = elem}/>
 			</div>
 		);
 	}

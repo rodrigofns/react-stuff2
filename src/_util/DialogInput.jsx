@@ -1,63 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
+import TextField from 'material-ui/TextField'
+
+import {DialogBase} from './DialogBase';
 
 export class DialogInput extends React.PureComponent {
 	static propTypes = {
+		label: PropTypes.string.isRequired,
 		width: PropTypes.string
 	};
 
-	static defaultProps = {
-		width: '400px'
-	};
-
-	state = {
-		open: false,
-		label: ''
-	};
-
+	dlgBase = null;
 	text = '';
-	callback = null;
 
-	show(label, callback) {
-		this.callback = callback;
-		this.setState({ open: true, label });
-	}
-
-	clickYes = () => {
-		this.setState({ open: false }, () => {
-			if (this.callback) this.callback(this.text);
-		});
-	}
-
-	clickNo = () => {
-		this.setState({ open: false }, () => {
-			if (this.callback) this.callback(false);
+	show(callback) {
+		this.dlgBase.show(status => {
+			if (callback && status) callback(this.text);
+			if (callback && !status) callback();
 		});
 	}
 
 	handleKeyPress = (ev) => {
 		if (ev.key === 'Enter') {
-			this.clickYes();
+			this.dlgBase.forceClose(true);
 		}
 	}
 
 	render() {
 		return (
-			<Dialog modal={false} contentStyle={{ width: this.props.width }}
-				open={this.state.open} onRequestClose={this.clickNo}
-				actions={[
-					<FlatButton label="OK" onClick={this.clickYes} primary/>,
-					<FlatButton label="Cancelar" onClick={this.clickNo} secondary/>
-				]}>
+			<DialogBase width={this.props.width} okFocus={false} ref={elem => this.dlgBase = elem}>
 				<TextField fullWidth autoFocus
 					id="DialogInput-textField"
-					floatingLabelText={this.state.label}
+					floatingLabelText={this.props.label}
 					onKeyPress={this.handleKeyPress}
 					onChange={ev => this.text = ev.target.value}/>
-			</Dialog>
+			</DialogBase>
 		);
 	}
 }

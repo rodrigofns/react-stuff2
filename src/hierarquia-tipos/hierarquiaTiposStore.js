@@ -1,10 +1,17 @@
 import {action, computed, observable} from 'mobx';
 
+import {removeAcentos} from '_util';
+
 class HierarquiaTiposStore {
 	@observable tipos = [];
 	@observable filtro = '';
 	@observable tipoAtual = null; // clone do objeto atualmente selecionado
 	@observable processando = false;
+
+	@action
+	processandoDados(v) {
+		this.processando = v; // seta o flag observado pelos componentes
+	}
 
 	@action
 	carregaTipos(tipos) {
@@ -13,9 +20,7 @@ class HierarquiaTiposStore {
 	}
 
 	@action
-	filtra(texto) {
-		// O filtro é simplesmente guardado aqui, a
-		// filtragem da lista acontece no componente.
+	defineFiltro(texto) {
 		this.filtro = texto;
 	}
 
@@ -33,7 +38,7 @@ class HierarquiaTiposStore {
 	}
 
 	@action
-	atualizaArrayOriginal() {
+	replicaTipoAtualNoArrayOriginal() {
 		// Após as alterações no tipo clonado serem encerradas, o
 		// array original é atualizado. Isto mantém a consistência
 		// da página sem precisar recarregá-la.
@@ -67,6 +72,36 @@ class HierarquiaTiposStore {
 		this.tipoAtual.filhos.splice(idx, 1);
 	}
 
+	@action
+	adicionaFilho(idTipo) {
+		const possuiReferenciaCircular = (idNovoFilho) => {
+			if (idNovoFilho === this.tipoAtual.id) return true;
+			let novoFilho = this.tipos.find(t => t.id === idNovoFilho);
+			for (let i = 0; i < novoFilho.filhos.length; ++i) {
+				if (novoFilho.filhos[i] === this.tipoAtual.id ||
+					possuiReferenciaCircular(novoFilho.filhos[i])) return true;
+			}
+			return false;
+		};
+		if (!!this.tipoAtual.filhos.find(idFilho => idFilho === idTipo)) {
+			let filhoExist = this.tipos.find(t => t.id === idTipo);
+			return {
+				status: false,
+				msg: `O tipo "${filhoExist.nome}" já é filho.`
+			};
+		} else if (possuiReferenciaCircular(idTipo)) {
+			let filhoCirc = this.tipos.find(t => t.id === idTipo);
+			return {
+				status: false,
+				msg: `O tipo "${filhoCirc.nome}" não pode ser incluído como filho, ` +
+					'pois gera uma referência circular.'
+			};
+		} else {
+			this.tipoAtual.filhos.push(idTipo);
+			return { status: true };
+		}
+	}
+
 	@computed
 	get tipoAtualComFilhos() {
 		// Os filhos do tipo são um simples array com os IDs,
@@ -93,9 +128,15 @@ class HierarquiaTiposStore {
 		return null; // não há tipo atualmente selecionado
 	}
 
-	@action
-	processandoDados(v) {
-		this.processando = v; // seta o flag observado pelos componentes
+	@computed
+	get tiposFiltrados() {
+		if (this.filtro) {
+			return this.tipos.filter(t =>
+				removeAcentos(t.nome).toLowerCase()
+					.indexOf(removeAcentos(this.filtro).toLowerCase()) !== -1);
+		} else {
+			return this.tipos;
+		}
 	}
 }
 

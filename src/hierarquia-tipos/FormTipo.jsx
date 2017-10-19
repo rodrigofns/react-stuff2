@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Checkbox, RaisedButton, TextField} from 'material-ui';
-import {CircleButton, DialogYesNo, subscribeTo, Tree, WaitBar} from '_util';
+import {CircleButton, DialogInfo, DialogOkCancel, subscribeTo, Tree, WaitBar} from '_util';
 
 import ListaFilhos from './ListaFilhos';
+import AdicionaFilho from './AdicionaFilho';
 import htStore from './hierarquiaTiposStore';
 import httpHierarquiaTipos from './httpHierarquiaTipos';
 import './FormTipo.sass';
@@ -14,20 +15,12 @@ export default class FormTipo extends React.Component {
 		onDeletaTipo: PropTypes.func.isRequired
 	};
 
-	dlg = null;
-
-	salvaTipo = (ev) => {
-		ev.preventDefault();
-		htStore.processandoDados(true);
-		httpHierarquiaTipos.salvaTipo(htStore.tipoAtual)
-			.then(() => {
-				htStore.atualizaArrayOriginal();
-				htStore.processandoDados(false);
-			});
-	}
+	dlgOk = null;
+	dlgInfo = null;
+	dlgAdicionaFilho = null;
 
 	deletaTipo = (ev) => {
-		this.dlg.show(`Deseja deletar permanentemente o tipo "${htStore.tipoAtual.nome}"?`,
+		this.dlgOk.show(`Deseja deletar permanentemente o tipo "${htStore.tipoAtual.nome}"?`,
 			resp => {
 				if (resp) {
 					httpHierarquiaTipos.deletaTipo(htStore.tipoAtual.id)
@@ -37,7 +30,22 @@ export default class FormTipo extends React.Component {
 	}
 
 	adicionaFilho = (ev) => {
+		this.dlgAdicionaFilho.show(idTipo => {
+			let res = htStore.adicionaFilho(idTipo);
+			if (!res.status) {
+				this.dlgInfo.show(res.msg);
+			}
+		});
+	}
 
+	salvaTipo = (ev) => {
+		ev.preventDefault();
+		htStore.processandoDados(true);
+		httpHierarquiaTipos.salvaTipo(htStore.tipoAtual)
+			.then(() => {
+				htStore.replicaTipoAtualNoArrayOriginal();
+				htStore.processandoDados(false);
+			});
 	}
 
 	render() {
@@ -82,7 +90,9 @@ export default class FormTipo extends React.Component {
 							disabled={htStore.processando} onClick={this.salvaTipo}/>
 					</div>
 				</div>
-				<DialogYesNo ref={elem => this.dlg = elem}/>
+				<DialogOkCancel ref={elem => this.dlgOk = elem}/>
+				<DialogInfo ref={elem => this.dlgInfo = elem}/>
+				<AdicionaFilho tipos={htStore.tipos.slice()} ref={elem => this.dlgAdicionaFilho = elem}/>
 			</form>
 		);
 	}

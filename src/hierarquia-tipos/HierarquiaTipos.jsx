@@ -10,7 +10,7 @@ import './HierarquiaTipos.sass';
 
 @subscribeTo({ htStore })
 export default class HierarquiaTipos extends React.Component {
-	dlg = null;
+	dlgInput = null;
 
 	componentWillMount() {
 		htStore.carregaTipos([]);
@@ -28,7 +28,7 @@ export default class HierarquiaTipos extends React.Component {
 	}
 
 	adicionaTipo = (ev) => {
-		this.dlg.show('Nome do tipo', nome => {
+		this.dlgInput.show(nome => {
 			if (nome) {
 				httpHierarquiaTipos.criaTipo(nome)
 					.then(this.recarregaTipos);
@@ -47,12 +47,13 @@ export default class HierarquiaTipos extends React.Component {
 								<div id="card1Top-titulo">Tipos ({htStore.tipos.length})</div>
 								<TextField fullWidth
 									disabled={htStore.processando} value={htStore.filtro}
-									floatingLabelText="Filtro" onChange={ev => htStore.filtra(ev.target.value)}/>
+									floatingLabelText="Filtro" onChange={ev => htStore.defineFiltro(ev.target.value)}/>
 							</div>
 							<CircleButton icon="plus" tooltip="Novo tipo..." onClick={this.adicionaTipo}/>
 						</div>
 						<div>
-							<ListaTipos className="listaTipos"/>
+							<ListaTipos className="listaTipos" tipos={htStore.tiposFiltrados.slice()}
+								onSelecionaTipo={idTipo => htStore.selecionaTipo(idTipo)}/>
 						</div>
 					</div>
 				</Card>
@@ -64,7 +65,7 @@ export default class HierarquiaTipos extends React.Component {
 				) : (
 					<div id="card2-oculto"></div>
 				)}
-				<DialogInput ref={elem => this.dlg = elem}/>
+				<DialogInput label="Nome do tipo" ref={elem => this.dlgInput = elem}/>
 			</div>
 		);
 	}

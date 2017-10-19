@@ -1,3 +1,7 @@
+/**
+ * FAB (Floating Action Button) com um tooltip automático.
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import FloatingActionButton from 'material-ui/FloatingActionButton';

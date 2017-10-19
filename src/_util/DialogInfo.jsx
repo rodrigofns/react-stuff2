@@ -1,3 +1,7 @@
+/**
+ * Caixa de diálogo modal que exibe uma mensagem e o botão "OK".
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 

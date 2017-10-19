@@ -7,6 +7,7 @@ import './ListaTipos.sass';
 export default class ListaTipos extends React.PureComponent {
 	static propTypes = {
 		tipos: PropTypes.array,
+		disabled: PropTypes.bool,
 		className: PropTypes.string,
 		onSelecionaTipo: PropTypes.func
 	};
@@ -16,22 +17,28 @@ export default class ListaTipos extends React.PureComponent {
 	};
 
 	selecionaTipo(tipo) {
-		this.setState({ idTipoAtual: tipo.id }, () => {
-			if (this.props.onSelecionaTipo) {
-				this.props.onSelecionaTipo(tipo.id);
-			}
-		});
+		if (!this.props.disabled) {
+			this.setState({ idTipoAtual: tipo.id }, () => {
+				if (this.props.onSelecionaTipo) {
+					this.props.onSelecionaTipo(tipo.id);
+				}
+			});
+		}
 	}
 
 	render() {
-		const { tipos, className } = this.props;
+		const { tipos, disabled, className } = this.props;
 		const { idTipoAtual } = this.state;
 
 		return (
 			<div id="ListaTipos" className={className}>
 				{tipos.map((t, i) =>
 					<div key={i}
-						className={classNames('itemTipo', {selec: idTipoAtual === t.id})}
+						className={classNames(
+							'itemTipo',
+							{selec: (idTipoAtual === t.id) && !disabled},
+							{selecDesab: (idTipoAtual === t.id) && disabled}
+						)}
 						onClick={() => this.selecionaTipo(t)}>
 						{t.nome}
 						{!t.ativo &&

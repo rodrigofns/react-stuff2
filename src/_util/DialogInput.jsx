@@ -1,3 +1,7 @@
+/**
+ * Caixa de diálogo modal com um campo texto, e os botões "OK" e "Cancelar".
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField'

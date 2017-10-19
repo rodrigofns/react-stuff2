@@ -52,7 +52,8 @@ export default class HierarquiaTipos extends React.Component {
 							<CircleButton icon="plus" tooltip="Novo tipo..." onClick={this.adicionaTipo}/>
 						</div>
 						<div>
-							<ListaTipos className="listaTipos" tipos={htStore.tiposFiltrados.slice()}
+							<ListaTipos className="listaTipos" disabled={htStore.processando}
+								tipos={htStore.tiposFiltrados.slice()}
 								onSelecionaTipo={idTipo => htStore.selecionaTipo(idTipo)}/>
 						</div>
 					</div>

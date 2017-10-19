@@ -1,3 +1,7 @@
+/**
+ * Centraliza as mensagens globais do sistema.
+ */
+
 import {action, observable} from 'mobx';
 
 class GlobalMsgStore {

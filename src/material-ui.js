@@ -1,4 +1,6 @@
-// Módulos da biblioteca Material UI, para facilitar os imports.
+/**
+ * Módulos da biblioteca Material UI, para facilitar os imports.
+ */
 
 export {default as AppBar} from 'material-ui/AppBar';
 export {Card} from 'material-ui/Card';

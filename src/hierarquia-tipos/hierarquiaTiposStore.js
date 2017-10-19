@@ -6,11 +6,11 @@ class HierarquiaTiposStore {
 	@observable tipos = [];
 	@observable filtro = '';
 	@observable tipoAtual = null; // clone do objeto atualmente selecionado
-	@observable processando = false;
+	@observable processando = false; // flag que indica que uma chamada ao servidor está em curso
 
 	@action
 	processandoDados(v) {
-		this.processando = v; // seta o flag observado pelos componentes
+		this.processando = v;
 	}
 
 	@action
@@ -21,7 +21,7 @@ class HierarquiaTiposStore {
 
 	@action
 	defineFiltro(texto) {
-		this.filtro = texto;
+		this.filtro = texto; // filtra os tipos exibidos na lista
 	}
 
 	@action

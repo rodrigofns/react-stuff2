@@ -1,3 +1,7 @@
+/**
+ * Caixa de diálogo modal que exibe uma pergunta e os botões "OK" e "Cancelar".
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 

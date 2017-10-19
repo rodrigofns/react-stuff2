@@ -1,3 +1,7 @@
+/**
+ * Classe base de todas as consultas HTTP do sistema.
+ */
+
 import axios from 'axios';
 import {authStore} from './authStore';
 import {globalMsgStore} from './globalMsgStore';

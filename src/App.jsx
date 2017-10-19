@@ -1,3 +1,7 @@
+/**
+ * Componente raiz do sistema.
+ */
+
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {authStore, subscribeTo} from '_util';

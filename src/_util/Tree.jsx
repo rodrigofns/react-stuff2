@@ -1,3 +1,7 @@
+/**
+ * Renderiza uma estrutura hierárquia em forma de árvore.
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 

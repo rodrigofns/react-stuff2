@@ -1,3 +1,7 @@
+/**
+ * Centraliza os dados de sessão de um usuário autenticado.
+ */
+
 import {action, computed, observable} from 'mobx';
 import * as jwt from 'jwt-simple';
 

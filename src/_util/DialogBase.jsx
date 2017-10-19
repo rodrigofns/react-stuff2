@@ -1,3 +1,7 @@
+/**
+ * Caixa de diálogo modal genérica, com os botões "OK" e "Cancelar".
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';

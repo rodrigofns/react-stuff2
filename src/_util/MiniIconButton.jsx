@@ -1,3 +1,7 @@
+/**
+ * Pequeno botão com fundo transparente e tooltip automático.
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';

@@ -15,8 +15,8 @@ class HierarquiaTiposStore {
 
 	@action
 	carregaTipos(tipos) {
-		this.tipos = tipos;
 		this.tipoAtual = null;
+		this.tipos = tipos;
 	}
 
 	@action

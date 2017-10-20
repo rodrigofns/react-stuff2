@@ -16,6 +16,12 @@ export default class ListaTipos extends React.PureComponent {
 		idTipoAtual: null
 	};
 
+	componentWillReceiveProps(nextProps) {
+		if (this.props.tipos.length !== nextProps.tipos.length) {
+			this.setState({ idTipoAtual: null }); // se um tipo foi adicionado/removido, limpa seleção
+		}
+	}
+
 	selecionaTipo(tipo) {
 		if (!this.props.disabled) {
 			this.setState({ idTipoAtual: tipo.id }, () => {

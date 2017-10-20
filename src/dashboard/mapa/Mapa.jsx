@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import cores from '_layout/cores';
+import tema from '_layout/tema';
 import jsonMapas from './mapas-2d.json';
 
 export default class Mapa extends React.PureComponent {
@@ -22,8 +22,8 @@ export default class Mapa extends React.PureComponent {
 	};
 
 	static GRAF = { // constantes gráficas usadas na plotagem 2D do canvas
-		area: { corOn: cores.palette.primary1Color, corOff: 'white', corBorda: 'black', espessura: .25 },
-		ponto: { cor: cores.palette.accent1Color, corSelec: cores.palette.primary1Color },
+		area: { corOn: tema.palette.primary1Color, corOff: 'white', corBorda: 'black', espessura: .25 },
+		ponto: { cor: tema.palette.accent1Color, corSelec: tema.palette.primary1Color },
 		animacao: { duracao: 250 }
 	};
 

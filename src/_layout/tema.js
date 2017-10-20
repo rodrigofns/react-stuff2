@@ -30,7 +30,8 @@ export const redA200 = '#ff6b7a';
 export const redA400 = '#ff384c';
 export const redA700 = '#ff1f35';
 
-const cores = getMuiTheme({ // http://mcg.mbitson.com
+const tema = getMuiTheme({ // http://mcg.mbitson.com
+	fontFamily: 'Lato, Arial, sans-serif', // segue App.sass
 	palette: {
 		primary1Color: blue500,
 		primary2Color: blue700,
@@ -52,4 +53,4 @@ const cores = getMuiTheme({ // http://mcg.mbitson.com
 	}
 });
 
-export default cores;
+export default tema;

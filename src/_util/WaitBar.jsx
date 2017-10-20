@@ -6,11 +6,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {LinearProgress} from 'material-ui';
 
-import cores from '_layout/cores';
+import tema from '_layout/tema';
 
 export const WaitBar = ({ show }) => (
 	show &&
-		<LinearProgress mode="indeterminate" color={cores.palette.accent1Color}/>
+		<LinearProgress mode="indeterminate" color={tema.palette.accent1Color}/>
 );
 
 WaitBar.propTypes = {

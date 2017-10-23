@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classes from 'classnames';
 import {globalMsgStore, subscribeTo} from '_util';
 
-import './GlobalMsg.sass';
+import css from './GlobalMsg.module.css';
 
 @subscribeTo({ globalMsgStore })
 export default class GlobalMsg extends React.PureComponent {
@@ -18,12 +19,13 @@ export default class GlobalMsg extends React.PureComponent {
 		}
 
 		return (
-			<ul id="GlobalMsg" className={className}>
+			<ul className={classes(css.lista, className)}>
 				{globalMsgStore.msgs.map((msg, i) =>
-					<li key={i} className="erro">
+					<li key={i} className={css.msg}>
 						<div>{msg}</div>
 						<div>
-							<a href="dispensarMensagem"
+							<a className={css.link}
+								href="dispensarMensagem"
 								title="Dispensar mensagem"
 								onClick={ev => {
 									ev.preventDefault();

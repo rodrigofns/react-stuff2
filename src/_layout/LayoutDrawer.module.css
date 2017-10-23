@@ -1,0 +1,24 @@
+:import('./tema.css') {
+	red500: red500;
+}
+
+.topo {
+	height: 84px;
+	padding: 10px;
+	font-size: 120%;
+	background-color: #f3f3f3;
+	color: #a0a0a0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.logo {
+	margin-right: 6px;
+}
+.item {
+	user-select: none;
+}
+.icone {
+	width: 24px;
+	color: red500;
+}

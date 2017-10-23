@@ -1,0 +1,46 @@
+.formTipo {
+	display: flex;
+}
+
+.col1 {
+	width: 400px;
+}
+.col1Row1 {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.btnAdicionaFilho {
+	float: right;
+	top: -16px;
+	z-index: 1;
+}
+.tituloCampo {
+	font-size: 70%;
+	color: #b2b2b2;
+	margin: 10px 0;
+}
+.listaFilhos {
+	height: 250px;
+	border: 1px solid #ddd;
+}
+.listaFilhos table {
+	position: relative;
+	top: -15px;
+}
+
+.col2 {
+	margin-left: 50px;
+	width: 380px;
+}
+.arvore {
+	margin-top: 10px;
+	padding: 4px;
+	border: 1px solid #ddd;
+	overflow-y: auto;
+	height: 360px;
+}
+.botoesFinais {
+	text-align: right;
+	padding: 30px 8px 8px 8px;
+}

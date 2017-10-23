@@ -1,0 +1,34 @@
+:import('../_layout/tema.css') {
+	red500: red500;
+}
+
+.listaTipos {
+	height: 360px;
+	overflow-y: auto;
+	border: 1px solid #ddd;
+}
+.itemTipo {
+	padding: 8px 10px;
+	cursor: pointer;
+	user-select: none;
+}
+.itemTipo:hover {
+	background-color: #f0f0f0;
+}
+.itemTipo .inativo {
+	display: inline-block;
+	font-size: 90%;
+	color: #666;
+	padding-left: 10px;
+}
+.itemTipo.selec {
+	color: white;
+	background-color: red500;
+}
+.itemTipo.select .inativo {
+	color: #ccc;
+}
+.itemTipo.selecDesab {
+	color: white;
+	background-color: #bbb;
+}

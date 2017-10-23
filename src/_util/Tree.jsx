@@ -4,8 +4,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import classes from 'classnames';
 
-import './Tree.sass';
+import css from './Tree.module.css';
 
 class TreeNode extends React.PureComponent {
 	static propTypes = {
@@ -36,23 +37,23 @@ class TreeNode extends React.PureComponent {
 		const { childrenField } = this.props;
 		if (node[childrenField] && !node[childrenField].empty) {
 			return this.state.expanded
-				? <i className="fa fa-minus-square-o plusMinus"></i>
-				: <i className="fa fa-plus-square-o plusMinus"></i>;
+				? <i className={classes('fa fa-minus-square-o', css.plusMinus)}></i>
+				: <i className={classes('fa fa-plus-square-o', css.plusMinus)}></i>;
 		}
-		return <div className="blankIdent"></div>;
+		return <div className={css.blankIdent}></div>;
 	}
 
 	render() {
 		const { node, level, pxIdent, nameField, childrenField } = this.props;
 		const { expanded } = this.state;
 		return (
-			<div className="TreeNode-wrap">
+			<div className={css.wrap}>
 				<div
-					className="row"
+					className={css.row}
 					style={{ paddingLeft: (level * pxIdent) + 'px' }}
 					onClick={() => this.setState({ expanded: !expanded })}>
 					{this.ident(node)}
-					<div className="name">{node[nameField]}</div>
+					<div className={css.name}>{node[nameField]}</div>
 				</div>
 				{expanded && node[childrenField] && node[childrenField].map((child, i) =>
 					<TreeNode key={i} node={child} level={level + 1} pxIdent={pxIdent}

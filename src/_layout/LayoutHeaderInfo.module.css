@@ -1,0 +1,10 @@
+.wrap > div {
+	background-color: transparent !important;
+	padding-top: 7px;
+}
+.info {
+	margin-right: 50px;
+	display: inline-block;
+	color: white;
+	font-size: 90%;
+}

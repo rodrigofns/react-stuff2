@@ -6,7 +6,7 @@ import ListaTipos from './ListaTipos';
 import FormTipo from './FormTipo';
 import htStore from './hierarquiaTiposStore';
 import httpHierarquiaTipos from './httpHierarquiaTipos';
-import './HierarquiaTipos.sass';
+import css from './HierarquiaTipos.module.css';
 
 @subscribeTo({ htStore })
 export default class HierarquiaTipos extends React.Component {
@@ -48,12 +48,12 @@ export default class HierarquiaTipos extends React.Component {
 	render() {
 		const { htStore } = this.props;
 		return (
-			<div id="HierarquiaTipos">
+			<div className={css.wrap}>
 				<Card>
-					<div id="card1">
-						<div id="card1Top">
+					<div className={css.card1}>
+						<div className={css.card1Top}>
 							<div>
-								<div id="card1Top-titulo">Tipos ({htStore.tipos.length})</div>
+								<div className={css.card1TopTitulo}>Tipos ({htStore.tipos.length})</div>
 								<TextField fullWidth
 									disabled={htStore.processando} value={htStore.filtro}
 									floatingLabelText="Filtro" onChange={ev => htStore.defineFiltro(ev.target.value)}/>
@@ -62,20 +62,20 @@ export default class HierarquiaTipos extends React.Component {
 								disabled={htStore.tipoAtualMudou} onClick={this.adicionaTipo}/>
 						</div>
 						<div>
-							<ListaTipos className="listaTipos"
+							<ListaTipos className={css.listaTipos}
 								disabled={htStore.processando || htStore.tipoAtualMudou}
 								tipos={htStore.tiposFiltrados.slice()}
 								onSelecionaTipo={idTipo => htStore.selecionaTipo(idTipo)}/>
 						</div>
 					</div>
 				</Card>
-				<div className="entreCards"></div>
+				<div className={css.entreCards}></div>
 				{htStore.tipoAtual ? (
 					<Card>
-						<FormTipo className="card2" onDeletaTipo={this.tipoFoiDeletado}/>
+						<FormTipo className={css.card2} onDeletaTipo={this.tipoFoiDeletado}/>
 					</Card>
 				) : (
-					<div id="card2-oculto"></div>
+					<div className={css.card2Oculto}></div>
 				)}
 				<Toast ref={elem => this.toast = elem}/>
 				<DialogInput label="Nome do tipo" ref={elem => this.dlgInput = elem}/>

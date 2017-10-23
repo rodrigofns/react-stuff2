@@ -8,17 +8,17 @@ import LayoutHeader from './LayoutHeader';
 import GlobalMsg from './GlobalMsg';
 import Erro404 from './Erro404';
 import menuStore from './menuStore';
-import './Layout.sass';
+import css from './Layout.module.css';
 
 const Layout = ({ menuStore }) => (
 	<BrowserRouter>
-		<div id="Layout">
+		<div className={css.layout}>
 			<LayoutDrawer/>
-			<header>
+			<header className={css.header}>
 				<LayoutHeader onMenuClick={() => menuStore.abreMenu(true)}/>
 			</header>
-			<main>
-				<GlobalMsg className="msgs"/>
+			<main className={css.main}>
+				<GlobalMsg className={css.msgs}/>
 				<Switch>
 					<Redirect exact from="/" to={rotas[0].caminho}/>
 					{rotas.map((rota, i) =>
@@ -27,7 +27,7 @@ const Layout = ({ menuStore }) => (
 					<Route component={Erro404}/>
 				</Switch>
 			</main>
-			{/* <footer>footer</footer> */}
+			{/* <footer className={css.footer}>footer</footer> */}
 		</div>
 	</BrowserRouter>
 );

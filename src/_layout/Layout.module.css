@@ -1,0 +1,32 @@
+:import('./tema.css') {
+	blue500: blue500;
+}
+
+.layout {
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	left: 0;
+}
+.header {
+	border-top: 20px solid blue500;
+	margin-left: 0;
+}
+.main {
+	flex-grow: 1;
+	overflow-y: auto;
+	padding: 12px;
+	background-color: #fafafa;
+}
+.msgs {
+	max-width: 40vw;
+}
+.footer {
+	color: white;
+	background-color: blue500;
+	padding: 20px;
+	/*height: 100px;*/
+	margin-left: 0;
+}

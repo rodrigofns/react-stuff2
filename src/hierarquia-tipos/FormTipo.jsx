@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classes from 'classnames';
 import {Checkbox, RaisedButton, TextField} from 'material-ui';
 import {CircleButton, DialogInfo, DialogOkCancel, subscribeTo, Toast, Tree, WaitBar} from '_util';
 
@@ -7,7 +8,7 @@ import ListaFilhos from './ListaFilhos';
 import AdicionaFilho from './AdicionaFilho';
 import htStore from './hierarquiaTiposStore';
 import httpHierarquiaTipos from './httpHierarquiaTipos';
-import './FormTipo.sass';
+import css from './FormTipo.module.css';
 
 @subscribeTo({ htStore })
 export default class FormTipo extends React.Component {
@@ -65,9 +66,9 @@ export default class FormTipo extends React.Component {
 	render() {
 		const { htStore, className } = this.props;
 		return (
-			<form id="FormTipo" className={className}>
-				<div id="formCol1">
-					<div id="formCol1-row1">
+			<form className={classes(css.formTipo, className)}>
+				<div className={css.col1}>
+					<div className={css.col1Row1}>
 						<div>
 							<Checkbox label="Ativo"
 								disabled={htStore.processando} checked={htStore.tipoAtual.ativo}
@@ -88,17 +89,17 @@ export default class FormTipo extends React.Component {
 							onChange={ev => htStore.alteraTipoAtual({ descricao: ev.target.value })}/>
 					</div>
 					<div>
-						<CircleButton className="btnAdicionaFilho" icon="plus"
+						<CircleButton className={css.btnAdicionaFilho} icon="plus"
 							tooltip="Adicionar filho..." onClick={this.adicionaFilho}/>
-						<div className="tituloCampo">Filhos do tipo ({htStore.tipoAtual.filhos.length})</div>
-						<ListaFilhos className="listaFilhos"/>
+						<div className={css.tituloCampo}>Filhos do tipo ({htStore.tipoAtual.filhos.length})</div>
+						<ListaFilhos className={css.listaFilhos}/>
 					</div>
 				</div>
-				<div id="formCol2">
+				<div className={css.col2}>
 					<div>Visualização da hierarquia completa</div>
-					<Tree className="arvore" rootNode={htStore.tipoAtualComFilhos}
+					<Tree className={css.arvore} rootNode={htStore.tipoAtualComFilhos}
 						nameField="nome" childrenField="filhos"/>
-					<div id="finalButtons">
+					<div className={css.botoesFinais}>
 						<WaitBar show={htStore.processando}/>
 						<RaisedButton primary type="submit" label="Salvar"
 							disabled={htStore.processando || !htStore.tipoAtualMudou}

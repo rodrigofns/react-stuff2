@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classes from 'classnames';
 
-import './ListaTipos.sass';
+import css from './ListaTipos.module.css';
 
 export default class ListaTipos extends React.PureComponent {
 	static propTypes = {
@@ -37,18 +37,17 @@ export default class ListaTipos extends React.PureComponent {
 		const { idTipoAtual } = this.state;
 
 		return (
-			<div id="ListaTipos" className={className}>
+			<div className={classes(css.listaTipos, className)}>
 				{tipos.map((t, i) =>
 					<div key={i}
-						className={classNames(
-							'itemTipo',
-							{selec: (idTipoAtual === t.id) && !disabled},
-							{selecDesab: (idTipoAtual === t.id) && disabled}
-						)}
+						className={classes(css.itemTipo, {
+							[css.selec]: (idTipoAtual === t.id) && !disabled,
+							[css.selecDesab]: (idTipoAtual === t.id) && disabled
+						})}
 						onClick={() => this.selecionaTipo(t)}>
 						{t.nome}
 						{!t.ativo &&
-							<div className="inativo">(inativo)</div>
+							<div className={css.Inativo}>(inativo)</div>
 						}
 					</div>
 				)}

@@ -1,0 +1,14 @@
+.tabela {
+	width: 100%;
+	border-collapse: collapse;
+}
+.tabela tr:hover {
+	background-color: #f0f0f0;
+}
+.tabela td {
+	padding: 9px 10px;
+}
+.tabela td:not(:nth-child(1)) {
+	text-align: right;
+	width: 22px; /* vai ser ligeiramente maior por causa do padding, não tem problema */
+}

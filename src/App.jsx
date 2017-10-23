@@ -9,7 +9,7 @@ import {authStore, subscribeTo} from '_util';
 import tema from '_layout/tema';
 import Layout from '_layout/Layout';
 import Login from './login/Login';
-import './App.sass';
+import './App.module.css';
 
 @subscribeTo({ authStore })
 export default class App extends React.Component {

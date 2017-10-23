@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classes from 'classnames';
 import {Card, TextField} from 'material-ui';
 import {removeAcentos, WaitBar} from '_util';
 
@@ -7,7 +8,7 @@ import Mapa from '../mapa/Mapa';
 import NavegadorZoom from '../mapa/NavegadorZoom';
 import jsonMapas from '../mapa/mapas-2d.json';
 import Detalhes from './Detalhes';
-import './Visao.sass';
+import css from './Visao.module.css';
 
 export default class Visao extends React.Component {
 	static propTypes = {
@@ -119,21 +120,21 @@ export default class Visao extends React.Component {
 
 	render() {
 		return (
-			<div id="ExtFederal">
+			<div className={css.wrap}>
 				<Card>
-					<div className="card1">
-						<div className="txtFiltro">
+					<div className={classes(css.card, css.card1)}>
+						<div className={css.txtFiltro}>
 							<TextField fullWidth
 								floatingLabelText="Filtro do nome do órgão"
 								onChange={this.filtroMudou}/>
 						</div>
 						<NavegadorZoom
-							className="navegador"
+							className={css.navegador}
 							idAreas={this.pilhaIdArea}
 							pontoSelecionado={this.state.nomeOrgaoSelecionado}
 							nomeHover={this.state.nomeHover}
 							onClick={this.sobeNivel}/>
-						<div className="mapa">
+						<div className={css.mapa}>
 							<WaitBar show={this.pilhaIdArea.empty}/>
 							{!this.pilhaIdArea.empty &&
 								<Mapa
@@ -152,9 +153,9 @@ export default class Visao extends React.Component {
 						</div>
 					</div>
 				</Card>
-				<div className="entreCards"></div>
+				<div className={css.entreCards}></div>
 				<Card>
-					<div className="card2">
+					<div className={classes(css.card, css.card2)}>
 						<Detalhes
 							pilhaIdArea={this.pilhaIdArea}
 							orgaos={this.orgaosFederais}

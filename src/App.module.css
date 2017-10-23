@@ -1,0 +1,16 @@
+:import('./_layout/tema.css') {
+	fonte: fonte;
+	blue500: blue500;
+}
+
+* {
+	box-sizing: border-box;
+	font-family: fonte;
+}
+body {
+	margin: 0;
+}
+h1,h2,h3,h4 {
+	color: blue500;
+	margin: 0;
+}

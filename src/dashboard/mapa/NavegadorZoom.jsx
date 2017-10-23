@@ -1,33 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classes from 'classnames';
 
 import jsonMapas from './mapas-2d.json';
-import './NavegadorZoom.sass';
+import css from './NavegadorZoom.module.css';
 
 const NavegadorZoom = ({ idAreas, pontoSelecionado, nomeHover, className, onClick }) => (
-	<div id="Navegador" className={className}>
+	<div className={classes(css.wrap, className)}>
 		{idAreas.map((idArea, i) =>
 			(i >= 1 &&
-				<div className="navegaAcima" key={i} onClick={() => onClick(i)}>
+				<div className={classes(css.itemNav, css.navegaAcima)} key={i} onClick={() => onClick(i)}>
 					{jsonMapas.areas[idAreas[i - 1]].nome}
 				</div>
 			)
 		)}
 		{pontoSelecionado &&
-			<div className="navegaAcima" onClick={() => onClick(idAreas.length)}>
+			<div className={classes(css.itemNav, css.navegaAcima)} onClick={() => onClick(idAreas.length)}>
 				{jsonMapas.areas[idAreas.last].nome}
 			</div>
 		}
 		{!pontoSelecionado && !idAreas.empty &&
-			<div className="nivelAtual">
+			<div className={classes(css.itemNav, css.nivelAtual)}>
 				{jsonMapas.areas[idAreas.last].nome}
 			</div>
 		}
 		{pontoSelecionado &&
-			<div className="nivelAtual">{pontoSelecionado}</div>
+			<div className={classes(css.itemNav, css.nivelAtual)}>{pontoSelecionado}</div>
 		}
 		{nomeHover &&
-			<div className="nivelHover">{nomeHover}</div>
+			<div className={classes(css.itemNav, css.nivelHover)}>{nomeHover}</div>
 		}
 	</div>
 );

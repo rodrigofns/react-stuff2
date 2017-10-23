@@ -4,19 +4,19 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classes from 'classnames';
 import {FontIcon, IconButton} from 'material-ui';
 
-import './IconBtn.sass';
+import css from './MiniIconButton.module.css';
 
 export const MiniIconButton = ({ className, icon, tooltip, tooltipPosition, onClick }) => (
-	<div className={classNames('IconBtn-wrap', className)}>
+	<div className={classes(css.wrap, className)}>
 		<IconButton
 			tooltip={tooltip}
 			tooltipPosition={tooltipPosition}
 			tooltipStyles={{ fontSize: '9pt' }}
 			onClick={onClick}>
-			<FontIcon className={`fa fa-${icon}`}/>
+			<FontIcon className={classes(`fa fa-${icon}`, css.fontIcon)}/>
 		</IconButton>
 	</div>
 );

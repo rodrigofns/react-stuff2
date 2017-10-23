@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {DialogOkCancel, MiniIconButton, subscribeTo, Toast} from '_util';
 
 import htStore from './hierarquiaTiposStore';
-import './ListaFilhos.sass';
+import css from './ListaFilhos.module.css';
 
 @subscribeTo({ htStore })
 export default class ListaFilhos extends React.Component {
@@ -27,7 +27,7 @@ export default class ListaFilhos extends React.Component {
 		const { className, htStore } = this.props;
 		return (
 			<div className={className}>
-				<table id="ListaFilhos">
+				<table className={css.tabela}>
 					<tbody>
 						{htStore.tipoAtualComFilhos.filhos.map((filho, i) =>
 							<tr key={i}>

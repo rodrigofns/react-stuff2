@@ -1,0 +1,22 @@
+:import('../../_layout/tema.css') {
+	blue500: blue500;
+}
+
+.wrap {
+	margin-bottom: 8px;
+}
+.titulo {
+	display: inline-block;
+	margin-right: 4px;
+}
+.unidade {
+	display: inline-block;
+	border: 1px solid #ddd;
+	padding: 2px 3px;
+	margin: 0 2px 4px 0;
+}
+.unidade:hover {
+	cursor: pointer;
+	background-color: blue500;
+	color: white;
+}

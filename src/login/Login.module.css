@@ -1,0 +1,25 @@
+:import('../_layout/tema.css') {
+	blue900: blue900;
+}
+
+.login {
+	display: flex;
+	justify-content: center;
+	height: 100vh;
+	background-image: url('./ponte-jk.jpg');
+	background-position: 50% 40%;
+	background-repeat: no-repeat;
+	background-color: blue900;
+	background-size: 100% 100%;
+}
+.form {
+	position: relative;
+	left: 15%;
+	padding-top: 20vh;
+}
+.caixaLogin {
+	padding: 30px;
+}
+.msgs {
+	max-width: 252px;
+}

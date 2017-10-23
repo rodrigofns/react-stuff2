@@ -8,12 +8,12 @@ import ExtEstadual from './visoes/ExtEstadual';
 import ExtTrabalhista from './visoes/ExtTrabalhista';
 import ExtEleitoral from './visoes/ExtEleitoral';
 import Geografico from './visoes/Geografico';
-import './Dashboard.sass';
+import css from './Dashboard.module.css';
 
 const Dashboard = () => (
-	<div id="Dashboard">
-		<div className="centraliza">
-			<SelecionaVisao className="seletor"/>
+	<div className={css.dashboard}>
+		<div className={css.centraliza}>
+			<SelecionaVisao className={css.seletor}/>
 			<Switch>
 				<Redirect exact from="/dashboard" to="/dashboard/internas"/>
 				<Redirect exact from="/dashboard/externas" to="/dashboard/externas/federal"/>

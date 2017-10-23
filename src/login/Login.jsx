@@ -5,7 +5,7 @@ import {WaitBar} from '_util';
 import GlobalMsg from '../_layout/GlobalMsg';
 import Rodape from './Rodape';
 import httpLogin from './httpLogin';
-import './Login.sass';
+import css from './Login.module.css';
 
 export default class Login extends React.Component {
 	state = {
@@ -35,13 +35,13 @@ export default class Login extends React.Component {
 	render() {
 		const { usuario, senha, processando } = this.state;
 		return (
-			<div id="Login">
-				<form onSubmit={this.submitForm}>
+			<div className={css.login}>
+				<form className={css.form} onSubmit={this.submitForm}>
 					<Card>
 						<WaitBar show={processando}/>
-						<div className="caixaLogin">
+						<div className={css.caixaLogin}>
 							<h2>Login</h2>
-							<GlobalMsg className="msgs"/>
+							<GlobalMsg className={css.msgs}/>
 							<div>
 								<TextField autoComplete="off" disabled={processando}
 									ref={elem => this.txtUsuario = elem}

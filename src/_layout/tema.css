@@ -1,0 +1,40 @@
+/**
+ * Tema customizado para a PGFN.
+ * http://mcg.mbitson.com
+ */
+
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+:export {
+	fonte: Lato, Arial, sans-serif;
+
+	blue50: #e1eaed;
+	blue100: #b5cad2;
+	blue200: #83a7b4;
+	blue300: #518395;
+	blue400: #2c697f;
+	blue500: #074e68;
+	blue600: #064760;
+	blue700: #053d55;
+	blue800: #04354b;
+	blue900: #02253a;
+	blueA100: #70beff;
+	blueA200: #3da7ff;
+	blueA400: #0a90ff;
+	blueA700: #0083f0;
+
+	red50: #f3e4e7;
+	red100: #e1bac3;
+	red200: #cd8d9b;
+	red300: #b95f73;
+	red400: #aa3c55;
+	red500: #9b1a37;
+	red600: #931731;
+	red700: #89132a;
+	red800: #7f0f23;
+	red900: #6d0816;
+	redA100: #ff9ea8;
+	redA200: #ff6b7a;
+	redA400: #ff384c;
+	redA700: #ff1f35;
+}

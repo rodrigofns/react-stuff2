@@ -1,0 +1,33 @@
+@value card-padding: 20px;
+@value card2-cx: 900px;
+
+.wrap {
+	display: flex;
+	justify-content: center;
+}
+.card1 {
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	padding: card-padding;
+}
+.card1Top {
+	display: flex;
+	justify-content: space-between;
+}
+.card1TopTitulo {
+	padding-top: 14px;
+}
+.listaTipos {
+	margin-top: 11px;
+}
+.entreCards {
+	width: 16px;
+}
+.card2 {
+	width: card2-cx;
+	padding: card-padding;
+}
+.card2Oculto {
+	width: card2-cx;
+}

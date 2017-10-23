@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classes from 'classnames';
 import {WaitBar} from '_util';
 
 import jsonMapas from '../mapa/mapas-2d.json';
 import ListaAbrangencia from './ListaAbrangencia';
-import './Detalhes.sass';
+import css from './Detalhes.module.css';
 
 export default class Detalhes extends React.PureComponent {
 	static propTypes = {
@@ -62,17 +63,17 @@ export default class Detalhes extends React.PureComponent {
 		const { consultando, abrangencia } = this.state;
 
 		return (!pilhaIdArea.empty &&
-			<div id="Detalhes">
-				<div className="cabecalho">Dados da área</div>
-				<div className="corpo">
+			<div className={css.wrap}>
+				<div className={css.cabecalho}>Dados da área</div>
+				<div className={css.corpo}>
 					<div>Área: {jsonMapas.areas[pilhaIdArea.last].nome}</div>
 					<div>Quantidade de órgãos: {this.calculaQuantidadeOrgaos()}</div>
 				</div>
 				<WaitBar show={consultando}/>
 				{!consultando && !abrangencia.empty &&
 					<div>
-						<div className="cabecalho">Abrangência</div>
-						<div className="corpo abrangencia">
+						<div className={css.cabecalho}>Abrangência</div>
+						<div className={classes(css.corpo, css.abrangencia)}>
 							<ListaAbrangencia titulo="PGFN" abrangencia={abrangencia.unidadesPGFN}/>
 							<ListaAbrangencia titulo="Trabalhista" abrangencia={abrangencia.orgaosJusticaTrabalhista}/>
 							<ListaAbrangencia titulo="Eleitoral" abrangencia={abrangencia.orgaosJusticaEleitoral}/>

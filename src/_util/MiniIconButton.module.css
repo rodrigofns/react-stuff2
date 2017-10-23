@@ -1,0 +1,11 @@
+.wrap {
+	display: inline-block;
+}
+.wrap button {
+	padding: 0 4px 0 20px !important;
+	width: auto !important;
+	height: auto !important;
+}
+.fontIcon {
+	font-size: 12pt !important;
+}

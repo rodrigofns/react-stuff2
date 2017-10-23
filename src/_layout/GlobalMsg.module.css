@@ -1,0 +1,28 @@
+:import('./tema.css') {
+	blue500: blue500;
+}
+
+.lista {
+	color: crimson;
+	font-size: 90%;
+	padding: 2px;
+	margin: 10px auto;
+	border: 1px solid #e2e2e2;
+	background-color: rgba(255,0,0,.05);
+}
+.msg {
+	padding: 3px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.link {
+	text-decoration: none;
+	padding: 1px 6px;
+	border: 1px solid #e2e2e2;
+	color: blue500;
+}
+.link:hover {
+	color: white;
+	background-color: blue500;
+}

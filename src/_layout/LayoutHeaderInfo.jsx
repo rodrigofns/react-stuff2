@@ -3,7 +3,7 @@ import {withRouter} from 'react-router-dom';
 import {RaisedButton} from 'material-ui';
 import {authStore, subscribeTo} from '_util';
 
-import './LayoutHeaderInfo.sass';
+import css from './LayoutHeaderInfo.module.css';
 
 @withRouter
 @subscribeTo({ authStore })
@@ -11,8 +11,8 @@ export default class LayoutHeaderInfo extends React.PureComponent {
 	render() {
 		const { authStore, history } = this.props;
 		return (
-			<div id="LayoutHeaderInfo">
-				<div className="headerUserInfo">{authStore.userInfo.nome}</div>
+			<div className={css.wrap}>
+				<div className={css.info}>{authStore.userInfo.nome}</div>
 				<RaisedButton
 					secondary
 					id="TopRite-logoff"
